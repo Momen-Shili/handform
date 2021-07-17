@@ -1,8 +1,10 @@
 import plusIcon from "../../assets/svg/plus.svg";
-// import pencilIcon from "../../assets/svg/pencil.svg";
+import pencilIcon from "../../assets/svg/pencil.svg";
+import { useState } from "react";
 import { motion } from "framer-motion";
 
 export default function Home() {
+  const [isHover, setHover] = useState(false);
   return (
     <>
       <div className="w-2/3 py-3 space-y-6  mx-auto">
@@ -12,35 +14,37 @@ export default function Home() {
           <p className="text-gray-400">Klik + untuk membuat formulir baru</p>
         </div>
       </div>
-      <motion.div className="group absolute h-16 w-16 bottom-8 right-8 rounded-full shadow-md bg-white flex items-center justify-center cursor-pointer">
-        <motion.img
-          whileHover={{ rotate: 90 + 45 }}
-          transition={{ transition: 0.5 }}
-          // variants={rotate}
-          // initial="initial"
-          src={plusIcon}
-          alt="+"
-          className="h-10 w-10 group-hover:hidden*"
-        />
-        {/* <img
-          src={pencilIcon}
-          alt="+"
-          className="h-7 w-7 hidden group-hover:inline"
-        /> */}
+      <motion.div
+        initial={{ y: 100 }}
+        animate={{ y: 0 }}
+        transition={{ type: "spring", stiffness: 150 }}
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+        className="absolute h-16 w-16 bottom-8 right-8 rounded-full shadow-md bg-white"
+      >
+        <div className="h-full w-full absolute left-0 top-0 flex items-center justify-center cursor-pointer">
+          <img
+            src={plusIcon}
+            alt="+"
+            className={`${
+              !isHover
+                ? "rotate-0 translate-y-0 opacity-100 delay-100"
+                : "-rotate-90 opacity-0 invisible"
+            } transform duration-300 h-10 w-10`}
+          />
+        </div>
+        <div className="h-full w-full absolute left-0 top-0 flex items-center justify-center cursor-pointer">
+          <img
+            src={pencilIcon}
+            alt="+"
+            className={`${
+              isHover
+                ? "rotate-0 translate-y-0 opacity-100 delay-100"
+                : "rotate-90 opacity-0 invisible"
+            } transform duration-300 h-7 w-7`}
+          />
+        </div>
       </motion.div>
     </>
   );
 }
-
-// const rotate = {
-//   initial: {
-//     x: 0,
-//   },
-//   animate: {
-//     x: 0,
-//     transition: {
-//       type: "spring",
-//       stifness: 120,
-//     },
-//   },
-// };
