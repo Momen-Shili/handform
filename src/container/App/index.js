@@ -10,10 +10,7 @@ function App() {
   return (
     <>
       <Header />
-      <main
-        className="bg-gray-100 text-gray-600 mt-16 relative overflow-hidden"
-        style={{ minHeight: "90vh" }}
-      >
+      <main className="bg-gray-100 text-gray-600 mt-16">
         <AnimatePresence exitBeforeEnter>
           <Switch location={location} key={location.key}>
             <Route exact path="/" component={Home} />

@@ -8,7 +8,7 @@ export default function Home() {
   const { push } = useHistory();
   const [isHover, setHover] = useState(false);
   return (
-    <section>
+    <section style={{ minHeight: "90vh" }} className="relative overflow-hidden">
       <div className="w-2/3 py-3 space-y-6  mx-auto">
         <h6 className="font-semibold text-lg">Formulir Terbaru</h6>
         <div className="text-center bg-white shadow-md py-8 rounded-md space-y-2">
@@ -19,7 +19,7 @@ export default function Home() {
       <motion.div
         initial={{ y: 100 }}
         animate={{ y: 0 }}
-        exit={{ y: 100,transition:{ease:"easeInOut"} }}
+        exit={{ y: 100, transition: { ease: "easeInOut" } }}
         transition={{ type: "spring", stiffness: 150 }}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
