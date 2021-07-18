@@ -1,13 +1,14 @@
 import { createContext, useReducer } from "react";
 import { AnimatePresence } from "framer-motion";
-import { ContentForm } from "./ContentForm";
-import { TitleForm } from "./TitleForm";
+import ContentForm from "./ContentForm";
+import TitleForm from "./TitleForm";
 
 export const FormContext = createContext();
 
 const initialState = {
   titleForm: { title: "", desc: "" },
   contentForms: [],
+  isDropdown: false,
 };
 
 const reducer = (state, action) => {
@@ -21,6 +22,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         contentForms: action.value,
+      };
+    case "CHANGE_ISDROPDOWN":
+      return {
+        ...state,
+        isDropdown: action.value,
       };
     default:
       return state;

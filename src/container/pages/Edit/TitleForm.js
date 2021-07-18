@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { FormContext } from ".";
 import plusCircleIcon from "../../../assets/svg/plusCircle.svg";
 
-export const TitleForm = () => {
+export default function TitleForm() {
   const { state, dispatch } = useContext(FormContext);
   const createForm = () => {
     const arr = state.contentForms;
@@ -53,7 +53,7 @@ export const TitleForm = () => {
       </div>
     </div>
   );
-};
+}
 
 const color = "pink";
 const inputBorder = `hover:border-gray-300 border-white border-b focus:border-b-2 focus:border-${color}-700`;
