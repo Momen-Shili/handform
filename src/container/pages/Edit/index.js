@@ -9,6 +9,7 @@ const initialState = {
   titleForm: { title: "", desc: "" },
   contentForms: [],
   isDropdown: false,
+  isAnimateForm: false,
 };
 
 const reducer = (state, action) => {
@@ -28,6 +29,11 @@ const reducer = (state, action) => {
         ...state,
         isDropdown: action.value,
       };
+    case "CHANGE_ISANIMATEFORM":
+      return {
+        ...state,
+        isAnimateForm: action.value,
+      };
     default:
       return state;
   }
@@ -36,8 +42,8 @@ const reducer = (state, action) => {
 export default function Edit() {
   const [state, dispatch] = useReducer(reducer, initialState);
   return (
-    <FormContext.Provider value={{ state, dispatch }}>
-      <section style={{ minHeight: "90vh" }}>
+    <section style={{ minHeight: "90vh" }}>
+      <FormContext.Provider value={{ state, dispatch }}>
         <form
           onSubmit={(e) => e.preventDefault()}
           className="w-11/12 lg:w-1/2 py-5 space-y-4 mx-auto"
@@ -50,7 +56,7 @@ export default function Edit() {
               ))}
           </AnimatePresence>
         </form>
-      </section>
-    </FormContext.Provider>
+      </FormContext.Provider>
+    </section>
   );
 }

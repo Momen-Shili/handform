@@ -4,6 +4,7 @@ import plusCircleIcon from "../../../assets/svg/plusCircle.svg";
 
 export default function TitleForm() {
   const { state, dispatch } = useContext(FormContext);
+
   const createForm = () => {
     const arr = state.contentForms;
     arr.splice(0, 0, { id: Date.now() });
@@ -12,6 +13,7 @@ export default function TitleForm() {
       180
     );
   };
+  
   return (
     <div
       style={{ borderTopWidth: "10px" }}
@@ -45,7 +47,12 @@ export default function TitleForm() {
           src={plusCircleIcon}
           alt="plus"
           className="h-6 w-6 cursor-pointer"
-          onClick={() => createForm()}
+          onClick={() => {
+            createForm();
+            state.contentForms.length === 0
+              ? dispatch({ type: "CHANGE_ISANIMATEFORM", value: true })
+              : dispatch({ type: "CHANGE_ISANIMATEFORM", value: false });
+          }}
         />
       </div>
     </div>

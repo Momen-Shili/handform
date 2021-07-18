@@ -9,10 +9,10 @@ export default function ContentForm({ index, title }) {
   const { state } = useContext(FormContext);
   return (
     <motion.div
-      initial={{ y: 150 }}
+      initial={{ y: state.isAnimateForm ? 150 : 0 }}
       animate={{ y: 0 }}
       exit={{
-        y: 150,
+        y: state.isAnimateForm ? 150 : 0,
         transition: { ease: "easeIn", type: "tween", duration: 0.2 },
       }}
       className={`${state.isDropdown && "z-10"}

@@ -77,8 +77,8 @@ export const ActionForm = ({ index, duplicate }) => {
   ];
   return (
     <div className="border-t py-3 flex justify-end items-center space-x-3">
-      {icons.map((el, index) => (
-        <span key={index}>
+      {icons.map((el, idx) => (
+        <span key={idx}>
           <motion.img
             variants={el.variants}
             initial="initial"
@@ -86,7 +86,12 @@ export const ActionForm = ({ index, duplicate }) => {
             src={el.icon}
             alt={el.alt}
             className="h-6 w-6 cursor-pointer"
-            onClick={() => el.onClick()}
+            onClick={() => {
+              index === state.contentForms.length - 1
+                ? dispatch({ type: "CHANGE_ISANIMATEFORM", value: true })
+                : dispatch({ type: "CHANGE_ISANIMATEFORM", value: false });
+              el.onClick();
+            }}
           />
         </span>
       ))}
