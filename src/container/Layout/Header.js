@@ -4,7 +4,7 @@ import documentIcon from "../../assets/svg/document.svg";
 export default function Header() {
   const [isDropdown, setDropdown] = useState(false);
   return (
-    <header className="bg-white text-gray-600 w-full flex left-0 top-0 fixed items-center justify-between py-3 px-8 z-10">
+    <header className="bg-white text-gray-600 w-full flex left-0 top-0 fixed items-center justify-between py-3 px-8 z-50">
       <div className="flex items-center space-x-2">
         <img src={documentIcon} alt="logo" className="h-10 w-10" />
         <h1 className="text-2xl">Forms</h1>

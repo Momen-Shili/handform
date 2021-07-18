@@ -1,7 +1,7 @@
 import { AnimatePresence } from "framer-motion";
 import { Route, Switch, useLocation } from "react-router-dom";
 import Header from "../Layout/Header";
-import Edit from "../pages/Edit";
+import Edit from "../pages/Edit/";
 import Home from "../pages/Home";
 import "./App.css";
 
