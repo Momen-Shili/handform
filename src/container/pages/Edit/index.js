@@ -1,3 +1,4 @@
+import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { ContentForm } from "./ContentForm";
 
@@ -11,7 +12,17 @@ export default function Edit() {
   });
 
   const [contentForms, setContentForms] = useState([]);
-  console.log(contentForms);
+
+  const deleteForm = (index) => {
+    const filter = contentForms.filter((el, idx) => idx !== index);
+    setContentForms(filter);
+  };
+
+  const createForm = (index) => {
+    const arr = contentForms;
+    arr.splice(index + 1, 0, { id: Date.now() });
+    setContentForms([...arr]);
+  };
 
   return (
     <section style={{ minHeight: "90vh" }}>
@@ -20,31 +31,23 @@ export default function Edit() {
         className="w-1/2 py-5 space-y-4  mx-auto"
       >
         {/* title  */}
-        <TitleForm titleForm={titleForm} setTitleForm={setTitleForm} />
+        <TitleForm
+          titleForm={titleForm}
+          setTitleForm={setTitleForm}
+          createForm={createForm}
+        />
         {/* content  */}
-        {contentForms.map((el, index) => (
-          <ContentForm key={index} />
-        ))}
-        <div className="space-x-4">
-          <button
-            onClick={() => setContentForms([...contentForms, Date.now()])}
-            className="py-1 px-3 rounded-md bg-indigo-500 text-white"
-          >
-            push
-          </button>
-          <button
-            onClick={() => {
-              const lastIndex = contentForms.length - 1;
-              const filter = contentForms.filter(
-                (e, index) => index !== lastIndex
-              );
-              setContentForms(filter);
-            }}
-            className="py-1 px-3 rounded-md bg-red-500 text-white"
-          >
-            pop
-          </button>
-        </div>
+        <AnimatePresence exitBeforeEnter>
+          {contentForms &&
+            contentForms.map((el, index) => (
+              <ContentForm
+                key={index}
+                index={index}
+                remove={deleteForm}
+                create={createForm}
+              />
+            ))}
+        </AnimatePresence>
       </form>
     </section>
   );

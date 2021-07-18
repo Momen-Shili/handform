@@ -11,12 +11,18 @@ import duplicateIcon from "../../../assets/svg/duplicate.svg";
 import trashIcon from "../../../assets/svg/trash.svg";
 import plusCircleIcon from "../../../assets/svg/plusCircle.svg";
 
-export const ContentForm = ({ create, duplicate, remove }) => {
+export const ContentForm = ({ index, create, duplicate, remove }) => {
   const [isDropdown, setDropdown] = useState(false);
   const ref = useRef();
   useOutsideClick(ref, () => isDropdown && setDropdown(false));
   return (
-    <div
+    <motion.div
+      initial={{ y: 150 }}
+      animate={{ y: 0 }}
+      exit={{
+        y: 150,
+        transition: { ease: "easeIn", type: "tween", duration: 0.2 },
+      }}
       className={`bg-white px-8 border-t shadow rounded-lg relative ${
         isDropdown && "z-10"
       }`}
@@ -45,13 +51,13 @@ export const ContentForm = ({ create, duplicate, remove }) => {
           src={plusCircleIcon}
           alt="plus"
           className="h-6 w-6 cursor-pointer"
-          onClick={() => create()}
+          onClick={() => create(index)}
         />
         <img
           src={trashIcon}
           alt="delete"
           className="h-6 w-6 cursor-pointer"
-          onClick={() => remove()}
+          onClick={() => remove(index)}
         />
       </div>
       {/* dropdown menu */}
@@ -87,7 +93,7 @@ export const ContentForm = ({ create, duplicate, remove }) => {
           )}
         </AnimatePresence>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
