@@ -13,7 +13,7 @@ export default function TitleForm() {
       180
     );
   };
-  
+
   return (
     <div
       style={{ borderTopWidth: "10px" }}
@@ -49,7 +49,7 @@ export default function TitleForm() {
           className="h-6 w-6 cursor-pointer"
           onClick={() => {
             createForm();
-            state.contentForms.length === 0
+            state.contentForms.length <= 1
               ? dispatch({ type: "CHANGE_ISANIMATEFORM", value: true })
               : dispatch({ type: "CHANGE_ISANIMATEFORM", value: false });
           }}
@@ -59,5 +59,5 @@ export default function TitleForm() {
   );
 }
 
-const color = "pink";
+const color = "green";
 const inputBorder = `hover:border-gray-300 border-white border-b focus:border-b-2 focus:border-${color}-700`;
