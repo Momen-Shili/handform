@@ -30,59 +30,30 @@ export const ActionForm = ({ index, duplicate }) => {
       icon: duplicateIcon,
       alt: "duplicate",
       onClick: duplicate,
-      variants: {
-        initial: {
-          x: 92,
-          opacity: 0,
-        },
-        animate: {
-          x: 0,
-          opacity: 1,
-          transition: { delay: 0.2 },
-        },
-      },
+      x: 112,
     },
     {
       icon: plusCircleIcon,
       alt: "plus",
       onClick: createForm,
-      variants: {
-        initial: {
-          x: 56,
-          opacity: 0,
-        },
-        animate: {
-          x: 0,
-          opacity: 1,
-          transition: { delay: 0.2 },
-        },
-      },
+      x: 76,
     },
     {
       icon: trashIcon,
       alt: "remove",
       onClick: deleteForm,
-      variants: {
-        initial: {
-          x: 20,
-          opacity: 0,
-        },
-        animate: {
-          x: 0,
-          opacity: 1,
-          transition: { delay: 0.2 },
-        },
-      },
+      x: 40,
     },
   ];
+
   return (
     <div className="border-t py-3 flex justify-end items-center space-x-3">
       {icons.map((el, idx) => (
         <span key={idx}>
           <motion.img
-            variants={el.variants}
-            initial="initial"
-            animate="animate"
+            initial={{ rotate: 360, x: el.x, opacity: 0 }}
+            animate={{ rotate: 0, x: 0, opacity: 1 }}
+            transition={{delay: 0.2,type: "spring",duration: 0.5,stiffness: 80,}}
             src={el.icon}
             alt={el.alt}
             className="h-6 w-6 cursor-pointer"
