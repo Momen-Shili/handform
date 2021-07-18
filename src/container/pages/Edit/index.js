@@ -1,7 +1,6 @@
-import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { AnimatePresence } from "framer-motion";
 import { ContentForm } from "./ContentForm";
-
 import { TitleForm } from "./TitleForm";
 
 export default function Edit() {
@@ -10,17 +9,24 @@ export default function Edit() {
     title: "",
     desc: "",
   });
-
   const [contentForms, setContentForms] = useState([]);
-
+  console.log(contentForms);
   const deleteForm = (index) => {
     const filter = contentForms.filter((el, idx) => idx !== index);
-    setContentForms(filter);
+    setContentForms([]);
+    setTimeout(() => setContentForms([...filter]), 180);
   };
 
   const createForm = (index) => {
     const arr = contentForms;
     arr.splice(index + 1, 0, { id: Date.now() });
+    setContentForms([]);
+    setTimeout(() => setContentForms([...arr]), 180);
+  };
+
+  const handleChange = (e, index, props) => {
+    const arr = contentForms;
+    arr[index] = { ...arr[index], [props]: e.target.value };
     setContentForms([...arr]);
   };
 
@@ -38,15 +44,19 @@ export default function Edit() {
         />
         {/* content  */}
         <AnimatePresence exitBeforeEnter>
-          {contentForms &&
-            contentForms.map((el, index) => (
-              <ContentForm
-                key={index}
-                index={index}
-                remove={deleteForm}
-                create={createForm}
-              />
-            ))}
+          <div>
+            {contentForms &&
+              contentForms.map((el, index) => (
+                <ContentForm
+                  key={index}
+                  index={index}
+                  title={el.title}
+                  remove={deleteForm}
+                  create={createForm}
+                  handleChange={handleChange}
+                />
+              ))}
+          </div>
         </AnimatePresence>
       </form>
     </section>

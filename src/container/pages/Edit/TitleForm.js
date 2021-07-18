@@ -5,9 +5,9 @@ export const TitleForm = ({ titleForm, setTitleForm, createForm }) => {
   return (
     <div
       style={{ borderTopWidth: "10px" }}
-      className={`bg-white px-8 border-t  shadow rounded-lg border-${color}-700`}
+      className={`bg-white px-8 border-t shadow rounded-lg border-${color}-700`}
     >
-      <div className="space-y-2 py-4">
+      <div className="py-4 space-y-2">
         <input
           value={titleForm.title ? titleForm.title : "Formulir tanpa judul"}
           onChange={(e) =>
@@ -21,7 +21,7 @@ export const TitleForm = ({ titleForm, setTitleForm, createForm }) => {
           className={`${inputBorder} border-white w-full py-2`}
         />
       </div>
-      <div className="border-t py-3 flex justify-end items-center">
+      <div className="border-t py-3 flex justify-end items-center space-x-3">
         <img
           src={plusCircleIcon}
           alt="plus"

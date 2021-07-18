@@ -11,7 +11,14 @@ import duplicateIcon from "../../../assets/svg/duplicate.svg";
 import trashIcon from "../../../assets/svg/trash.svg";
 import plusCircleIcon from "../../../assets/svg/plusCircle.svg";
 
-export const ContentForm = ({ index, create, duplicate, remove }) => {
+export const ContentForm = ({
+  index,
+  create,
+  duplicate,
+  remove,
+  handleChange,
+  title,
+}) => {
   const [isDropdown, setDropdown] = useState(false);
   const ref = useRef();
   useOutsideClick(ref, () => isDropdown && setDropdown(false));
@@ -31,7 +38,9 @@ export const ContentForm = ({ index, create, duplicate, remove }) => {
       <div className="space-y-2 py-4">
         <input
           id="random"
+          value={title ? title : ""}
           placeholder="Pertanyaan"
+          onChange={(e) => handleChange(e, index, "title")}
           className={`${inputBorder} border-white w-full text-xl py-3`}
         />
         <input
