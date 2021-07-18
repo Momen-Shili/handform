@@ -43,20 +43,18 @@ export default function Edit() {
           createForm={createForm}
         />
         {/* content  */}
-        <AnimatePresence exitBeforeEnter>
-          <div>
-            {contentForms &&
-              contentForms.map((el, index) => (
-                <ContentForm
-                  key={index}
-                  index={index}
-                  title={el.title}
-                  remove={deleteForm}
-                  create={createForm}
-                  handleChange={handleChange}
-                />
-              ))}
-          </div>
+        <AnimatePresence>
+          {contentForms &&
+            contentForms.map((el, index) => (
+              <ContentForm
+                key={index}
+                index={index}
+                title={el.title}
+                remove={deleteForm}
+                create={createForm}
+                handleChange={handleChange}
+              />
+            ))}
         </AnimatePresence>
       </form>
     </section>
