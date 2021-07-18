@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
+import { FormContext } from ".";
 import plusCircleIcon from "../../../assets/svg/plusCircle.svg";
 
-export const TitleForm = ({ titleForm, setTitleForm, createForm }) => {
+export const TitleForm = () => {
+  const { state, dispatch } = useContext(FormContext);
+  const createForm = () => {
+    const arr = state.contentForms;
+    arr.splice(0, 0, { id: Date.now() });
+    setTimeout(
+      () => dispatch({ type: "CHANGE_CONTENTFORM", value: [...arr] }),
+      180
+    );
+  };
   return (
     <div
       style={{ borderTopWidth: "10px" }}
@@ -9,15 +19,27 @@ export const TitleForm = ({ titleForm, setTitleForm, createForm }) => {
     >
       <div className="py-4 space-y-2">
         <input
-          value={titleForm.title ? titleForm.title : "Formulir tanpa judul"}
+          value={
+            state.titleForm.title
+              ? state.titleForm.title
+              : "Formulir tanpa judul"
+          }
           onChange={(e) =>
-            setTitleForm({ ...titleForm, title: e.target.value })
+            dispatch({
+              type: "CHANGE_TITLEFORM",
+              value: { ...state.titleForm, title: e.target.value },
+            })
           }
           className={`${inputBorder} border-white w-full text-3xl py-3`}
         />
         <input
           placeholder="Deskripsi formulir"
-          onChange={(e) => setTitleForm({ ...titleForm, desc: e.target.value })}
+          onChange={(e) =>
+            dispatch({
+              type: "CHANGE_TITLEFORM",
+              value: { ...state.titleForm, desc: e.target.value },
+            })
+          }
           className={`${inputBorder} border-white w-full py-2`}
         />
       </div>
@@ -26,7 +48,7 @@ export const TitleForm = ({ titleForm, setTitleForm, createForm }) => {
           src={plusCircleIcon}
           alt="plus"
           className="h-6 w-6 cursor-pointer"
-          onClick={() => createForm(-1)}
+          onClick={() => createForm()}
         />
       </div>
     </div>

@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useState, useRef } from "react";
 import dotsIcon from "../../../assets/svg/verticalDots.svg";
@@ -10,18 +11,38 @@ import documentAddIcon from "../../../assets/svg/documentAdd.svg";
 import duplicateIcon from "../../../assets/svg/duplicate.svg";
 import trashIcon from "../../../assets/svg/trash.svg";
 import plusCircleIcon from "../../../assets/svg/plusCircle.svg";
+import { FormContext } from ".";
 
-export const ContentForm = ({
-  index,
-  create,
-  duplicate,
-  remove,
-  handleChange,
-  title,
-}) => {
+export const ContentForm = ({ index, duplicate, title }) => {
+  const { state, dispatch } = useContext(FormContext);
   const [isDropdown, setDropdown] = useState(false);
+
   const ref = useRef();
   useOutsideClick(ref, () => isDropdown && setDropdown(false));
+
+  const createForm = (index) => {
+    const arr = state.contentForms;
+    arr.splice(index + 1, 0, { id: Date.now() });
+    setTimeout(
+      () => dispatch({ type: "CHANGE_CONTENTFORM", value: [...arr] }),
+      180
+    );
+  };
+
+  const deleteForm = (index) => {
+    const filter = state.contentForms.filter((el, idx) => idx !== index);
+    setTimeout(
+      () => dispatch({ type: "CHANGE_CONTENTFORM", value: [...filter] }),
+      180
+    );
+  };
+
+  const handleChange = (e, index, props) => {
+    const arr = state.contentForms;
+    arr[index] = { ...arr[index], [props]: e.target.value };
+    dispatch({ type: "CHANGE_CONTENTFORM", value: [...arr] });
+  };
+
   return (
     <motion.div
       initial={{ y: 150 }}
@@ -60,13 +81,13 @@ export const ContentForm = ({
           src={plusCircleIcon}
           alt="plus"
           className="h-6 w-6 cursor-pointer"
-          onClick={() => create(index)}
+          onClick={() => createForm(index)}
         />
         <img
           src={trashIcon}
           alt="delete"
           className="h-6 w-6 cursor-pointer"
-          onClick={() => remove(index)}
+          onClick={() => deleteForm(index)}
         />
       </div>
       {/* dropdown menu */}
