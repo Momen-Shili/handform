@@ -12,15 +12,16 @@ export const InputForm = ({ index, title }) => {
   };
 
   return (
-    <div className="space-y-2 py-4">
+    <div className="space-y-2 pt-4 pb-8">
       <input
         id="random"
         value={title ? title : ""}
-        placeholder="Pertanyaan"
+        placeholder="Judul pertanyaan"
         onChange={(e) => handleChange(e, index, "title")}
         className={`${inputBorder} border-white w-full text-xl py-3`}
       />
       <input
+        disabled
         placeholder="Teks jawaban singkat"
         className={`${inputBorder} border-white w-full py-2`}
       />

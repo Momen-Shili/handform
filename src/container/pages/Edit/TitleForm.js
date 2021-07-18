@@ -17,13 +17,10 @@ export default function TitleForm() {
       style={{ borderTopWidth: "10px" }}
       className={`bg-white px-8 border-t shadow rounded-lg border-${color}-700`}
     >
-      <div className="py-4 space-y-2">
+      <div className="pt-4 pb-8 space-y-2">
         <input
-          value={
-            state.titleForm.title
-              ? state.titleForm.title
-              : "Formulir tanpa judul"
-          }
+          value={state.titleForm.title ? state.titleForm.title : ""}
+          placeholder="Judul formulir"
           onChange={(e) =>
             dispatch({
               type: "CHANGE_TITLEFORM",

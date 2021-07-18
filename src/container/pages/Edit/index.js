@@ -35,7 +35,6 @@ const reducer = (state, action) => {
 
 export default function Edit() {
   const [state, dispatch] = useReducer(reducer, initialState);
-  console.log(state.contentForms);
   return (
     <FormContext.Provider value={{ state, dispatch }}>
       <section style={{ minHeight: "90vh" }}>
@@ -43,18 +42,11 @@ export default function Edit() {
           onSubmit={(e) => e.preventDefault()}
           className="w-11/12 lg:w-1/2 py-5 space-y-4 mx-auto"
         >
-          {/* title  */}
           <TitleForm />
-          {/* content  */}
           <AnimatePresence>
             {state.contentForms &&
               state.contentForms.map((el, index) => (
-                <ContentForm
-                  key={index}
-                  index={index}
-                  title={el.title}
-                  desc={el.desc}
-                />
+                <ContentForm key={index} index={index} title={el.title} />
               ))}
           </AnimatePresence>
         </form>
