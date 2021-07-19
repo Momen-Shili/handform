@@ -1,9 +1,11 @@
 import React from "react";
 import { useContext } from "react";
 import { GlobalState } from "../../config/contextAPI";
+import { FormContext } from "./Content";
 
-export const Input = ({ index, title, inputType, isDesc }) => {
+export const Input = ({ index, title }) => {
   const { state, dispatch } = useContext(GlobalState);
+  const { formState } = useContext(FormContext);
 
   const handleChange = (e, index, props) => {
     const arr = state.contentForms;
@@ -22,20 +24,20 @@ export const Input = ({ index, title, inputType, isDesc }) => {
         className={`${inputBorder} border-white w-full text-xl py-3`}
       />
       {/* desc  */}
-      {isDesc && (
+      {formState.isDesc && (
         <input
           placeholder="Deskripsi pertanyaan"
           className={`${inputBorder} border-white w-full text-sm`}
         />
       )}
       {/* content  */}
-      {inputType === "text" && (
+      {formState.inputType === "text" && (
         <input
           placeholder="Teks jawaban singkat"
           className={`${inputBorder} border-white w-full py-2`}
         />
       )}
-      {inputType === "textarea" && (
+      {formState.inputType === "textarea" && (
         <textarea
           placeholder="Teks jawaban panjang"
           className={`${inputBorder} border-white w-full py-2 h-auto resize-none`}

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import dotsIcon from "../../../assets/svg/verticalDots.svg";
 import menuIcon from "../../../assets/svg/menu.svg";
@@ -6,12 +6,47 @@ import menuAltIcon from "../../../assets/svg/menuAlt.svg";
 import gridIcon from "../../../assets/svg/grid.svg";
 import checkIcon from "../../../assets/svg/check.svg";
 import documentAddIcon from "../../../assets/svg/documentAdd.svg";
+import documentRemoveIcon from "../../../assets/svg/documentRemove.svg";
 import useOutsideClick from "../../Utils/useOutsideClick";
+import { FormContext } from "./Content";
 
-export const Dropdown = ({ setInputType, seDesc }) => {
+export const Dropdown = () => {
   const ref = useRef();
+  const { formState, formDispatch } = useContext(FormContext);
   const [isDropdown, setDropdown] = useState(false);
+
   useOutsideClick(ref, () => isDropdown && setDropdown(false));
+
+  const dropdownMenu = [
+    {
+      icon: menuAltIcon,
+      text: "Jawaban singkat",
+      onClick: () => formDispatch({ type: "CHANGE_INPUTTYPE", value: "text" }),
+    },
+    {
+      icon: menuIcon,
+      text: "Paragraf",
+      onClick: () =>
+        formDispatch({ type: "CHANGE_INPUTTYPE", value: "textarea" }),
+    },
+    {
+      icon: gridIcon,
+      text: "Pilihan ganda",
+      onClick: () => formDispatch({ type: "CHANGE_INPUTTYPE", value: "radio" }),
+    },
+    {
+      icon: checkIcon,
+      text: "Kotak centang",
+      onClick: () =>
+        formDispatch({ type: "CHANGE_INPUTTYPE", value: "checkbox" }),
+    },
+    {
+      icon: !formState.isDesc ? documentAddIcon : documentRemoveIcon,
+      text: !formState.isDesc ? "Tambahkan deskripsi" : "Hapus deskripsi",
+      onClick: () =>
+        formDispatch({ type: "CHANGE_ISDESC", value: !formState.isDesc }),
+    },
+  ];
 
   return (
     <div
@@ -32,11 +67,11 @@ export const Dropdown = ({ setInputType, seDesc }) => {
             className="absolute rounded shadow right-0 top-12 bg-white w-60"
           >
             <ul className="text-gray-500 py-1">
-              {dropdownBottom.map((el, index) => (
+              {dropdownMenu.map((el, index) => (
                 <li
                   key={index}
                   className="flex items-center space-x-3 py-2 px-5 hover:bg-gray-100"
-                  onClick={() => setInputType(el.value)}
+                  onClick={() => el.onClick()}
                 >
                   <img src={el.icon} alt="icon" className="h-5 w-5" />
                   <p className="">{el.text}</p>
@@ -66,31 +101,3 @@ const variants = {
     },
   },
 };
-
-const dropdownBottom = [
-  {
-    icon: menuAltIcon,
-    text: "Jawaban singkat",
-    value: "text",
-  },
-  {
-    icon: menuIcon,
-    text: "Paragraf",
-    value: "textarea",
-  },
-  {
-    icon: gridIcon,
-    text: "Pilihan ganda",
-    value: "text",
-  },
-  {
-    icon: checkIcon,
-    text: "Kotak centang",
-    value: "text",
-  },
-  {
-    icon: documentAddIcon,
-    text: "Tambahkan deskripsi",
-    value: "text",
-  },
-];
