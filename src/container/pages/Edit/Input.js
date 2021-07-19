@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { GlobalState } from "../../config/contextAPI";
 import { FormContext } from "./Content";
 
-export const Input = ({ index, title }) => {
+export const Input = ({ index }) => {
   const { state, dispatch } = useContext(GlobalState);
   const { formState } = useContext(FormContext);
 
@@ -13,21 +13,24 @@ export const Input = ({ index, title }) => {
     dispatch({ type: "CHANGE_CONTENTFORM", value: [...arr] });
   };
 
+  const { title, desc } = state.contentForms[index];
+
   return (
     <div className="space-y-2 pt-4 pb-8">
       {/* title  */}
       <input
-        id="random"
         value={title ? title : ""}
         placeholder="Judul pertanyaan"
         onChange={(e) => handleChange(e, index, "title")}
         className={`${inputBorder} border-white w-full text-xl py-3`}
       />
       {/* desc  */}
-      {formState.isDesc && (
+      {desc !== undefined && (
         <input
+          value={desc ? desc : ""}
           placeholder="Deskripsi pertanyaan"
           className={`${inputBorder} border-white w-full text-sm`}
+          onChange={(e) => handleChange(e, index, "desc")}
         />
       )}
       {/* content  */}

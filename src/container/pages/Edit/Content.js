@@ -29,7 +29,7 @@ const reducer = (state, action) => {
   }
 };
 
-export default function Content({ index, title }) {
+export default function Content({ index }) {
   const { state } = useContext(GlobalState);
   const [formState, formDispatch] = useReducer(reducer, initialState);
   return (
@@ -44,9 +44,9 @@ export default function Content({ index, title }) {
         className={`${state.isDropdown && "z-10"}
         bg-white px-8 border-t shadow rounded-lg relative `}
       >
-        <Input index={index} title={title} />
+        <Input index={index} />
         <Action index={index} />
-        <Dropdown />
+        <Dropdown index={index} />
       </motion.div>
     </FormContext.Provider>
   );

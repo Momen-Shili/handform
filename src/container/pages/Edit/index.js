@@ -19,7 +19,7 @@ export default function Edit() {
         <AnimatePresence>
           {state.contentForms &&
             state.contentForms.map((el, index) => (
-              <Content key={index} index={index} title={el.title} />
+              <Content key={index} index={index}/>
             ))}
         </AnimatePresence>
         <div className="flex justify-end py-3">

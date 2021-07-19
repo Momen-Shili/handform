@@ -9,11 +9,15 @@ import documentAddIcon from "../../../assets/svg/documentAdd.svg";
 import documentRemoveIcon from "../../../assets/svg/documentRemove.svg";
 import useOutsideClick from "../../Utils/useOutsideClick";
 import { FormContext } from "./Content";
+import { GlobalState } from "../../config/contextAPI";
 
-export const Dropdown = () => {
+export const Dropdown = ({ index }) => {
   const ref = useRef();
-  const { formState, formDispatch } = useContext(FormContext);
+  const { state, dispatch } = useContext(GlobalState);
+  const { formDispatch } = useContext(FormContext);
   const [isDropdown, setDropdown] = useState(false);
+
+  const { desc } = state.contentForms[index];
 
   useOutsideClick(ref, () => isDropdown && setDropdown(false));
 
@@ -41,10 +45,17 @@ export const Dropdown = () => {
         formDispatch({ type: "CHANGE_INPUTTYPE", value: "checkbox" }),
     },
     {
-      icon: !formState.isDesc ? documentAddIcon : documentRemoveIcon,
-      text: !formState.isDesc ? "Tambahkan deskripsi" : "Hapus deskripsi",
-      onClick: () =>
-        formDispatch({ type: "CHANGE_ISDESC", value: !formState.isDesc }),
+      icon: desc !== undefined ? documentRemoveIcon : documentAddIcon,
+      text: desc !== undefined ? "Hapus deskripsi" : "Tambahkan deskripsi",
+      onClick: () => {
+        const arr = state.contentForms;
+        arr[index] = {
+          ...arr[index],
+          desc: desc !== undefined ? undefined : "",
+        };
+
+        dispatch({ type: "CHANGE_CONTENTFORM", value: [...arr] });
+      },
     },
   ];
 
