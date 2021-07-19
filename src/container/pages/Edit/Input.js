@@ -1,7 +1,7 @@
-import React from "react";
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { GlobalState } from "../../config/contextAPI";
 import { FormContext } from "./Content";
+import * as InputType from "./InputType";
 
 export const Input = ({ index }) => {
   const { state, dispatch } = useContext(GlobalState);
@@ -42,18 +42,9 @@ export const Input = ({ index }) => {
         />
       )}
       {/* content  */}
-      {formState.inputType === "text" && (
-        <input
-          placeholder="Teks jawaban singkat"
-          className={`${inputBorder} border-white w-full py-2`}
-        />
-      )}
-      {formState.inputType === "textarea" && (
-        <textarea
-          placeholder="Teks jawaban panjang"
-          className={`${inputBorder} border-white w-full py-2 h-auto resize-none`}
-        ></textarea>
-      )}
+      {formState.inputType === "text" && <InputType.Text />}
+      {formState.inputType === "textarea" && <InputType.TextArea />}
+      {formState.inputType === "radio" && <InputType.Radio />}
     </div>
   );
 };

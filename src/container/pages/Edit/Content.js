@@ -8,7 +8,7 @@ import { GlobalState } from "../../config/contextAPI";
 export const FormContext = createContext();
 
 const initialState = {
-  inputType: "text",
+  inputType: "radio",
   isDesc: false,
 };
 
