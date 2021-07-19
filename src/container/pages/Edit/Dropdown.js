@@ -12,14 +12,18 @@ import { FormContext } from "./Content";
 import { GlobalState } from "../../config/contextAPI";
 
 export const Dropdown = ({ index }) => {
-  const ref = useRef();
   const { state, dispatch } = useContext(GlobalState);
   const { formDispatch } = useContext(FormContext);
+
   const [isDropdown, setDropdown] = useState(false);
 
-  const { desc } = state.contentForms[index];
-
+  const ref = useRef();
   useOutsideClick(ref, () => isDropdown && setDropdown(false));
+
+  const desc =
+    state.contentForms[index] !== undefined
+      ? state.contentForms[index].desc
+      : "";
 
   const dropdownMenu = [
     {

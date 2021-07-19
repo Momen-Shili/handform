@@ -13,7 +13,15 @@ export const Input = ({ index }) => {
     dispatch({ type: "CHANGE_CONTENTFORM", value: [...arr] });
   };
 
-  const { title, desc } = state.contentForms[index];
+  const title =
+    state.contentForms[index] !== undefined
+      ? state.contentForms[index].title
+      : "";
+
+  const desc =
+    state.contentForms[index] !== undefined
+      ? state.contentForms[index].desc
+      : "";
 
   return (
     <div className="space-y-2 pt-4 pb-8">
