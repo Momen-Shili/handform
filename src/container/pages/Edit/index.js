@@ -8,7 +8,6 @@ export const FormContext = createContext();
 const initialState = {
   titleForm: { title: "", desc: "" },
   contentForms: [],
-  isDropdown: false,
   isAnimateForm: false,
 };
 
@@ -23,11 +22,6 @@ const reducer = (state, action) => {
       return {
         ...state,
         contentForms: action.value,
-      };
-    case "CHANGE_ISDROPDOWN":
-      return {
-        ...state,
-        isDropdown: action.value,
       };
     case "CHANGE_ISANIMATEFORM":
       return {
@@ -45,7 +39,10 @@ export default function Edit() {
     <section style={{ minHeight: "90vh" }}>
       <FormContext.Provider value={{ state, dispatch }}>
         <form
-          onSubmit={(e) => e.preventDefault()}
+          onSubmit={(e) => {
+            e.preventDefault();
+            console.log(state.contentForms);
+          }}
           className="w-11/12 lg:w-1/2 py-5 space-y-4 mx-auto"
         >
           <TitleForm />
@@ -55,6 +52,14 @@ export default function Edit() {
                 <ContentForm key={index} index={index} title={el.title} />
               ))}
           </AnimatePresence>
+          <div className="flex justify-end py-3">
+            <button
+              type="submit"
+              className="tracking-wide bg-white shadow rounded-md py-2 px-5"
+            >
+              SIMPAN
+            </button>
+          </div>
         </form>
       </FormContext.Provider>
     </section>

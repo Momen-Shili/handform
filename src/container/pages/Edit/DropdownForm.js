@@ -1,6 +1,5 @@
-import React, { useContext, useRef } from "react";
+import React, { useState,useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { FormContext } from ".";
 import dotsIcon from "../../../assets/svg/verticalDots.svg";
 import menuIcon from "../../../assets/svg/menu.svg";
 import menuAltIcon from "../../../assets/svg/menuAlt.svg";
@@ -10,28 +9,21 @@ import documentAddIcon from "../../../assets/svg/documentAdd.svg";
 import useOutsideClick from "../../Utils/useOutsideClick";
 
 export const DropdownForm = () => {
-  const { state, dispatch } = useContext(FormContext);
-
   const ref = useRef();
-  useOutsideClick(
-    ref,
-    () =>
-      state.isDropdown && dispatch({ type: "CHANGE_ISDROPDOWN", value: false })
-  );
-  
+  const [isDropdown, setDropdown] = useState(false);
+  useOutsideClick(ref, () => isDropdown && setDropdown(false));
+
   return (
     <div
       ref={ref}
-      onClick={() =>
-        dispatch({ type: "CHANGE_ISDROPDOWN", value: !state.isDropdown })
-      }
+      onClick={() => setDropdown(!isDropdown)}
       className={`${
-        state.isDropdown ? "bg-gray-300" : "hover:bg-gray-100"
+        isDropdown ? "bg-gray-300 z-10" : "hover:bg-gray-100"
       } absolute right-2 top-2 p-2 rounded-full duration-200 cursor-pointer `}
     >
       <img src={dotsIcon} alt="dots" className="h-6 w-6" />
       <AnimatePresence>
-        {state.isDropdown && (
+        {isDropdown && (
           <motion.div
             variants={variants}
             initial="initial"
