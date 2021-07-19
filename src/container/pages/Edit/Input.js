@@ -2,7 +2,7 @@ import React from "react";
 import { useContext } from "react";
 import { FormContext } from ".";
 
-export const InputForm = ({ index, title }) => {
+export const Input = ({ index, title }) => {
   const { state, dispatch } = useContext(FormContext);
 
   const handleChange = (e, index, props) => {

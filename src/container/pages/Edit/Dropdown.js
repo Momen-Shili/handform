@@ -8,7 +8,7 @@ import checkIcon from "../../../assets/svg/check.svg";
 import documentAddIcon from "../../../assets/svg/documentAdd.svg";
 import useOutsideClick from "../../Utils/useOutsideClick";
 
-export const DropdownForm = () => {
+export const Dropdown = () => {
   const ref = useRef();
   const [isDropdown, setDropdown] = useState(false);
   useOutsideClick(ref, () => isDropdown && setDropdown(false));

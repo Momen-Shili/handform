@@ -5,7 +5,7 @@ import trashIcon from "../../../assets/svg/trash.svg";
 import plusCircleIcon from "../../../assets/svg/plusCircle.svg";
 import { motion } from "framer-motion";
 
-export const ActionForm = ({ index, duplicate }) => {
+export const Action = ({ index, duplicate }) => {
   const { state, dispatch } = useContext(FormContext);
 
   const createForm = () => {

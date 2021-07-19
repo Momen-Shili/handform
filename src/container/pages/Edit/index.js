@@ -1,7 +1,7 @@
 import { createContext, useReducer } from "react";
 import { AnimatePresence } from "framer-motion";
-import ContentForm from "./ContentForm";
-import TitleForm from "./TitleForm";
+import Content from "./Content";
+import Title from "./Title";
 
 export const FormContext = createContext();
 
@@ -45,11 +45,11 @@ export default function Edit() {
           }}
           className="w-11/12 lg:w-1/2 py-5 space-y-4 mx-auto"
         >
-          <TitleForm />
+          <Title />
           <AnimatePresence>
             {state.contentForms &&
               state.contentForms.map((el, index) => (
-                <ContentForm key={index} index={index} title={el.title} />
+                <Content key={index} index={index} title={el.title} />
               ))}
           </AnimatePresence>
           <div className="flex justify-end py-3">

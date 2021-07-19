@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { motion } from "framer-motion";
 import { FormContext } from ".";
-import { InputForm } from "./InputForm";
-import { ActionForm } from "./ActionForm";
-import { DropdownForm } from "./DropdownForm";
+import { Input } from "./Input";
+import { Action } from "./Action";
+import { Dropdown } from "./Dropdown";
 
-export default function ContentForm({ index, title }) {
+export default function Content({ index, title }) {
   const { state } = useContext(FormContext);
   return (
     <motion.div
@@ -18,9 +18,9 @@ export default function ContentForm({ index, title }) {
       className={`${state.isDropdown && "z-10"}
         bg-white px-8 border-t shadow rounded-lg relative `}
     >
-      <InputForm index={index} title={title} />
-      <ActionForm index={index} />
-      <DropdownForm />
+      <Input index={index} title={title} />
+      <Action index={index} />
+      <Dropdown />
     </motion.div>
   );
 }
