@@ -1,4 +1,4 @@
-import React, { useState,useRef } from "react";
+import React, { useState, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import dotsIcon from "../../../assets/svg/verticalDots.svg";
 import menuIcon from "../../../assets/svg/menu.svg";
@@ -8,7 +8,7 @@ import checkIcon from "../../../assets/svg/check.svg";
 import documentAddIcon from "../../../assets/svg/documentAdd.svg";
 import useOutsideClick from "../../Utils/useOutsideClick";
 
-export const Dropdown = () => {
+export const Dropdown = ({ setInputType, seDesc }) => {
   const ref = useRef();
   const [isDropdown, setDropdown] = useState(false);
   useOutsideClick(ref, () => isDropdown && setDropdown(false));
@@ -36,6 +36,7 @@ export const Dropdown = () => {
                 <li
                   key={index}
                   className="flex items-center space-x-3 py-2 px-5 hover:bg-gray-100"
+                  onClick={() => setInputType(el.value)}
                 >
                   <img src={el.icon} alt="icon" className="h-5 w-5" />
                   <p className="">{el.text}</p>
@@ -67,9 +68,29 @@ const variants = {
 };
 
 const dropdownBottom = [
-  { icon: menuAltIcon, text: "Jawaban singkat" },
-  { icon: menuIcon, text: "Paragraf" },
-  { icon: gridIcon, text: "Pilihan ganda" },
-  { icon: checkIcon, text: "Kotak centang" },
-  { icon: documentAddIcon, text: "Tambahkan deskripsi" },
+  {
+    icon: menuAltIcon,
+    text: "Jawaban singkat",
+    value: "text",
+  },
+  {
+    icon: menuIcon,
+    text: "Paragraf",
+    value: "textarea",
+  },
+  {
+    icon: gridIcon,
+    text: "Pilihan ganda",
+    value: "text",
+  },
+  {
+    icon: checkIcon,
+    text: "Kotak centang",
+    value: "text",
+  },
+  {
+    icon: documentAddIcon,
+    text: "Tambahkan deskripsi",
+    value: "text",
+  },
 ];

@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
-import { FormContext } from ".";
+import React, { useContext,useState } from "react";
 import plusCircleIcon from "../../../assets/svg/plusCircle.svg";
+import { GlobalState } from "../../config/contextAPI";
 
 export default function TitleForm() {
-  const { state, dispatch } = useContext(FormContext);
-
+  const [titleForm, setTitleForm] = useState({ title: "", desc: "" });
+  const { state, dispatch } = useContext(GlobalState);
+  
   const createForm = () => {
     const arr = state.contentForms;
     arr.splice(0, 0, { id: Date.now() });
@@ -21,23 +22,17 @@ export default function TitleForm() {
     >
       <div className="pt-4 pb-8 space-y-2">
         <input
-          value={state.titleForm.title ? state.titleForm.title : ""}
+          value={titleForm.title ? titleForm.title : ""}
           placeholder="Judul formulir"
           onChange={(e) =>
-            dispatch({
-              type: "CHANGE_TITLEFORM",
-              value: { ...state.titleForm, title: e.target.value },
-            })
+            setTitleForm({ ...titleForm, title: e.target.value })
           }
           className={`${inputBorder} border-white w-full text-3xl py-3`}
         />
         <input
           placeholder="Deskripsi formulir"
           onChange={(e) =>
-            dispatch({
-              type: "CHANGE_TITLEFORM",
-              value: { ...state.titleForm, desc: e.target.value },
-            })
+            setTitleForm({ ...titleForm, desc: e.target.value })
           }
           className={`${inputBorder} border-white w-full py-2`}
         />

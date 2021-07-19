@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
-import { FormContext } from ".";
 import duplicateIcon from "../../../assets/svg/duplicate.svg";
 import trashIcon from "../../../assets/svg/trash.svg";
 import plusCircleIcon from "../../../assets/svg/plusCircle.svg";
 import { motion } from "framer-motion";
+import { GlobalState } from "../../config/contextAPI";
 
 export const Action = ({ index, duplicate }) => {
-  const { state, dispatch } = useContext(FormContext);
+  const { state, dispatch } = useContext(GlobalState);
 
   const createForm = () => {
     const arr = state.contentForms;
@@ -24,6 +24,8 @@ export const Action = ({ index, duplicate }) => {
       180
     );
   };
+
+  const animate = (num) => (state.isAnimateForm ? num : 1);
 
   const icons = [
     {
@@ -51,9 +53,18 @@ export const Action = ({ index, duplicate }) => {
       {icons.map((el, idx) => (
         <span key={idx}>
           <motion.img
-            initial={{ rotate: 360, x: el.x, opacity: 0 }}
+            initial={{
+              rotate: animate(360),
+              x: animate(el.x),
+              opacity: animate(0),
+            }}
             animate={{ rotate: 0, x: 0, opacity: 1 }}
-            transition={{delay: 0.2,type: "spring",duration: 0.5,stiffness: 80,}}
+            transition={{
+              delay: animate(0.2),
+              type: "spring",
+              duration: animate(0.5),
+              stiffness: animate(80),
+            }}
             src={el.icon}
             alt={el.alt}
             className="h-6 w-6 cursor-pointer"
