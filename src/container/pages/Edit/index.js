@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { AnimatePresence } from "framer-motion";
 import { GlobalState } from "../../config/contextAPI";
-import Content from "./Content";
+import Question from "./Question";
 import Title from "./Title";
 
 export default function Edit() {
@@ -18,9 +18,7 @@ export default function Edit() {
         <Title />
         <AnimatePresence>
           {state.contentForms &&
-            state.contentForms.map((el, index) => (
-              <Content key={index} id={el.id} />
-            ))}
+            state.contentForms.map((el) => <Question key={el.id} id={el.id} />)}
         </AnimatePresence>
         <div className="flex justify-end py-3">
           <button

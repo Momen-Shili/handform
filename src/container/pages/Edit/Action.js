@@ -4,7 +4,7 @@ import trashIcon from "../../../assets/svg/trash.svg";
 import plusCircleIcon from "../../../assets/svg/plusCircle.svg";
 import { motion } from "framer-motion";
 import { contentForms, GlobalState } from "../../config/contextAPI";
-import { QuestionContext } from "./Content";
+import { QuestionContext } from "./Question";
 
 export const Action = ({ duplicate }) => {
   const id = useContext(QuestionContext);

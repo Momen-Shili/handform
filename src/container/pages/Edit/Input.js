@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { contentForms, GlobalState } from "../../config/contextAPI";
-import { QuestionContext } from "./Content";
+import { QuestionContext } from "./Question";
 import * as InputType from "./InputType";
 
 export const Input = () => {
@@ -33,10 +33,11 @@ export const Input = () => {
           onChange={(e) => handleChange(e, "desc")}
         />
       )}
-      {/* content  */}
+      {/* input  */}
       {inputType === "text" && <InputType.Text />}
       {inputType === "textarea" && <InputType.TextArea />}
       {inputType === "radio" && <InputType.Radio />}
+      {inputType === "checkbox" && <InputType.CheckBox />}
     </div>
   );
 };

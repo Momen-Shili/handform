@@ -9,7 +9,7 @@ import documentAddIcon from "../../../assets/svg/documentAdd.svg";
 import documentRemoveIcon from "../../../assets/svg/documentRemove.svg";
 import useOutsideClick from "../../Utils/useOutsideClick";
 import { contentForms, GlobalState } from "../../config/contextAPI";
-import { QuestionContext } from "./Content";
+import { QuestionContext } from "./Question";
 
 export const Dropdown = () => {
   const { dispatch } = useContext(GlobalState);

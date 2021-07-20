@@ -7,7 +7,7 @@ import { GlobalState } from "../../config/contextAPI";
 
 export const QuestionContext = createContext();
 
-export default function Content({ id }) {
+export default function Question({ id }) {
   const { state } = useContext(GlobalState);
   console.log("state", state.contentForms);
   return (
