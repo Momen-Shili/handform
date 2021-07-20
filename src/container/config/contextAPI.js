@@ -7,6 +7,7 @@ export const contentForms = [];
 export const initialState = {
   contentForms,
   isAnimateForm: false,
+  color:"indigo"
 };
 
 export const reducer = (state, action) => {

@@ -3,25 +3,31 @@ import { contentForms, GlobalState } from "../../config/contextAPI";
 import plusIcon from "../../../assets/svg/plus.svg";
 import { QuestionContext } from "./Question";
 
-const Text = () => (
-  <input
-    disabled
-    placeholder="Teks jawaban singkat"
-    className={`${inputBorder} border-white w-full py-2`}
-  />
-);
+const Text = () => {
+  const { state } = useContext(GlobalState);
+  return (
+    <input
+      disabled
+      placeholder="Teks jawaban singkat"
+      className={`hover:border-gray-300 border-white border-b focus:border-b-2 focus:border-${state.color}-700 w-full py-2`}
+    />
+  );
+};
 
-const TextArea = () => (
-  <textarea
-    disabled
-    placeholder="Teks jawaban panjang"
-    className={`${inputBorder} border-white w-full py-2 h-auto resize-none`}
-  ></textarea>
-);
+const TextArea = () => {
+  const { state } = useContext(GlobalState);
+  return (
+    <textarea
+      disabled
+      placeholder="Teks jawaban panjang"
+      className={`hover:border-gray-300 border-white border-b focus:border-b-2 focus:border-${state.color}-700 w-full py-2 h-auto resize-none`}
+    ></textarea>
+  );
+};
 
 const Radio = () => {
   const id = useContext(QuestionContext);
-  const { dispatch } = useContext(GlobalState);
+  const { state, dispatch } = useContext(GlobalState);
 
   const index = contentForms.findIndex((el) => el.id === id);
   const options = contentForms[index] && contentForms[index].options;
@@ -43,7 +49,7 @@ const Radio = () => {
               saveData();
             }}
             placeholder={`opsi ${idx + 1}`}
-            className={`${inputBorder} border-white w-full py-2`}
+            className={`hover:border-gray-300 border-white border-b focus:border-b-2 focus:border-${state.color}-700 w-full py-2`}
           />
           {options.length > 1 && (
             <div
@@ -69,7 +75,7 @@ const Radio = () => {
             options.push("");
             saveData();
           }}
-          className={`${inputBorder} border-white py-2 text-gray-400`}
+          className={`hover:border-gray-300 border-white border-b focus:border-b-2 focus:border-${state.color}-700 py-2 text-gray-400`}
         >
           Tambah opsi
         </button>
@@ -80,7 +86,7 @@ const Radio = () => {
 
 const CheckBox = () => {
   const id = useContext(QuestionContext);
-  const { dispatch } = useContext(GlobalState);
+  const { state, dispatch } = useContext(GlobalState);
 
   const index = contentForms.findIndex((el) => el.id === id);
   const options = contentForms[index] && contentForms[index].options;
@@ -102,7 +108,7 @@ const CheckBox = () => {
               saveData();
             }}
             placeholder={`opsi ${idx + 1}`}
-            className={`${inputBorder} border-white w-full py-2`}
+            className={`hover:border-gray-300 border-white border-b focus:border-b-2 focus:border-${state.color}-700 w-full py-2`}
           />
           {options.length > 1 && (
             <div
@@ -128,7 +134,7 @@ const CheckBox = () => {
             options.push("");
             saveData();
           }}
-          className={`${inputBorder} border-white py-2 text-gray-400`}
+          className={`hover:border-gray-300 border-white border-b focus:border-b-2 focus:border-${state.color}-700 py-2 text-gray-400`}
         >
           Tambah opsi
         </button>
@@ -138,6 +144,3 @@ const CheckBox = () => {
 };
 
 export { Text, TextArea, Radio, CheckBox };
-
-const color = "pink";
-const inputBorder = `hover:border-gray-300 border-white border-b focus:border-b-2 focus:border-${color}-700`;

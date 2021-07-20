@@ -4,7 +4,7 @@ import { QuestionContext } from "./Question";
 import * as InputType from "./InputType";
 
 export const Input = () => {
-  const { dispatch } = useContext(GlobalState);
+  const { state, dispatch } = useContext(GlobalState);
   const id = useContext(QuestionContext);
 
   const index = contentForms.findIndex((el) => el.id === id);
@@ -22,14 +22,14 @@ export const Input = () => {
         value={formState ? formState.title : ""}
         placeholder="Judul pertanyaan"
         onChange={(e) => handleChange(e, "title")}
-        className={`${inputBorder} border-white w-full text-xl py-3`}
+        className={`hover:border-gray-300 border-white border-b focus:border-b-2 focus:border-${state.color}-700 w-full text-xl py-3`}
       />
       {/* desc  */}
       {formState && formState.desc !== undefined && (
         <input
           value={formState ? formState.desc : ""}
           placeholder="Deskripsi pertanyaan"
-          className={`${inputBorder} border-white w-full text-sm`}
+          className={`hover:border-gray-300 border-white border-b focus:border-b-2 focus:border-${state.color}-700 w-full text-sm`}
           onChange={(e) => handleChange(e, "desc")}
         />
       )}
@@ -41,6 +41,3 @@ export const Input = () => {
     </div>
   );
 };
-
-const color = "pink";
-const inputBorder = `hover:border-gray-300 border-white border-b focus:border-b-2 focus:border-${color}-700`;

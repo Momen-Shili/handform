@@ -24,7 +24,7 @@ export default function TitleForm() {
   return (
     <div
       style={{ borderTopWidth: "10px" }}
-      className={`bg-white px-8 border-t shadow rounded-lg border-${color}-700`}
+      className={`bg-white px-8 border-t shadow rounded-lg border-${state.color}-700`}
     >
       <div className="pt-4 pb-8 space-y-2">
         <input
@@ -33,12 +33,12 @@ export default function TitleForm() {
           onChange={(e) =>
             setTitleForm({ ...titleForm, title: e.target.value })
           }
-          className={`${inputBorder} border-white w-full text-3xl py-3`}
+          className={`hover:border-gray-300 border-white border-b focus:border-b-2 focus:border-${state.color}-700 w-full text-3xl py-3`}
         />
         <input
           placeholder="Deskripsi formulir"
           onChange={(e) => setTitleForm({ ...titleForm, desc: e.target.value })}
-          className={`${inputBorder} border-white w-full py-2`}
+          className={`hover:border-gray-300 border-white border-b focus:border-b-2 focus:border-${state.color}-700 w-full py-2`}
         />
       </div>
       <div className="border-t py-3 flex justify-end items-center space-x-3">
@@ -57,6 +57,3 @@ export default function TitleForm() {
     </div>
   );
 }
-
-const color = "green";
-const inputBorder = `hover:border-gray-300 border-white border-b focus:border-b-2 focus:border-${color}-700`;
