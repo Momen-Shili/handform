@@ -3,13 +3,10 @@ import { AnimatePresence } from "framer-motion";
 import { GlobalState } from "../../config/contextAPI";
 import Content from "./Content";
 import Title from "./Title";
-import { useEffect } from "react";
 
 export default function Edit() {
-  const { state, dispatch } = useContext(GlobalState);
-  useEffect(() => {
-    return () => dispatch({ type: "CHANGE_CONTENFORM", value: [] });
-  }, [dispatch]);
+  const { state } = useContext(GlobalState);
+  console.log("index");
   return (
     <section style={{ minHeight: "90vh" }}>
       <form
@@ -23,14 +20,7 @@ export default function Edit() {
         <AnimatePresence>
           {state.contentForms &&
             state.contentForms.map((el, index) => (
-              <Content
-                key={index}
-                id={el.id}
-                desc={el.desc}
-                title={el.title}
-                options={el.options}
-                inputType={el.inputType}
-              />
+              <Content key={index} id={el.id} />
             ))}
         </AnimatePresence>
         <div className="flex justify-end py-3">

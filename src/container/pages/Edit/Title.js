@@ -7,7 +7,14 @@ export default function TitleForm() {
   const { state, dispatch } = useContext(GlobalState);
 
   const createForm = () => {
-    contentForms.unshift({ id: Date.now() });
+    const newForm = {
+      id: Date.now(),
+      title: "",
+      desc: undefined,
+      options: [],
+      inputType: "radio",
+    };
+    contentForms.unshift({ ...newForm });
     setTimeout(
       () => dispatch({ type: "CHANGE_CONTENTFORM", value: [...contentForms] }),
       180

@@ -8,52 +8,67 @@ import checkIcon from "../../../assets/svg/check.svg";
 import documentAddIcon from "../../../assets/svg/documentAdd.svg";
 import documentRemoveIcon from "../../../assets/svg/documentRemove.svg";
 import useOutsideClick from "../../Utils/useOutsideClick";
-import { FormContext } from "./Content";
+import { contentForms, GlobalState } from "../../config/contextAPI";
 
-export const Dropdown = () => {
-  const { formState, formDispatch } = useContext(FormContext);
+export const Dropdown = ({ id }) => {
+  const { dispatch } = useContext(GlobalState);
+  const index = contentForms.findIndex((el) => el.id === id);
+  const formState = contentForms[index];
 
   const [isDropdown, setDropdown] = useState(false);
 
   const ref = useRef();
   useOutsideClick(ref, () => isDropdown && setDropdown(false));
 
-  // const desc =
-  //   state.contentForms[index] !== undefined
-  //     ? state.contentForms[index].desc
-  //     : "";
-
   const dropdownMenu = [
     {
       icon: menuAltIcon,
       text: "Jawaban singkat",
-      onClick: () => formDispatch({ type: "CHANGE_INPUTTYPE", value: "text" }),
+      onClick: () => {
+        contentForms[index].inputType = "text";
+        dispatch({ type: "CHANGE_CONTENTFORM", value: [...contentForms] });
+      },
     },
     {
       icon: menuIcon,
       text: "Paragraf",
-      onClick: () =>
-        formDispatch({ type: "CHANGE_INPUTTYPE", value: "textarea" }),
+      // onClick: () =>
+      onClick: () => {
+        contentForms[index].inputType = "textarea";
+        dispatch({ type: "CHANGE_CONTENTFORM", value: [...contentForms] });
+      },
     },
     {
       icon: gridIcon,
       text: "Pilihan ganda",
-      onClick: () => formDispatch({ type: "CHANGE_INPUTTYPE", value: "radio" }),
+      onClick: () => {
+        contentForms[index].inputType = "radio";
+        dispatch({ type: "CHANGE_CONTENTFORM", value: [...contentForms] });
+      },
     },
     {
       icon: checkIcon,
       text: "Kotak centang",
-      onClick: () =>
-        formDispatch({ type: "CHANGE_INPUTTYPE", value: "checkbox" }),
+      onClick: () => {
+        contentForms[index].inputType = "checkbox";
+        dispatch({ type: "CHANGE_CONTENTFORM", value: [...contentForms] });
+      },
     },
     {
-      icon: formState.desc !== null ? documentRemoveIcon : documentAddIcon,
-      text: formState.desc !== null ? "Hapus deskripsi" : "Tambahkan deskripsi",
-      onClick: () =>
-        formDispatch({
-          type: "CHANGE_DESC",
-          value: formState.desc !== null ? null : "",
-        }),
+      icon:
+        formState && formState.desc !== undefined
+          ? documentRemoveIcon
+          : documentAddIcon,
+      text:
+        formState && formState.desc !== undefined
+          ? "Hapus deskripsi"
+          : "Tambahkan deskripsi",
+      onClick: () => {
+        contentForms[index].desc !== undefined
+          ? (contentForms[index].desc = undefined)
+          : (contentForms[index].desc = "");
+        dispatch({ type: "CHANGE_CONTENTFORM", value: [...contentForms] });
+      },
     },
   ];
 

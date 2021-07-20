@@ -4,26 +4,29 @@ import trashIcon from "../../../assets/svg/trash.svg";
 import plusCircleIcon from "../../../assets/svg/plusCircle.svg";
 import { motion } from "framer-motion";
 import { contentForms, GlobalState } from "../../config/contextAPI";
-import { FormContext } from "./Content";
 
-export const Action = ({ duplicate }) => {
+export const Action = ({ duplicate, id }) => {
   const { state, dispatch } = useContext(GlobalState);
-  const { formState,formDispatch } = useContext(FormContext);
-  const index = state.contentForms.findIndex((el) => el.id === formState.id);
+  const index = state.contentForms.findIndex((el) => el.id === id);
 
   const createForm = () => {
-    const id = Date.now();
-    contentForms.splice(index + 1, 0, { id });
+    const newForm = {
+      id: Date.now(),
+      title: "",
+      desc: undefined,
+      options: [],
+      inputType: "radio",
+    };
+    contentForms.splice(index + 1, 0, { ...newForm });
     setTimeout(() => {
-      formDispatch({ type: "CHANGE_TITLE", value: id });
       dispatch({ type: "CHANGE_CONTENTFORM", value: [...contentForms] });
     }, 180);
   };
 
   const deleteForm = () => {
-    const filter = state.contentForms.filter((el, idx) => idx !== index);
+    contentForms.splice(index, 1);
     setTimeout(
-      () => dispatch({ type: "CHANGE_CONTENTFORM", value: [...filter] }),
+      () => dispatch({ type: "CHANGE_CONTENTFORM", value: [...contentForms] }),
       180
     );
   };
@@ -50,8 +53,6 @@ export const Action = ({ duplicate }) => {
       x: 40,
     },
   ];
-
-  console.log("action formState", formState);
 
   return (
     <div className="border-t py-3 flex justify-end items-center space-x-3">

@@ -1,33 +1,39 @@
 import React, { useContext } from "react";
-import { FormContext } from "./Content";
+import { contentForms, GlobalState } from "../../config/contextAPI";
 import * as InputType from "./InputType";
 
 export const Input = ({ id }) => {
-  const { formState, formDispatch } = useContext(FormContext);
-  const handleChange = (e, CHANGE_VALUE) =>
-    formDispatch({ type: CHANGE_VALUE, value: e.target.value });
+  const { dispatch } = useContext(GlobalState);
+  const index = contentForms.findIndex((el) => el.id === id);
+  const formState = contentForms[index];
+  const inputType = contentForms[index] && contentForms[index].inputType;
+
+  const handleChange = (e, props) => {
+    contentForms[index] = { ...contentForms[index], [props]: e.target.value };
+    dispatch({ type: "CHANGE_CONTENTFORM", value: [...contentForms] });
+  };
   return (
     <div className="space-y-2 pt-4 pb-8">
       {/* title  */}
       <input
-        value={formState.id ? formState.id : ""}
+        value={formState ? formState.title : ""}
         placeholder="Judul pertanyaan"
-        onChange={(e) => handleChange(e, "CHANGE_TITLE")}
+        onChange={(e) => handleChange(e, "title")}
         className={`${inputBorder} border-white w-full text-xl py-3`}
       />
       {/* desc  */}
-      {formState.desc !== null && (
+      {formState && formState.desc !== undefined && (
         <input
-          value={formState.desc ? formState.desc : ""}
+          value={formState ? formState.desc : ""}
           placeholder="Deskripsi pertanyaan"
           className={`${inputBorder} border-white w-full text-sm`}
-          onChange={(e) => handleChange(e, "CHANGE_DESC")}
+          onChange={(e) => handleChange(e, "desc")}
         />
       )}
       {/* content  */}
-      {formState.inputType === "text" && <InputType.Text />}
-      {formState.inputType === "textarea" && <InputType.TextArea />}
-      {formState.inputType === "radio" && <InputType.Radio />}
+      {inputType === "text" && <InputType.Text />}
+      {inputType === "textarea" && <InputType.TextArea />}
+      {inputType === "radio" && <InputType.Radio />}
     </div>
   );
 };
