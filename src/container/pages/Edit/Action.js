@@ -4,8 +4,10 @@ import trashIcon from "../../../assets/svg/trash.svg";
 import plusCircleIcon from "../../../assets/svg/plusCircle.svg";
 import { motion } from "framer-motion";
 import { contentForms, GlobalState } from "../../config/contextAPI";
+import { QuestionContext } from "./Content";
 
-export const Action = ({ duplicate, id }) => {
+export const Action = ({ duplicate }) => {
+  const id = useContext(QuestionContext);
   const { state, dispatch } = useContext(GlobalState);
   const index = state.contentForms.findIndex((el) => el.id === id);
 

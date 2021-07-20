@@ -6,7 +6,6 @@ import Title from "./Title";
 
 export default function Edit() {
   const { state } = useContext(GlobalState);
-  console.log("index");
   return (
     <section style={{ minHeight: "90vh" }}>
       <form

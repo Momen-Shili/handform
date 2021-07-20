@@ -9,9 +9,12 @@ import documentAddIcon from "../../../assets/svg/documentAdd.svg";
 import documentRemoveIcon from "../../../assets/svg/documentRemove.svg";
 import useOutsideClick from "../../Utils/useOutsideClick";
 import { contentForms, GlobalState } from "../../config/contextAPI";
+import { QuestionContext } from "./Content";
 
-export const Dropdown = ({ id }) => {
+export const Dropdown = () => {
   const { dispatch } = useContext(GlobalState);
+  const id = useContext(QuestionContext);
+  
   const index = contentForms.findIndex((el) => el.id === id);
   const formState = contentForms[index];
 
@@ -20,39 +23,36 @@ export const Dropdown = ({ id }) => {
   const ref = useRef();
   useOutsideClick(ref, () => isDropdown && setDropdown(false));
 
+  const changeInputType = (type) => {
+    contentForms[index].inputType = type;
+    contentForms[index].options = [];
+    dispatch({ type: "CHANGE_CONTENTFORM", value: [...contentForms] });
+  };
+
   const dropdownMenu = [
     {
       icon: menuAltIcon,
       text: "Jawaban singkat",
-      onClick: () => {
-        contentForms[index].inputType = "text";
-        dispatch({ type: "CHANGE_CONTENTFORM", value: [...contentForms] });
-      },
+      type: "text",
+      onClick: changeInputType,
     },
     {
       icon: menuIcon,
       text: "Paragraf",
-      // onClick: () =>
-      onClick: () => {
-        contentForms[index].inputType = "textarea";
-        dispatch({ type: "CHANGE_CONTENTFORM", value: [...contentForms] });
-      },
+      type: "textarea",
+      onClick: changeInputType,
     },
     {
       icon: gridIcon,
       text: "Pilihan ganda",
-      onClick: () => {
-        contentForms[index].inputType = "radio";
-        dispatch({ type: "CHANGE_CONTENTFORM", value: [...contentForms] });
-      },
+      type: "radio",
+      onClick: changeInputType,
     },
     {
       icon: checkIcon,
       text: "Kotak centang",
-      onClick: () => {
-        contentForms[index].inputType = "checkbox";
-        dispatch({ type: "CHANGE_CONTENTFORM", value: [...contentForms] });
-      },
+      type: "checkbox",
+      onClick: changeInputType,
     },
     {
       icon:
@@ -63,6 +63,7 @@ export const Dropdown = ({ id }) => {
         formState && formState.desc !== undefined
           ? "Hapus deskripsi"
           : "Tambahkan deskripsi",
+
       onClick: () => {
         contentForms[index].desc !== undefined
           ? (contentForms[index].desc = undefined)
@@ -95,10 +96,10 @@ export const Dropdown = ({ id }) => {
                 <li
                   key={index}
                   className="flex items-center space-x-3 py-2 px-5 hover:bg-gray-100"
-                  onClick={() => el.onClick()}
+                  onClick={() => el.onClick(el.type)}
                 >
                   <img src={el.icon} alt="icon" className="h-5 w-5" />
-                  <p className="">{el.text}</p>
+                  <p>{el.text}</p>
                 </li>
               ))}
             </ul>

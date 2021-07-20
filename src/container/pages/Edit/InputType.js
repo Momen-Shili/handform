@@ -1,6 +1,7 @@
-import { useState, useContext } from "react";
-import { GlobalState } from "../../config/contextAPI";
+import { useContext } from "react";
+import { contentForms, GlobalState } from "../../config/contextAPI";
 import plusIcon from "../../../assets/svg/plus.svg";
+import { QuestionContext } from "./Content";
 
 const Text = () => (
   <input
@@ -16,22 +17,31 @@ const TextArea = () => (
   ></textarea>
 );
 
-const Radio = ({ index }) => {
-  const { state, dispatch } = useContext(GlobalState);
-  const [options, setOptions] = useState([""]);
+const Radio = () => {
+  const id = useContext(QuestionContext);
+  const { dispatch } = useContext(GlobalState);
+  
+  const index = contentForms.findIndex((el) => el.id === id);
+  const options = contentForms[index] && contentForms[index].options;
 
   const handleChange = (e, idx) => {
-    const opt = options;
-    opt[idx] = e.target.value;
-    setOptions([...opt]);
-
-    const arr = state.contentForms;
-    arr[index] = { ...arr[index], options: [...opt] };
-    dispatch({ type: "CHANGE_CONTENTFORM", value: [...arr] });
+    options[idx] = e.target.value;
+    contentForms[index] = { ...contentForms[index], options: [...options] };
+    dispatch({ type: "CHANGE_CONTENTFORM", value: [...contentForms] });
   };
 
-  // console.log("content form", state.contentForms);
-  // console.log("option", options);
+  const removeOption = (idx) => {
+    options.splice(idx, 1);
+    contentForms[index] = { ...contentForms[index], options: [...options] };
+    dispatch({ type: "CHANGE_CONTENTFORM", value: [...contentForms] });
+  };
+
+  const addOption = () => {
+    options.push("");
+    contentForms[index] = { ...contentForms[index], options: [...options] };
+    dispatch({ type: "CHANGE_CONTENTFORM", value: [...contentForms] });
+  };
+
   return (
     <div>
       {options.map((el, idx) => (
@@ -46,10 +56,7 @@ const Radio = ({ index }) => {
           {options.length > 1 && (
             <div
               className="absolute right-0 flex justify-end items-center cursor-pointer opacity-0 group-hover:opacity-100 duration-300"
-              onClick={() => {
-                const filter = options.filter((el, i) => i !== idx);
-                setOptions(filter);
-              }}
+              onClick={() => removeOption(idx)}
             >
               <img
                 src={plusIcon}
@@ -63,7 +70,7 @@ const Radio = ({ index }) => {
       <div className="flex items-center space-x-3">
         <input type="radio" disabled className="h-5 w-5" />
         <button
-          onClick={() => setOptions([...options, ""])}
+          onClick={() => addOption()}
           className={`${inputBorder} border-white py-2 text-sm text-gray-400`}
         >
           Tambahkan opsi
