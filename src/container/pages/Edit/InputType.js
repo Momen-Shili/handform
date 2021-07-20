@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { GlobalState } from "../../config/contextAPI";
 import plusIcon from "../../../assets/svg/plus.svg";
 
 const Text = () => (
@@ -15,8 +16,22 @@ const TextArea = () => (
   ></textarea>
 );
 
-const Radio = () => {
+const Radio = ({ index }) => {
+  const { state, dispatch } = useContext(GlobalState);
   const [options, setOptions] = useState([""]);
+
+  const handleChange = (e, idx) => {
+    const opt = options;
+    opt[idx] = e.target.value;
+    setOptions([...opt]);
+
+    const arr = state.contentForms;
+    arr[index] = { ...arr[index], options: [...opt] };
+    dispatch({ type: "CHANGE_CONTENTFORM", value: [...arr] });
+  };
+
+  // console.log("content form", state.contentForms);
+  // console.log("option", options);
   return (
     <div>
       {options.map((el, idx) => (
@@ -24,11 +39,7 @@ const Radio = () => {
           <input value={el} type="radio" disabled className="h-5 w-5" />
           <input
             value={el ? el : ""}
-            onChange={(e) => {
-              const arr = options;
-              arr[idx] = e.target.value;
-              setOptions([...arr]);
-            }}
+            onChange={(e) => handleChange(e, idx)}
             placeholder="opsi"
             className={`${inputBorder} border-white w-full py-2`}
           />

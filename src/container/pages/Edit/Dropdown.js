@@ -9,21 +9,19 @@ import documentAddIcon from "../../../assets/svg/documentAdd.svg";
 import documentRemoveIcon from "../../../assets/svg/documentRemove.svg";
 import useOutsideClick from "../../Utils/useOutsideClick";
 import { FormContext } from "./Content";
-import { GlobalState } from "../../config/contextAPI";
 
-export const Dropdown = ({ index }) => {
-  const { state, dispatch } = useContext(GlobalState);
-  const { formDispatch } = useContext(FormContext);
+export const Dropdown = () => {
+  const { formState, formDispatch } = useContext(FormContext);
 
   const [isDropdown, setDropdown] = useState(false);
 
   const ref = useRef();
   useOutsideClick(ref, () => isDropdown && setDropdown(false));
 
-  const desc =
-    state.contentForms[index] !== undefined
-      ? state.contentForms[index].desc
-      : "";
+  // const desc =
+  //   state.contentForms[index] !== undefined
+  //     ? state.contentForms[index].desc
+  //     : "";
 
   const dropdownMenu = [
     {
@@ -49,17 +47,13 @@ export const Dropdown = ({ index }) => {
         formDispatch({ type: "CHANGE_INPUTTYPE", value: "checkbox" }),
     },
     {
-      icon: desc !== undefined ? documentRemoveIcon : documentAddIcon,
-      text: desc !== undefined ? "Hapus deskripsi" : "Tambahkan deskripsi",
-      onClick: () => {
-        const arr = state.contentForms;
-        arr[index] = {
-          ...arr[index],
-          desc: desc !== undefined ? undefined : "",
-        };
-
-        dispatch({ type: "CHANGE_CONTENTFORM", value: [...arr] });
-      },
+      icon: formState.desc !== null ? documentRemoveIcon : documentAddIcon,
+      text: formState.desc !== null ? "Hapus deskripsi" : "Tambahkan deskripsi",
+      onClick: () =>
+        formDispatch({
+          type: "CHANGE_DESC",
+          value: formState.desc !== null ? null : "",
+        }),
     },
   ];
 

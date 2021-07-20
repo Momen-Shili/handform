@@ -3,18 +3,21 @@ import duplicateIcon from "../../../assets/svg/duplicate.svg";
 import trashIcon from "../../../assets/svg/trash.svg";
 import plusCircleIcon from "../../../assets/svg/plusCircle.svg";
 import { motion } from "framer-motion";
-import { GlobalState } from "../../config/contextAPI";
+import { contentForms, GlobalState } from "../../config/contextAPI";
+import { FormContext } from "./Content";
 
-export const Action = ({ index, duplicate }) => {
+export const Action = ({ duplicate }) => {
   const { state, dispatch } = useContext(GlobalState);
+  const { formState,formDispatch } = useContext(FormContext);
+  const index = state.contentForms.findIndex((el) => el.id === formState.id);
 
   const createForm = () => {
-    const arr = state.contentForms;
-    arr.splice(index + 1, 0, { id: Date.now() });
-    setTimeout(
-      () => dispatch({ type: "CHANGE_CONTENTFORM", value: [...arr] }),
-      180
-    );
+    const id = Date.now();
+    contentForms.splice(index + 1, 0, { id });
+    setTimeout(() => {
+      formDispatch({ type: "CHANGE_TITLE", value: id });
+      dispatch({ type: "CHANGE_CONTENTFORM", value: [...contentForms] });
+    }, 180);
   };
 
   const deleteForm = () => {
@@ -47,6 +50,8 @@ export const Action = ({ index, duplicate }) => {
       x: 40,
     },
   ];
+
+  console.log("action formState", formState);
 
   return (
     <div className="border-t py-3 flex justify-end items-center space-x-3">

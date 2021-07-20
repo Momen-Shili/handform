@@ -2,8 +2,10 @@ import { createContext } from "react";
 
 export const GlobalState = createContext();
 
+export const contentForms = [];
+
 export const initialState = {
-  contentForms: [],
+  contentForms,
   isAnimateForm: false,
 };
 
