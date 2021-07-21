@@ -7,7 +7,7 @@ import Title from "./Title";
 export default function Edit() {
   const { state } = useContext(GlobalState);
   return (
-    <section className>
+    <section>
       <form
         onSubmit={(e) => e.preventDefault()}
         className="w-11/12 lg:w-1/2 py-5 space-y-4 mx-auto"
@@ -27,7 +27,7 @@ export default function Edit() {
                 exit="exit"
                 type="submit"
                 className={`tracking-wide bg-white shadow rounded-md py-2 px-5 ${
-                  state.isDark ? "light-shadow" : "shadow"
+                  state.isDark ? "light-shadow bg-gray-100" : "shadow"
                 }`}
               >
                 SIMPAN

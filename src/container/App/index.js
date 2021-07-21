@@ -2,7 +2,7 @@ import { useReducer } from "react";
 import { Route, Switch, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { GlobalState, initialState, reducer } from "../config/contextAPI";
-import Header from "../Layout/Header";
+import Header from "../Layout/Header/";
 import Edit from "../pages/Edit/";
 import Home from "../pages/Home";
 import "./App.css";
