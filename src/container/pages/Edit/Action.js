@@ -20,20 +20,21 @@ export const Action = ({ duplicate }) => {
       inputType: "radio",
     };
     contentForms.splice(index + 1, 0, { ...newForm });
-    setTimeout(() => {
-      dispatch({ type: "CHANGE_CONTENTFORM", value: [...contentForms] });
-    }, 180);
+    dispatch({ type: "CHANGE_CONTENTFORM", value: [...contentForms] });
   };
 
   const deleteForm = () => {
     contentForms.splice(index, 1);
-    setTimeout(
-      () => dispatch({ type: "CHANGE_CONTENTFORM", value: [...contentForms] }),
-      180
-    );
+    dispatch({ type: "CHANGE_CONTENTFORM", value: [...contentForms] });
+    contentForms.length === index && animateSubmitButton();
   };
 
-  const animate = (num) => (state.isAnimateForm ? num : 1);
+  const animateSubmitButton = () => {
+    dispatch({ type: "CHANGE_ISANIMATESUBMITBUTTON", value: true });
+    setTimeout(() => {
+      dispatch({ type: "CHANGE_ISANIMATESUBMITBUTTON", value: false });
+    }, 300);
+  };
 
   const icons = [
     {
@@ -62,26 +63,21 @@ export const Action = ({ duplicate }) => {
         <span key={idx}>
           <motion.img
             initial={{
-              rotate: animate(360),
-              x: animate(el.x),
-              opacity: animate(0),
+              rotate: 360,
+              x: el.x,
+              opacity: 0,
             }}
             animate={{ rotate: 0, x: 0, opacity: 1 }}
             transition={{
-              delay: animate(0.2),
+              delay: 0.2,
               type: "spring",
-              duration: animate(0.5),
-              stiffness: animate(80),
+              duration: 0.5,
+              stiffness: 80,
             }}
             src={el.icon}
             alt={el.alt}
             className="h-6 w-6 cursor-pointer"
-            onClick={() => {
-              index === state.contentForms.length - 1
-                ? dispatch({ type: "CHANGE_ISANIMATEFORM", value: true })
-                : dispatch({ type: "CHANGE_ISANIMATEFORM", value: false });
-              el.onClick();
-            }}
+            onClick={() => el.onClick()}
           />
         </span>
       ))}

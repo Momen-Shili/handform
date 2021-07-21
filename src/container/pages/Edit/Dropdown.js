@@ -25,7 +25,7 @@ export const Dropdown = () => {
 
   const changeInputType = (type) => {
     contentForms[index].inputType = type;
-    contentForms[index].options = [];
+    contentForms[index].options = [""];
     dispatch({ type: "CHANGE_CONTENTFORM", value: [...contentForms] });
   };
 

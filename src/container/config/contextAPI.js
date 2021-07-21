@@ -6,8 +6,8 @@ export const contentForms = [];
 
 export const initialState = {
   contentForms,
-  isAnimateForm: false,
-  color:"indigo"
+  color: "indigo",
+  isAnimateSubmitButton: false,
 };
 
 export const reducer = (state, action) => {
@@ -22,10 +22,10 @@ export const reducer = (state, action) => {
         ...state,
         contentForms: action.value,
       };
-    case "CHANGE_ISANIMATEFORM":
+    case "CHANGE_ISANIMATESUBMITBUTTON":
       return {
         ...state,
-        isAnimateForm: action.value,
+        isAnimateSubmitButton: action.value,
       };
     default:
       return state;

@@ -1,5 +1,5 @@
-import { useContext } from "react";
-import { AnimatePresence } from "framer-motion";
+import React, { useContext } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { GlobalState } from "../../config/contextAPI";
 import Question from "./Question";
 import Title from "./Title";
@@ -9,10 +9,7 @@ export default function Edit() {
   return (
     <section style={{ minHeight: "90vh" }}>
       <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          console.log(state.contentForms);
-        }}
+        onSubmit={(e) => e.preventDefault()}
         className="w-11/12 lg:w-1/2 py-5 space-y-4 mx-auto"
       >
         <Title />
@@ -21,14 +18,36 @@ export default function Edit() {
             state.contentForms.map((el) => <Question key={el.id} id={el.id} />)}
         </AnimatePresence>
         <div className="flex justify-end py-3">
-          <button
-            type="submit"
-            className="tracking-wide bg-white shadow rounded-md py-2 px-5"
-          >
-            SIMPAN
-          </button>
+          <AnimatePresence>
+            {!state.isAnimateSubmitButton && (
+              <motion.button
+                variants={variants}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                type="submit"
+                className="tracking-wide bg-white shadow rounded-md py-2 px-5"
+              >
+                SIMPAN
+              </motion.button>
+            )}
+          </AnimatePresence>
         </div>
       </form>
     </section>
   );
 }
+
+const variants = {
+  initial: { x: 150 },
+  animate: {
+    x: 0,
+    transition: {
+      ease: "easeOut",
+      type: "spring",
+      stiffness: 100,
+      duration: 0.3,
+    },
+  },
+  exit: { x: 150 },
+};

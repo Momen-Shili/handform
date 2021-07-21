@@ -13,16 +13,16 @@ export default function Question({ id }) {
   return (
     <QuestionContext.Provider value={id}>
       <motion.div
-        initial={{ y: state.isAnimateForm ? 150 : 0 }}
+        initial={{ y: 150 }}
         animate={{ y: 0 }}
         exit={{
-          y: state.isAnimateForm ? 150 : 0,
+          y: 150,
           transition: { ease: "easeIn", type: "tween", duration: 0.2 },
         }}
         className={`${state.isDropdown && "z-10"}
       bg-white px-8 border-t shadow rounded-lg relative `}
       >
-        <Input/>
+        <Input />
         <Action />
         <Dropdown />
       </motion.div>

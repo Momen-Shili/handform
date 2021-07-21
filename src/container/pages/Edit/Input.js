@@ -11,26 +11,31 @@ export const Input = () => {
   const formState = contentForms[index];
   const inputType = contentForms[index] && contentForms[index].inputType;
 
-  const handleChange = (e, props) => {
-    contentForms[index] = { ...contentForms[index], [props]: e.target.value };
+  const handleChange = (e) => {
+    contentForms[index] = {
+      ...contentForms[index],
+      [e.target.name]: e.target.value,
+    };
     dispatch({ type: "CHANGE_CONTENTFORM", value: [...contentForms] });
   };
   return (
     <div className="space-y-2 pt-4 pb-8">
       {/* title  */}
       <input
+        name="title"
         value={formState ? formState.title : ""}
         placeholder="Judul pertanyaan"
-        onChange={(e) => handleChange(e, "title")}
+        onChange={(e) => handleChange(e)}
         className={`hover:border-gray-300 border-white border-b focus:border-b-2 focus:border-${state.color}-700 w-full text-xl py-3`}
       />
       {/* desc  */}
       {formState && formState.desc !== undefined && (
         <input
+          name="desc"
           value={formState ? formState.desc : ""}
           placeholder="Deskripsi pertanyaan"
           className={`hover:border-gray-300 border-white border-b focus:border-b-2 focus:border-${state.color}-700 w-full text-sm`}
-          onChange={(e) => handleChange(e, "desc")}
+          onChange={(e) => handleChange(e)}
         />
       )}
       {/* input  */}

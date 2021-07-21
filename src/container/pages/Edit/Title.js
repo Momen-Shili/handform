@@ -15,10 +15,7 @@ export default function TitleForm() {
       inputType: "radio",
     };
     contentForms.unshift({ ...newForm });
-    setTimeout(
-      () => dispatch({ type: "CHANGE_CONTENTFORM", value: [...contentForms] }),
-      180
-    );
+    dispatch({ type: "CHANGE_CONTENTFORM", value: [...contentForms] });
   };
 
   return (
@@ -46,12 +43,7 @@ export default function TitleForm() {
           src={plusCircleIcon}
           alt="plus"
           className="h-6 w-6 cursor-pointer"
-          onClick={() => {
-            createForm();
-            state.contentForms.length <= 1
-              ? dispatch({ type: "CHANGE_ISANIMATEFORM", value: true })
-              : dispatch({ type: "CHANGE_ISANIMATEFORM", value: false });
-          }}
+          onClick={() => createForm()}
         />
       </div>
     </div>
