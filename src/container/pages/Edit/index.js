@@ -7,7 +7,7 @@ import Title from "./Title";
 export default function Edit() {
   const { state } = useContext(GlobalState);
   return (
-    <section style={{ minHeight: "90vh" }}>
+    <section className>
       <form
         onSubmit={(e) => e.preventDefault()}
         className="w-11/12 lg:w-1/2 py-5 space-y-4 mx-auto"
@@ -45,7 +45,7 @@ const variants = {
     transition: {
       ease: "easeOut",
       type: "spring",
-      stiffness: 100,
+      stiffness: 70,
       duration: 0.3,
     },
   },

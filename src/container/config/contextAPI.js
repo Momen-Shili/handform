@@ -8,6 +8,7 @@ export const initialState = {
   contentForms,
   color: "indigo",
   isAnimateSubmitButton: false,
+  isDark: false,
 };
 
 export const reducer = (state, action) => {
@@ -26,6 +27,11 @@ export const reducer = (state, action) => {
       return {
         ...state,
         isAnimateSubmitButton: action.value,
+      };
+    case "CHANGE_ISDARK":
+      return {
+        ...state,
+        isDark: action.value,
       };
     default:
       return state;
