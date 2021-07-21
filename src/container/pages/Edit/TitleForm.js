@@ -46,7 +46,7 @@ export default function TitleForm() {
             state.color
           }-700 w-full text-3xl py-3`}
         />
-        <input
+        <textarea
           name="desc"
           value={state.titleForm.desc ? state.titleForm.desc : ""}
           placeholder="Deskripsi formulir"
@@ -57,8 +57,8 @@ export default function TitleForm() {
               : "bg-white hover:border-gray-300 border-white"
           } border-b focus:border-b-2 focus:border-${
             state.color
-          }-700 w-full py-2`}
-        />
+          }-700 w-full py-2 h-auto resize-none`}
+        ></textarea>
       </div>
       <div className="border-t py-3 flex justify-end items-center space-x-3">
         <img

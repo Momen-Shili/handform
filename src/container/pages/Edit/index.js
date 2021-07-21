@@ -6,10 +6,19 @@ import TitleForm from "./TitleForm";
 
 export default function Edit() {
   const { state } = useContext(GlobalState);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = {
+      title: state.titleForm,
+      contentForms: state.contentForms,
+      color: state.color,
+    };
+    console.log(form);
+  };
   return (
     <section>
       <form
-        onSubmit={(e) => e.preventDefault()}
+        onSubmit={(e) => handleSubmit(e)}
         className="w-11/12 lg:w-1/2 py-5 space-y-4 mx-auto"
       >
         <TitleForm />
