@@ -12,9 +12,9 @@ import { contentForms, GlobalState } from "../../config/contextAPI";
 import { QuestionContext } from "./Question";
 
 export const Dropdown = () => {
-  const { dispatch } = useContext(GlobalState);
+  const { state, dispatch } = useContext(GlobalState);
   const id = useContext(QuestionContext);
-  
+
   const index = contentForms.findIndex((el) => el.id === id);
   const formState = contentForms[index];
 
@@ -73,6 +73,9 @@ export const Dropdown = () => {
     },
   ];
 
+  const activeType = (active) =>
+    state.contentForms.map((el) => el.inputType).includes(active);
+
   return (
     <div
       ref={ref}
@@ -95,8 +98,11 @@ export const Dropdown = () => {
               {dropdownMenu.map((el, index) => (
                 <li
                   key={index}
-                  className="flex items-center space-x-3 py-2 px-5 hover:bg-gray-100"
                   onClick={() => el.onClick(el.type)}
+                  className={`${
+                    activeType(el.type) ? "bg-gray-200" : "hover:bg-gray-100"
+                  }
+                   flex items-center space-x-3 py-2 px-5 `}
                 >
                   <img src={el.icon} alt="icon" className="h-5 w-5" />
                   <p>{el.text}</p>

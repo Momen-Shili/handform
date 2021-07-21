@@ -5,6 +5,7 @@ export const GlobalState = createContext();
 export const contentForms = [];
 
 export const initialState = {
+  titleForm: { title: "", desc: "" },
   contentForms,
   color: "purple",
   isAnimateSubmitButton: false,
@@ -13,6 +14,11 @@ export const initialState = {
 
 export const reducer = (state, action) => {
   switch (action.type) {
+    case "CHANGE_TITLEFORM":
+      return {
+        ...state,
+        titleForm: action.value,
+      };
     case "CHANGE_CONTENTFORM":
       return {
         ...state,

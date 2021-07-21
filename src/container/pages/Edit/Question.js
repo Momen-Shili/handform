@@ -9,7 +9,6 @@ export const QuestionContext = createContext();
 
 export default function Question({ id }) {
   const { state } = useContext(GlobalState);
-  console.log("state", state.contentForms);
   return (
     <QuestionContext.Provider value={id}>
       <motion.div

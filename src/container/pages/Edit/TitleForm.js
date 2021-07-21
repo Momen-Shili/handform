@@ -1,9 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import plusCircleIcon from "../../../assets/svg/plusCircle.svg";
 import { contentForms, GlobalState } from "../../config/contextAPI";
 
 export default function TitleForm() {
-  const [titleForm, setTitleForm] = useState({ title: "", desc: "" });
   const { state, dispatch } = useContext(GlobalState);
 
   const createForm = () => {
@@ -12,10 +11,18 @@ export default function TitleForm() {
       title: "",
       desc: undefined,
       options: [],
-      inputType: "radio",
+      inputType: "text",
     };
     contentForms.unshift({ ...newForm });
     dispatch({ type: "CHANGE_CONTENTFORM", value: [...contentForms] });
+  };
+
+  const handleChange = (e) => {
+    contentForms.titleForm = {
+      ...contentForms.titleForm,
+      [e.target.name]: e.target.value,
+    };
+    dispatch({ type: "CHANGE_TITLEFORM", value: contentForms.titleForm });
   };
 
   return (
@@ -27,11 +34,10 @@ export default function TitleForm() {
     >
       <div className="pt-4 pb-8 space-y-2">
         <input
-          value={titleForm.title ? titleForm.title : ""}
+          name="title"
+          value={state.titleForm.title ? state.titleForm.title : ""}
           placeholder="Judul formulir"
-          onChange={(e) =>
-            setTitleForm({ ...titleForm, title: e.target.value })
-          }
+          onChange={(e) => handleChange(e)}
           className={`${
             state.isDark
               ? "bg-gray-100 hover:border-gray-300 border-gray-100"
@@ -41,8 +47,10 @@ export default function TitleForm() {
           }-700 w-full text-3xl py-3`}
         />
         <input
+          name="desc"
+          value={state.titleForm.desc ? state.titleForm.desc : ""}
           placeholder="Deskripsi formulir"
-          onChange={(e) => setTitleForm({ ...titleForm, desc: e.target.value })}
+          onChange={(e) => handleChange(e)}
           className={`${
             state.isDark
               ? "bg-gray-100 hover:border-gray-300 border-gray-100"

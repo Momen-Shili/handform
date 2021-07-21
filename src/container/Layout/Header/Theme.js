@@ -30,7 +30,6 @@ export const Theme = () => {
                 onMouseEnter={() =>
                   dispatch({ type: "CHANGE_COLOR", value: el.color })
                 }
-                onClick={() => setTheme(false)}
               ></motion.span>
             ))}
           </motion.div>

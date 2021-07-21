@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { GlobalState } from "../../config/contextAPI";
 import Question from "./Question";
-import Title from "./Title";
+import TitleForm from "./TitleForm";
 
 export default function Edit() {
   const { state } = useContext(GlobalState);
@@ -12,7 +12,7 @@ export default function Edit() {
         onSubmit={(e) => e.preventDefault()}
         className="w-11/12 lg:w-1/2 py-5 space-y-4 mx-auto"
       >
-        <Title />
+        <TitleForm />
         <AnimatePresence>
           {state.contentForms &&
             state.contentForms.map((el) => <Question key={el.id} id={el.id} />)}

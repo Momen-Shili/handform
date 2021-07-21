@@ -17,7 +17,7 @@ export const Action = ({ duplicate }) => {
       title: "",
       desc: undefined,
       options: [],
-      inputType: "radio",
+      inputType: "text",
     };
     contentForms.splice(index + 1, 0, { ...newForm });
     dispatch({ type: "CHANGE_CONTENTFORM", value: [...contentForms] });
