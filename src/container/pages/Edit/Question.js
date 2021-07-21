@@ -21,8 +21,8 @@ export default function Question({ id }) {
         }}
         className={`
           ${state.isDropdown && "z-10"}
-          ${state.isDark ? "light-shadow" : "shadow"}
-          bg-white px-8 border-t rounded-lg relative 
+          ${state.isDark ? "light-shadow bg-gray-100" : "shadow bg-white"}
+           px-8 border-t rounded-lg relative 
         `}
       >
         <Input />

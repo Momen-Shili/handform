@@ -9,7 +9,11 @@ const Text = () => {
     <input
       disabled
       placeholder="Teks jawaban singkat"
-      className={`hover:border-gray-300 border-white border-b focus:border-b-2 focus:border-${state.color}-700 w-full py-2`}
+      className={`${
+        state.isDark
+          ? "bg-gray-100 hover:border-gray-300 border-gray-100"
+          : "bg-white hover:border-gray-300 border-white"
+      } border-b focus:border-b-2 focus:border-${state.color}-700 w-full py-2`}
     />
   );
 };
@@ -20,7 +24,13 @@ const TextArea = () => {
     <textarea
       disabled
       placeholder="Teks jawaban panjang"
-      className={`hover:border-gray-300 border-white border-b focus:border-b-2 focus:border-${state.color}-700 w-full py-2 h-auto resize-none`}
+      className={`${
+        state.isDark
+          ? "bg-gray-100 hover:border-gray-300 border-gray-100"
+          : "bg-white hover:border-gray-300 border-white"
+      } border-b focus:border-b-2 focus:border-${
+        state.color
+      }-700 w-full py-2 h-auto resize-none`}
     ></textarea>
   );
 };
@@ -49,7 +59,13 @@ const Radio = () => {
               saveData();
             }}
             placeholder={`opsi ${idx + 1}`}
-            className={`hover:border-gray-300 border-white border-b focus:border-b-2 focus:border-${state.color}-700 w-full py-2`}
+            className={`${
+              state.isDark
+                ? "bg-gray-100 hover:border-gray-300 border-gray-100"
+                : "bg-white hover:border-gray-300 border-white"
+            } border-b focus:border-b-2 focus:border-${
+              state.color
+            }-700 w-full py-2`}
           />
           {options.length > 1 && (
             <div
@@ -75,7 +91,13 @@ const Radio = () => {
             options.push("");
             saveData();
           }}
-          className={`hover:border-gray-300 border-white border-b focus:border-b-2 focus:border-${state.color}-700 py-2 text-gray-400`}
+          className={`${
+            state.isDark
+              ? "bg-gray-100 hover:border-gray-300 border-gray-100"
+              : "bg-white hover:border-gray-300 border-white"
+          } border-b focus:border-b-2 focus:border-${
+            state.color
+          }-700 py-2 text-gray-400`}
         >
           Tambah opsi
         </button>

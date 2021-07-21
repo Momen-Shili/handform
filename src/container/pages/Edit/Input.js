@@ -26,7 +26,13 @@ export const Input = () => {
         value={formState ? formState.title : ""}
         placeholder="Judul pertanyaan"
         onChange={(e) => handleChange(e)}
-        className={`hover:border-gray-300 border-white border-b focus:border-b-2 focus:border-${state.color}-700 w-full text-xl py-3`}
+        className={`${
+          state.isDark
+            ? "bg-gray-100 hover:border-gray-300 border-gray-100"
+            : "bg-white hover:border-gray-300 border-white"
+        }  border-b focus:border-b-2 focus:border-${
+          state.color
+        }-700 w-full text-xl py-3`}
       />
       {/* desc  */}
       {formState && formState.desc !== undefined && (
@@ -34,7 +40,13 @@ export const Input = () => {
           name="desc"
           value={formState ? formState.desc : ""}
           placeholder="Deskripsi pertanyaan"
-          className={`hover:border-gray-300 border-white border-b focus:border-b-2 focus:border-${state.color}-700 w-full text-sm`}
+          className={`${
+            state.isDark
+              ? "bg-gray-100 hover:border-gray-300 border-gray-100"
+              : "bg-white hover:border-gray-300 border-white"
+          } border-b focus:border-b-2 focus:border-${
+            state.color
+          }-700 w-full text-sm`}
           onChange={(e) => handleChange(e)}
         />
       )}

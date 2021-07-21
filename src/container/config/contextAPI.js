@@ -33,6 +33,11 @@ export const reducer = (state, action) => {
         ...state,
         isDark: action.value,
       };
+    case "CHANGE_COLOR":
+      return {
+        ...state,
+        color: action.value,
+      };
     default:
       return state;
   }
