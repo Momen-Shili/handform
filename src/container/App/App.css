@@ -23,3 +23,7 @@ textarea::-webkit-scrollbar-track {
 textarea::-webkit-scrollbar-thumb {
   background-color: rgb(163, 163, 163); /* color of the scroll thumb */
 }
+
+.light-shadow {
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.76);
+}

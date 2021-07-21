@@ -21,7 +21,9 @@ export default function TitleForm() {
   return (
     <div
       style={{ borderTopWidth: "10px" }}
-      className={`bg-white px-8 border-t shadow rounded-lg border-${state.color}-700`}
+      className={`
+      ${state.isDark ? "light-shadow" : "shadow"}
+      bg-white px-8 border-t  rounded-lg border-${state.color}-700`}
     >
       <div className="pt-4 pb-8 space-y-2">
         <input

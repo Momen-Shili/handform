@@ -10,13 +10,16 @@ import "./App.css";
 function App() {
   const location = useLocation();
   const [state, dispatch] = useReducer(reducer, initialState);
-  const mode = !state.isDark
-    ? "bg-gray-100 text-gray-600"
-    : "bg-gray-700";
+  const mode = {
+    backgroundColor: state.isDark ? "#374151" : "#F3F4F6",
+    transition: "all .5s ease",
+    WebkitTransition: "all .5s ease",
+    MozTransition: "all .5s ease",
+  };
 
   return (
     <GlobalState.Provider value={{ state, dispatch }}>
-      <div className={`${mode} min-h-screen`}>
+      <div style={mode} className="min-h-screen">
         <Header />
         <main className="pt-16">
           <AnimatePresence exitBeforeEnter>

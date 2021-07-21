@@ -26,7 +26,9 @@ export default function Edit() {
                 animate="animate"
                 exit="exit"
                 type="submit"
-                className="tracking-wide bg-white shadow rounded-md py-2 px-5"
+                className={`tracking-wide bg-white shadow rounded-md py-2 px-5 ${
+                  state.isDark ? "light-shadow" : "shadow"
+                }`}
               >
                 SIMPAN
               </motion.button>

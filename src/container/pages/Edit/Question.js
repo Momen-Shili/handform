@@ -19,8 +19,11 @@ export default function Question({ id }) {
           y: 150,
           transition: { ease: "easeIn", type: "tween", duration: 0.2 },
         }}
-        className={`${state.isDropdown && "z-10"}
-      bg-white px-8 border-t shadow rounded-lg relative `}
+        className={`
+          ${state.isDropdown && "z-10"}
+          ${state.isDark ? "light-shadow" : "shadow"}
+          bg-white px-8 border-t rounded-lg relative 
+        `}
       >
         <Input />
         <Action />
