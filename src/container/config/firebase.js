@@ -5,27 +5,25 @@ import "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBrKhrgF38cwYDFYew7_P3h-Jbh_htRRK0",
-  authDomain: "handform-3017b.firebaseapp.com",
-  projectId: "handform-3017b",
-  storageBucket: "handform-3017b.appspot.com",
-  messagingSenderId: "513120191394",
-  appId: "1:513120191394:web:e49f7f3adf702702d6a8fb",
+  apiKey: "AIzaSyDlLz6w3rLYJ_n211nRIVCK_tlV2U1GA0A",
+  authDomain: "handform-c62a3.firebaseapp.com",
+  databaseURL: "https://handform-c62a3-default-rtdb.firebaseio.com",
+  projectId: "handform-c62a3",
+  storageBucket: "handform-c62a3.appspot.com",
+  messagingSenderId: "867248517559",
+  appId: "1:867248517559:web:7eed23797fda6d2ae8f832"
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-export const database = firebase.database();
-// export const storage = firebase.storage();
-export default firebase;
 
 // ACTION--------------------------------------------------------------
 
 // sign in
-export const signInToDatabase = (username, password) =>
+export const signInToDatabase = (email, password) =>
   new Promise((resolve, reject) =>
     firebase
       .auth()
-      .signInWithEmailAndPassword(username, password)
+      .signInWithEmailAndPassword(email, password)
       .then((userCredential) => resolve(userCredential.user))
       .catch((error) => reject(error))
   );
@@ -37,12 +35,23 @@ export const signUpToDatabase = (email, password) =>
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then((userCredential) => resolve(userCredential.user))
-      .catch((error) => reject(error.message))
+      .catch((error) => reject(error))
+  );
+
+// post
+export const postDataToDatabase = (path, data) =>
+  new Promise((resolve, reject) =>
+    firebase
+      .database()
+      .ref(`/${path}`)
+      .set(data)
+      .then((res) => resolve(res))
+      .catch((err) => reject(err))
   );
 
 // get data
 export const getDataFromAPI = (path) => {
-  const datas = database.ref(`${path}/`);
+  const datas = firebase.database().ref(`${path}/`);
   return new Promise((resolve, reject) => {
     datas.on("value", (snapshot) => {
       const data = [];

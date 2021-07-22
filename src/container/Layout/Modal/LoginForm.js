@@ -1,14 +1,53 @@
 import React, { useState, useContext, useEffect } from "react";
 import { GlobalState } from "../../config/contextAPI";
-import { signInToDatabase, signUpToDatabase } from "../../config/firebase";
+import {
+  postDataToDatabase,
+  signInToDatabase,
+  signUpToDatabase,
+} from "../../config/firebase";
 
 export const LoginForm = ({ isSignUp, setSignUp }) => {
   const { dispatch } = useContext(GlobalState);
   const [input, setInput] = useState({ remember: false });
+
   const handleChange = (e) =>
     setInput({ ...input, [e.target.name]: e.target.value });
 
-  const handleSubmit = async (e) => {
+  const signUp = async () => {
+    dispatch({ type: "CHANGE_ISLOADING", value: true });
+    const data = {
+      name: input.name,
+      email: input.email,
+      password: input.password,
+    };
+    try {
+      const res = await signUpToDatabase(input.email, input.password);
+      await postDataToDatabase(`users/${res.uid}`, data);
+      dispatch({ type: "CHANGE_ISLOADING", value: false });
+      alert("berhasil registrasi");
+      setSignUp(false);
+    } catch (error) {
+      alert("sign up error\n" + error.message + "\ncode : " + error.code);
+      dispatch({ type: "CHANGE_ISLOADING", value: false });
+    }
+  };
+
+  const signIn = async () => {
+    dispatch({ type: "CHANGE_ISLOADING", value: true });
+    try {
+      const res = await signInToDatabase(input.email, input.password);
+      input.remember &&
+        localStorage.setItem("uid", JSON.stringify(res.uid));
+      dispatch({ type: "CHANGE_ISLOADING", value: false });
+      dispatch({ type: "CHANGE_ISMODAL", value: false });
+      dispatch({ type: "CHANGE_ISLOGIN", value: true });
+    } catch (error) {
+      alert("login error\n" + error.message + "\ncode : " + error.code);
+      dispatch({ type: "CHANGE_ISLOADING", value: false });
+    }
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (isSignUp) {
       // sign up
@@ -16,16 +55,7 @@ export const LoginForm = ({ isSignUp, setSignUp }) => {
         // field isn't empty
         if (input.password === input["re-password"]) {
           // password match
-          dispatch({ type: "CHANGE_ISLOADING", value: true });
-          try {
-            await signUpToDatabase(input.email, input.password);
-            dispatch({ type: "CHANGE_ISLOADING", value: false });
-            alert("berhasil registrasi");
-            setSignUp(false);
-          } catch (error) {
-            alert("login error\n" + error.message + "\ncode : " + error.code);
-            dispatch({ type: "CHANGE_ISLOADING", value: false });
-          }
+          signUp();
         } else {
           // password isnt match
           alert("password tidak cocok");
@@ -38,22 +68,12 @@ export const LoginForm = ({ isSignUp, setSignUp }) => {
       // sign in
       if (input.email && input.password) {
         // field isn't empty
-        dispatch({ type: "CHANGE_ISLOADING", value: true });
-        try {
-          await signInToDatabase(input.email, input.password);
-          dispatch({ type: "CHANGE_ISLOADING", value: false });
-          dispatch({ type: "CHANGE_ISMODAL", value: false });
-          dispatch({ type: "CHANGE_ISLOGIN", value: true });
-        } catch (error) {
-          alert("login error\n" + error.message + "\ncode : " + error.code);
-          dispatch({ type: "CHANGE_ISLOADING", value: false });
-        }
+        signIn();
       } else {
         // some field is empty
         alert("tidak boleh kosong");
       }
     }
-    console.log(input);
   };
 
   useEffect(() => {
