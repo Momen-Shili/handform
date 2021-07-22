@@ -6,11 +6,13 @@ import Header from "../Layout/Header/";
 import Edit from "../pages/Edit/";
 import Home from "../pages/Home";
 import "./App.css";
+import Modal from "../Layout/Modal";
 
 function App() {
   const location = useLocation();
   const [state, dispatch] = useReducer(reducer, initialState);
   const mode = {
+    color: state.isDark ? "#eee" : "#999",
     backgroundColor: state.isDark ? "#374151" : "#F3F4F6",
     transition: "all .5s ease",
     WebkitTransition: "all .5s ease",
@@ -29,6 +31,7 @@ function App() {
             </Switch>
           </AnimatePresence>
         </main>
+        <Modal />
       </div>
     </GlobalState.Provider>
   );

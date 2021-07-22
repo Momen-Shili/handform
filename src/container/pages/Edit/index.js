@@ -35,7 +35,7 @@ export default function Edit() {
                 animate="animate"
                 exit="exit"
                 type="submit"
-                className={`tracking-wide bg-white shadow rounded-md py-2 px-5 ${
+                className={`text-gray-500 tracking-wide bg-white shadow rounded-md py-2 px-5 ${
                   state.isDark ? "light-shadow bg-gray-100" : "shadow"
                 }`}
               >

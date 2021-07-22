@@ -6,10 +6,11 @@ import { Account } from "./Account";
 
 export default function Header() {
   const [isDropdown, setDropdown] = useState(false);
+  const [isOverHide, setOverHide] = useState(true);
   return (
     <header
       className={`${
-        !isDropdown && "overflow-hidden"
+        isOverHide && "overflow-hidden"
       } bg-white text-gray-600 w-full flex left-0 top-0 fixed items-center justify-between py-3 px-8 z-50`}
     >
       {/* left  */}
@@ -21,7 +22,11 @@ export default function Header() {
       <div className="space-x-6 flex items-center">
         <Theme />
         <Mode />
-        <Account isDropdown={isDropdown} setDropdown={setDropdown} />
+        <Account
+          isDropdown={isDropdown}
+          setDropdown={setDropdown}
+          setOverHide={setOverHide}
+        />
       </div>
     </header>
   );

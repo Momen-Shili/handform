@@ -10,6 +10,7 @@ export const initialState = {
   color: "purple",
   isAnimateSubmitButton: false,
   isDark: false,
+  isModal: false,
 };
 
 export const reducer = (state, action) => {
@@ -33,6 +34,11 @@ export const reducer = (state, action) => {
       return {
         ...state,
         isDark: action.value,
+      };
+    case "CHANGE_ISMODAL":
+      return {
+        ...state,
+        isModal: action.value,
       };
     case "CHANGE_COLOR":
       return {
