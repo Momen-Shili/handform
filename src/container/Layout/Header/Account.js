@@ -1,10 +1,10 @@
-import React, { useRef,useContext } from "react";
+import React, { useRef, useContext } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import useOutsideClick from "../../Utils/useOutsideClick";
 import { GlobalState } from "../../config/contextAPI";
 
 export const Account = ({ isDropdown, setDropdown, setOverHide }) => {
-  const { dispatch } = useContext(GlobalState);
+  const { state, dispatch } = useContext(GlobalState);
   const ref = useRef();
   useOutsideClick(ref, () => {
     setDropdown(false);
@@ -15,8 +15,9 @@ export const Account = ({ isDropdown, setDropdown, setOverHide }) => {
       ref={ref}
       onClick={() => {
         setOverHide(false);
-        // setDropdown(!isDropdown);
-        dispatch({ type: "CHANGE_ISMODAL", value: true });
+        state.isLogin
+          ? setDropdown(!isDropdown)
+          : dispatch({ type: "CHANGE_ISMODAL", value: true });
       }}
       className="h-10 w-10 relative rounded-full border-2 border-gray-200 bg-green-600 flex justify-center items-center cursor-pointer"
     >

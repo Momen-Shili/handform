@@ -3,8 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { GlobalState } from "../../config/contextAPI";
 import useOutsideClick from "../../Utils/useOutsideClick";
 import { Header } from "./Header";
-import { Body } from "./Body";
-import { Footer } from "./Footer";
+import { LoginForm } from "./LoginForm";
 
 export default function Modal() {
   const { state, dispatch } = useContext(GlobalState);
@@ -30,7 +29,7 @@ export default function Modal() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
             ref={ref}
-            className={`w-1/3 bg-white rounded shadow-lg z-50 overflow-y-auto`}
+            className="w-3/4 lg:w-1/3 bg-white rounded shadow-lg z-50 overflow-y-auto"
           >
             <div className="modal-content text-left">
               {/*Title*/}
@@ -56,14 +55,7 @@ export default function Modal() {
                   </svg>
                 </div>
               </div>
-              {/*Body*/}
-              <div className="py-6 px-6">
-                <Body isSignUp={isSignUp} />
-              </div>
-              {/*Footer*/}
-              <div className="py-3 px-6">
-                <Footer isSignUp={isSignUp} />
-              </div>
+              <LoginForm isSignUp={isSignUp} />
             </div>
           </motion.div>
         </motion.div>

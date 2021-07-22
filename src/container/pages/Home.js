@@ -1,18 +1,22 @@
+import { useState, useContext } from "react";
 import plusIcon from "../../assets/svg/plus.svg";
 import pencilIcon from "../../assets/svg/pencil.svg";
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { useHistory } from "react-router-dom";
+import { GlobalState } from "../config/contextAPI";
 
 export default function Home() {
-  const { push } = useHistory();
+  const { state, dispatch } = useContext(GlobalState);
   const [isHover, setHover] = useState(false);
+  const { push } = useHistory();
   return (
     <section style={{ minHeight: "90vh" }} className="relative overflow-hidden">
       <div className="w-2/3 py-3 space-y-6  mx-auto">
         <h6 className="font-semibold text-lg">Formulir Terbaru</h6>
         <div className="text-center bg-white shadow-md py-8 rounded-md space-y-2">
-          <h6 className="text-gray-500 font-semibold text-lg">Belum ada formulir</h6>
+          <h6 className="text-gray-500 font-semibold text-lg">
+            Belum ada formulir
+          </h6>
           <p className="text-gray-400">Klik + untuk membuat formulir baru</p>
         </div>
       </div>
@@ -23,7 +27,11 @@ export default function Home() {
         transition={{ type: "spring", stiffness: 150 }}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
-        onClick={() => push("/edit")}
+        onClick={() =>
+          state.isLogin
+            ? push("/edit")
+            : dispatch({ type: "CHANGE_ISMODAL", value: true })
+        }
         className="absolute h-16 w-16 bottom-8 right-8 rounded-full shadow-md bg-white"
       >
         <div className="h-full w-full absolute left-0 top-0 flex items-center justify-center cursor-pointer">
