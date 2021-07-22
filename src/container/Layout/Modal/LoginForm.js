@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { GlobalState } from "../../config/contextAPI";
 import { signInToDatabase, signUpToDatabase } from "../../config/firebase";
 
-export const LoginForm = ({ isSignUp }) => {
+export const LoginForm = ({ isSignUp, setSignUp }) => {
+  const { dispatch } = useContext(GlobalState);
   const [input, setInput] = useState({ remember: false });
   const handleChange = (e) =>
     setInput({ ...input, [e.target.name]: e.target.value });
@@ -14,8 +16,16 @@ export const LoginForm = ({ isSignUp }) => {
         // field isn't empty
         if (input.password === input["re-password"]) {
           // password match
-          const res = await signUpToDatabase(input.email, input.password);
-          console.log(res);
+          dispatch({ type: "CHANGE_ISLOADING", value: true });
+          try {
+            await signUpToDatabase(input.email, input.password);
+            dispatch({ type: "CHANGE_ISLOADING", value: false });
+            alert("berhasil registrasi");
+            setSignUp(false);
+          } catch (error) {
+            alert("login error\n" + error.message + "\ncode : " + error.code);
+            dispatch({ type: "CHANGE_ISLOADING", value: false });
+          }
         } else {
           // password isnt match
           alert("password tidak cocok");
@@ -28,16 +38,27 @@ export const LoginForm = ({ isSignUp }) => {
       // sign in
       if (input.email && input.password) {
         // field isn't empty
-        const res = await signInToDatabase(input.email, input.password);
-        console.log(res);
+        dispatch({ type: "CHANGE_ISLOADING", value: true });
+        try {
+          await signInToDatabase(input.email, input.password);
+          dispatch({ type: "CHANGE_ISLOADING", value: false });
+          dispatch({ type: "CHANGE_ISMODAL", value: false });
+          dispatch({ type: "CHANGE_ISLOGIN", value: true });
+        } catch (error) {
+          alert("login error\n" + error.message + "\ncode : " + error.code);
+          dispatch({ type: "CHANGE_ISLOADING", value: false });
+        }
       } else {
         // some field is empty
         alert("tidak boleh kosong");
       }
     }
-
     console.log(input);
   };
+
+  useEffect(() => {
+    return () => setInput({ remember: false });
+  }, []);
 
   return (
     <form onSubmit={(e) => handleSubmit(e)}>
@@ -80,7 +101,10 @@ export const LoginForm = ({ isSignUp }) => {
         </div>
       </div>
       <div className="py-3 px-6">
-        <button className="w-full mb-3 py-2 rounded shadow-red bg-red-400 hover:bg-red-500 text-white text-center focus:outline-none outline-none tracking-widest duration-200">
+        <button
+          type="submit"
+          className="w-full mb-3 py-2 rounded shadow-red bg-red-400 hover:bg-red-500 text-white text-center focus:outline-none outline-none tracking-widest duration-200"
+        >
           {isSignUp ? "REGISTER" : "LOGIN"}
         </button>
       </div>

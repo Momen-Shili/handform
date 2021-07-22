@@ -27,12 +27,7 @@ export const signInToDatabase = (username, password) =>
       .auth()
       .signInWithEmailAndPassword(username, password)
       .then((userCredential) => resolve(userCredential.user))
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        alert("login error\n" + errorMessage + "\ncode : " + errorCode);
-        reject("gagal", errorMessage);
-      })
+      .catch((error) => reject(error))
   );
 
 // sign up

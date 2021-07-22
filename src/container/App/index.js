@@ -33,8 +33,8 @@ function App() {
           </AnimatePresence>
         </main>
         <Modal />
-        <Loading />
       </div>
+      <Loading />
     </GlobalState.Provider>
   );
 }

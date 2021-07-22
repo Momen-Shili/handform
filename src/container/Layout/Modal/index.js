@@ -55,7 +55,7 @@ export default function Modal() {
                   </svg>
                 </div>
               </div>
-              <LoginForm isSignUp={isSignUp} />
+              <LoginForm isSignUp={isSignUp} setSignUp={setSignUp} />
             </div>
           </motion.div>
         </motion.div>
