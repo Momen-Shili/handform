@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { GlobalState } from "../../config/contextAPI";
 import {
-  postDataToDatabase,
+  setDataToDatabase,
   signInToDatabase,
   signUpToDatabase,
 } from "../../config/firebase";
@@ -22,7 +22,7 @@ export const LoginForm = ({ isSignUp, setSignUp }) => {
     };
     try {
       const res = await signUpToDatabase(input.email, input.password);
-      await postDataToDatabase(`users/${res.uid}`, data);
+      await setDataToDatabase(`users/${res.uid}`, data);
       dispatch({ type: "CHANGE_ISLOADING", value: false });
       alert("berhasil registrasi");
       setSignUp(false);
