@@ -11,7 +11,7 @@ const firebaseConfig = {
   projectId: "handform-c62a3",
   storageBucket: "handform-c62a3.appspot.com",
   messagingSenderId: "867248517559",
-  appId: "1:867248517559:web:7eed23797fda6d2ae8f832"
+  appId: "1:867248517559:web:7eed23797fda6d2ae8f832",
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -43,30 +43,21 @@ export const setDataToDatabase = (path, data) =>
   new Promise((resolve, reject) =>
     firebase
       .database()
-      .ref(`/${path}`)
+      .ref(path)
       .set(data)
       .then((res) => resolve(res))
       .catch((err) => reject(err))
   );
 
 // get data
-export const getDataFromAPI = (path) => {
-  const datas = firebase.database().ref(`${path}/`);
-  return new Promise((resolve, reject) => {
-    datas.on("value", (snapshot) => {
-      const data = [];
-      if (snapshot.val()) {
-        // MEMBUAT OBJECT MENJADI ARRAY
-        Object.keys(snapshot.val()).map((key) => {
-          return data.push({
-            id: key,
-            data: snapshot.val()[key],
-          });
-        });
-        resolve(data);
-      } else {
-        alert("data not found");
-      }
-    });
-  });
-};
+export const getDataFromDatabase = (path) =>
+  new Promise((resolve, reject) =>
+    firebase
+      .database()
+      .ref(path)
+      .on("value", (snapshot) =>
+        snapshot.val()
+          ? resolve(snapshot.val())
+          : reject("data not found or database error")
+      )
+  );

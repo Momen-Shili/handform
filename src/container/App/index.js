@@ -12,7 +12,7 @@ import "./App.css";
 function App() {
   const location = useLocation();
   const [state, dispatch] = useReducer(reducer, initialState);
-  
+
   const mode = {
     color: state.isDark ? "#eee" : "#999",
     backgroundColor: state.isDark ? "#374151" : "#F3F4F6",
@@ -20,13 +20,19 @@ function App() {
     WebkitTransition: "all .5s ease",
     MozTransition: "all .5s ease",
   };
-  
+
   useEffect(() => {
-    JSON.parse(localStorage.getItem("uid")) &&
-    dispatch({ type: "CHANGE_ISLOGIN", value: true });
-    return () => dispatch({ type: "CHANGE_ISLOGIN", value: false });
+    const uid = JSON.parse(localStorage.getItem("uid"));
+    if (uid) {
+      dispatch({ type: "CHANGE_ISLOGIN", value: true });
+      dispatch({ type: "CHANGE_UID", value: uid });
+    }
+    return () => {
+      dispatch({ type: "CHANGE_ISLOGIN", value: false });
+      dispatch({ type: "CHANGE_UID", value: uid });
+    };
   }, [dispatch]);
-  
+
   return (
     <GlobalState.Provider value={{ state, dispatch }}>
       <div style={mode} className="min-h-screen">

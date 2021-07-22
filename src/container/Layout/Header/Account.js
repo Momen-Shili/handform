@@ -1,17 +1,35 @@
-import React, { useRef, useContext } from "react";
+import React, { useRef, useContext, useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import useOutsideClick from "../../Utils/useOutsideClick";
 import { GlobalState } from "../../config/contextAPI";
 import { useHistory } from "react-router-dom";
+import { getDataFromDatabase } from "../../config/firebase";
 
-export const Account = ({ isDropdown, setDropdown, setOverHide }) => {
+export const Account = ({ setOverHide }) => {
+  const [isDropdown, setDropdown] = useState(false);
+  const [name, setName] = useState("?");
   const { state, dispatch } = useContext(GlobalState);
   const { push } = useHistory();
+
   const ref = useRef();
   useOutsideClick(ref, () => {
     setDropdown(false);
     setOverHide(true);
   });
+
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        const res = await getDataFromDatabase(`users/${state.uid}`);
+        setName(res.name);
+      } catch (e) {
+        alert(e);
+      }
+    };
+    getUserData();
+    return () => setName("");
+  }, [state.uid]);
+
   return (
     <div
       ref={ref}
@@ -21,9 +39,11 @@ export const Account = ({ isDropdown, setDropdown, setOverHide }) => {
           ? setDropdown(!isDropdown)
           : dispatch({ type: "CHANGE_ISMODAL", value: true });
       }}
-      className="h-10 w-10 relative rounded-full border-2 border-gray-200 bg-green-600 flex justify-center items-center cursor-pointer"
+      className={`bg-${
+        name ? "green" : "indigo"
+      }-600 h-10 w-10 relative rounded-full border-2 border-gray-200 flex justify-center items-center cursor-pointer`}
     >
-      <span className="text-white text-lg">A</span>
+      <span className="text-white text-lg">{name ? name.charAt(0) : "?"}</span>
       <AnimatePresence>
         {isDropdown && (
           <motion.button
@@ -34,6 +54,7 @@ export const Account = ({ isDropdown, setDropdown, setOverHide }) => {
             onClick={(e) => {
               e.stopPropagation();
               push("/");
+              setName("");
               setOverHide(true);
               setDropdown(false);
               localStorage.clear();

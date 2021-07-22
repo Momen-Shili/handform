@@ -10,9 +10,6 @@ export const LoginForm = ({ isSignUp, setSignUp }) => {
   const { dispatch } = useContext(GlobalState);
   const [input, setInput] = useState({ remember: false });
 
-  const handleChange = (e) =>
-    setInput({ ...input, [e.target.name]: e.target.value });
-
   const signUp = async () => {
     dispatch({ type: "CHANGE_ISLOADING", value: true });
     const data = {
@@ -36,16 +33,19 @@ export const LoginForm = ({ isSignUp, setSignUp }) => {
     dispatch({ type: "CHANGE_ISLOADING", value: true });
     try {
       const res = await signInToDatabase(input.email, input.password);
-      input.remember &&
-        localStorage.setItem("uid", JSON.stringify(res.uid));
+      input.remember && localStorage.setItem("uid", JSON.stringify(res.uid));
       dispatch({ type: "CHANGE_ISLOADING", value: false });
       dispatch({ type: "CHANGE_ISMODAL", value: false });
       dispatch({ type: "CHANGE_ISLOGIN", value: true });
+      dispatch({ type: "CHANGE_UID", value: res.uid });
     } catch (error) {
       alert("login error\n" + error.message + "\ncode : " + error.code);
       dispatch({ type: "CHANGE_ISLOADING", value: false });
     }
   };
+
+  const handleChange = (e) =>
+    setInput({ ...input, [e.target.name]: e.target.value });
 
   const handleSubmit = (e) => {
     e.preventDefault();

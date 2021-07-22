@@ -13,6 +13,7 @@ export const initialState = {
   isModal: false,
   isLogin: false,
   isLoading: false,
+  uid: "",
 };
 
 export const reducer = (state, action) => {
@@ -56,6 +57,11 @@ export const reducer = (state, action) => {
       return {
         ...state,
         color: action.value,
+      };
+    case "CHANGE_UID":
+      return {
+        ...state,
+        uid: action.value,
       };
     default:
       return state;

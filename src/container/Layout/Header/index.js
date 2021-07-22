@@ -5,7 +5,6 @@ import { Mode } from "./Mode";
 import { Account } from "./Account";
 
 export default function Header() {
-  const [isDropdown, setDropdown] = useState(false);
   const [isOverHide, setOverHide] = useState(true);
   return (
     <header
@@ -22,11 +21,7 @@ export default function Header() {
       <div className="space-x-6 flex items-center">
         <Theme />
         <Mode />
-        <Account
-          isDropdown={isDropdown}
-          setDropdown={setDropdown}
-          setOverHide={setOverHide}
-        />
+        <Account setOverHide={setOverHide} />
       </div>
     </header>
   );
