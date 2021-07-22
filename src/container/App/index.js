@@ -5,8 +5,9 @@ import { GlobalState, initialState, reducer } from "../config/contextAPI";
 import Header from "../Layout/Header/";
 import Edit from "../pages/Edit/";
 import Home from "../pages/Home";
-import "./App.css";
 import Modal from "../Layout/Modal";
+import Loading from "../Layout/Loading";
+import "./App.css";
 
 function App() {
   const location = useLocation();
@@ -32,6 +33,7 @@ function App() {
           </AnimatePresence>
         </main>
         <Modal />
+        <Loading />
       </div>
     </GlobalState.Provider>
   );

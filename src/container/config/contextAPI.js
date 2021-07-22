@@ -11,6 +11,8 @@ export const initialState = {
   isAnimateSubmitButton: false,
   isDark: false,
   isModal: false,
+  isLogin: false,
+  isLoading: false,
 };
 
 export const reducer = (state, action) => {
@@ -39,6 +41,16 @@ export const reducer = (state, action) => {
       return {
         ...state,
         isModal: action.value,
+      };
+    case "CHANGE_ISLOGIN":
+      return {
+        ...state,
+        isLogin: action.value,
+      };
+    case "CHANGE_ISLOADING":
+      return {
+        ...state,
+        isLoading: action.value,
       };
     case "CHANGE_COLOR":
       return {

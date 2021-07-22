@@ -28,7 +28,6 @@ export default function Modal() {
           <motion.div
             initial={{ opacity: 0, y: "-100vh" }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
             transition={{ delay: 0.5 }}
             ref={ref}
             className={`w-1/3 bg-white rounded shadow-lg z-50 overflow-y-auto`}

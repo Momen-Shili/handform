@@ -12,7 +12,7 @@ export const Body = ({ isSignUp }) => {
             id={`modal-${item.id}`}
             name={`modal-${item.id}`}
             type={item.type}
-            className="py-2 px-3 border border-gray-300 focus:border-red-300 focus:shadow-red rounded-md outline-none duration-300 text-sm"
+            className="py-2 px-3 border border-gray-300 focus:border-red-300 focus:shadow-red rounded-md duration-300 text-sm"
           />
         </div>
       ))}
@@ -23,11 +23,11 @@ export const Body = ({ isSignUp }) => {
               id="modal-remember"
               name="modal-remember"
               type="checkbox"
-              className="border-gray-300 border outline-none"
+              className="border-gray-300 border"
             />
             <label htmlFor="modal-remember">Ingat saya</label>
           </div>
-          <button className="focus:outline-none text-red-400 hover:text-red-500">
+          <button className="text-red-400 hover:text-red-500">
             Lupa password?
           </button>
         </div>
