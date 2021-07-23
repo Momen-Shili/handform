@@ -1,21 +1,39 @@
 import React, { useContext } from "react";
+import { Redirect, useParams } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { GlobalState } from "../../config/contextAPI";
+import { contentForms, GlobalState } from "../../config/contextAPI";
+import { setDataToDatabase } from "../../config/firebase";
 import Question from "./Question";
 import TitleForm from "./TitleForm";
 
 export default function Edit() {
-  const { state } = useContext(GlobalState);
-  const handleSubmit = (e) => {
+  const { state, dispatch } = useContext(GlobalState);
+  const { id } = useParams();
+
+  const uid = JSON.parse(localStorage.getItem("uid"));
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(contentForms);
+    console.log(state);
+    dispatch({ type: "CHANGE_ISLOADING", value: true });
     const form = {
       title: state.titleForm,
       contentForms: state.contentForms,
       color: state.color,
     };
-    console.log(form);
+    await setDataToDatabase(`users/${state.uid}/forms/${id}/`, form)
+      .then(() => {
+        dispatch({ type: "CHANGE_CONTENTFORM", value: [] });
+        dispatch({ type: "CHANGE_COLOR", value: "purple" });
+      })
+      .catch((e) => alert(e))
+      .finally(() => dispatch({ type: "CHANGE_ISLOADING", value: false }));
   };
-  return (
+
+  return uid === null ? (
+    <Redirect to="/" />
+  ) : (
     <section>
       <form
         onSubmit={(e) => handleSubmit(e)}

@@ -35,7 +35,7 @@ export const Input = () => {
         }-700 w-full text-xl py-3`}
       />
       {/* desc  */}
-      {formState && formState.desc !== undefined && (
+      {formState && formState.isDesc && (
         <input
           name="desc"
           value={formState ? formState.desc : ""}

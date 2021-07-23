@@ -15,7 +15,8 @@ export const Action = ({ duplicate }) => {
     const newForm = {
       id: Date.now(),
       title: "",
-      desc: undefined,
+      isDesc: false,
+      desc: "",
       options: [],
       inputType: "text",
     };

@@ -87,6 +87,7 @@ const Radio = () => {
       <div className="flex items-center space-x-3">
         <input type="radio" disabled className="h-5 w-5" />
         <button
+          type="button"
           onClick={() => {
             options.push("");
             saveData();
@@ -158,6 +159,7 @@ const CheckBox = () => {
       <div className="flex items-center space-x-3">
         <input type="checkbox" disabled className="h-5 w-5" />
         <button
+          type="button"
           onClick={() => {
             options.push("");
             saveData();

@@ -38,6 +38,17 @@ export const signUpToDatabase = (email, password) =>
       .catch((error) => reject(error))
   );
 
+// post
+export const postDataToDatabase = (path, data) =>
+  new Promise((resolve, reject) =>
+    firebase
+      .database()
+      .ref(path)
+      .push(data)
+      .then((res) => resolve(res))
+      .catch((err) => reject(err))
+  );
+
 // set
 export const setDataToDatabase = (path, data) =>
   new Promise((resolve, reject) =>

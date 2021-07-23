@@ -20,7 +20,7 @@ export default function Question({ id }) {
         }}
         className={`
           ${state.isDropdown && "z-10"}
-          ${state.isDark ? "light-shadow bg-gray-100" : "shadow bg-white"}
+          ${state.isDark ? "light-shadow bg-gray-100 text-gray-700" : "shadow bg-white"}
            px-8 border-t rounded-lg relative 
         `}
       >

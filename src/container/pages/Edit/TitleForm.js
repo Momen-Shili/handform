@@ -9,7 +9,8 @@ export default function TitleForm() {
     const newForm = {
       id: Date.now(),
       title: "",
-      desc: undefined,
+      isDesc: false,
+      desc: "",
       options: [],
       inputType: "text",
     };
@@ -29,7 +30,11 @@ export default function TitleForm() {
     <div
       style={{ borderTopWidth: "10px" }}
       className={`
-      ${state.isDark ? "light-shadow bg-gray-100" : "shadow bg-white"}
+      ${
+        state.isDark
+          ? "light-shadow bg-gray-100 text-gray-700"
+          : "shadow bg-white"
+      }
       bg-white px-8 border-t  rounded-lg border-${state.color}-700`}
     >
       <div className="pt-4 pb-8 space-y-2">

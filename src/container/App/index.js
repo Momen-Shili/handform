@@ -4,7 +4,7 @@ import { AnimatePresence } from "framer-motion";
 import { GlobalState, initialState, reducer } from "../config/contextAPI";
 import Header from "../Layout/Header/";
 import Edit from "../pages/Edit/";
-import Home from "../pages/Home";
+import Home from "../pages/Home/";
 import Modal from "../Layout/Modal";
 import Loading from "../Layout/Loading";
 import "./App.css";
@@ -29,7 +29,7 @@ function App() {
     }
     return () => {
       dispatch({ type: "CHANGE_ISLOGIN", value: false });
-      dispatch({ type: "CHANGE_UID", value: uid });
+      dispatch({ type: "CHANGE_UID", value: "" });
     };
   }, [dispatch]);
 
@@ -41,7 +41,7 @@ function App() {
           <AnimatePresence exitBeforeEnter>
             <Switch location={location} key={location.key}>
               <Route exact path="/" component={Home} />
-              <Route path="/edit" component={Edit} />
+              <Route path="/edit/:id" component={Edit} />
             </Switch>
           </AnimatePresence>
         </main>

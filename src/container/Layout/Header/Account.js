@@ -22,8 +22,7 @@ export const Account = ({ setOverHide }) => {
       await getDataFromDatabase(`users/${state.uid}`)
         .then((res) => setName(res.name))
         .catch((e) => console.log(e));
-        
-    getUserData();
+    state.uid && getUserData();
     return () => setName("");
   }, [state.uid]);
 

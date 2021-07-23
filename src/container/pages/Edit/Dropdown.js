@@ -14,7 +14,7 @@ import { QuestionContext } from "./Question";
 export const Dropdown = () => {
   const { dispatch } = useContext(GlobalState);
   const id = useContext(QuestionContext);
-  
+
   const index = contentForms.findIndex((el) => el.id === id);
   const formState = contentForms[index];
 
@@ -56,18 +56,16 @@ export const Dropdown = () => {
     },
     {
       icon:
-        formState && formState.desc !== undefined
-          ? documentRemoveIcon
-          : documentAddIcon,
+        formState && formState.isDesc ? documentRemoveIcon : documentAddIcon,
       text:
-        formState && formState.desc !== undefined
+        formState && formState.isDesc
           ? "Hapus deskripsi"
           : "Tambahkan deskripsi",
 
       onClick: () => {
-        contentForms[index].desc !== undefined
-          ? (contentForms[index].desc = undefined)
-          : (contentForms[index].desc = "");
+        contentForms[index].isDesc
+          ? (contentForms[index].isDesc = false)
+          : (contentForms[index].isDesc = true);
         dispatch({ type: "CHANGE_CONTENTFORM", value: [...contentForms] });
       },
     },

@@ -113,7 +113,7 @@ export const LoginForm = ({ isSignUp, setSignUp }) => {
                 />
                 <label htmlFor="modal-remember">Ingat saya</label>
               </div>
-              <button className="text-red-400 hover:text-red-500">
+              <button type="button" className="text-red-400 hover:text-red-500">
                 Lupa password?
               </button>
             </div>
