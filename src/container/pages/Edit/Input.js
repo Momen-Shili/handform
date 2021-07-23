@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { contentForms, GlobalState } from "../../config/contextAPI";
+import { GlobalState } from "../../config/contextAPI";
 import { QuestionContext } from "./Question";
 import * as InputType from "./InputType";
 
@@ -7,6 +7,7 @@ export const Input = () => {
   const { state, dispatch } = useContext(GlobalState);
   const id = useContext(QuestionContext);
 
+  const contentForms = state.contentForms;
   const index = contentForms.findIndex((el) => el.id === id);
   const formState = contentForms[index];
   const inputType = contentForms[index] && contentForms[index].inputType;

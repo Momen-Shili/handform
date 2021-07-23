@@ -3,12 +3,13 @@ import duplicateIcon from "../../../assets/svg/duplicate.svg";
 import trashIcon from "../../../assets/svg/trash.svg";
 import plusCircleIcon from "../../../assets/svg/plusCircle.svg";
 import { motion } from "framer-motion";
-import { contentForms, GlobalState } from "../../config/contextAPI";
+import { GlobalState } from "../../config/contextAPI";
 import { QuestionContext } from "./Question";
 
 export const Action = ({ duplicate }) => {
   const id = useContext(QuestionContext);
   const { state, dispatch } = useContext(GlobalState);
+  const contentForms = state.contentForms;
   const index = state.contentForms.findIndex((el) => el.id === id);
 
   const createForm = () => {

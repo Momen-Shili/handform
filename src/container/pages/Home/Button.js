@@ -13,7 +13,7 @@ export const Button = () => {
   const handleClick = () => {
     const id = Date.now();
     state.isLogin
-      ? push("/edit/" + id)
+      ? push(`edit/uid=${state.uid}&&id=${id}/`)
       : dispatch({ type: "CHANGE_ISMODAL", value: true });
   };
   return (

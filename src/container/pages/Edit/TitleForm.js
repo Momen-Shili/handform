@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 import plusCircleIcon from "../../../assets/svg/plusCircle.svg";
-import { contentForms, GlobalState } from "../../config/contextAPI";
+import { GlobalState } from "../../config/contextAPI";
 
 export default function TitleForm() {
   const { state, dispatch } = useContext(GlobalState);
+  const contentForms = state.contentForms;
 
   const createForm = () => {
     const newForm = {

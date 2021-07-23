@@ -2,11 +2,9 @@ import { createContext } from "react";
 
 export const GlobalState = createContext();
 
-export const contentForms = [];
-
 export const initialState = {
   titleForm: { title: "", desc: "" },
-  contentForms,
+  contentForms: [],
   color: "purple",
   isAnimateSubmitButton: false,
   isDark: false,

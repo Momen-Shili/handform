@@ -1,20 +1,18 @@
-import React, { useContext } from "react";
-import { Redirect, useParams } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import { Redirect, useHistory, useParams } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { contentForms, GlobalState } from "../../config/contextAPI";
-import { setDataToDatabase } from "../../config/firebase";
+import { GlobalState } from "../../config/contextAPI";
+import { getDataFromDatabase, setDataToDatabase } from "../../config/firebase";
 import Question from "./Question";
 import TitleForm from "./TitleForm";
 
 export default function Edit() {
+  const { push } = useHistory();
   const { state, dispatch } = useContext(GlobalState);
   const { id } = useParams();
 
-  const uid = JSON.parse(localStorage.getItem("uid"));
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(contentForms);
     console.log(state);
     dispatch({ type: "CHANGE_ISLOADING", value: true });
     const form = {
@@ -23,15 +21,24 @@ export default function Edit() {
       color: state.color,
     };
     await setDataToDatabase(`users/${state.uid}/forms/${id}/`, form)
-      .then(() => {
-        dispatch({ type: "CHANGE_CONTENTFORM", value: [] });
-        dispatch({ type: "CHANGE_COLOR", value: "purple" });
-      })
+      .then(() => push("/"))
       .catch((e) => alert(e))
       .finally(() => dispatch({ type: "CHANGE_ISLOADING", value: false }));
   };
 
-  return uid === null ? (
+  useEffect(() => {
+    const getData = async () => {
+      const res = await getDataFromDatabase(`users/${state.uid}/forms/${id}/`);
+      if (res) {
+        dispatch({ type: "CHANGE_CONTENTFORM", value: [...res.contentForms] });
+        dispatch({ type: "CHANGE_TITLEFORM", value: { ...res.title } });
+        console.log(res);
+      }
+    };
+    getData();
+  }, [dispatch, id, state.uid]);
+
+  return state.uid === null ? (
     <Redirect to="/" />
   ) : (
     <section>

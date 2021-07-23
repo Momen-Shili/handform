@@ -8,13 +8,14 @@ import checkIcon from "../../../assets/svg/check.svg";
 import documentAddIcon from "../../../assets/svg/documentAdd.svg";
 import documentRemoveIcon from "../../../assets/svg/documentRemove.svg";
 import useOutsideClick from "../../Utils/useOutsideClick";
-import { contentForms, GlobalState } from "../../config/contextAPI";
+import { GlobalState } from "../../config/contextAPI";
 import { QuestionContext } from "./Question";
 
 export const Dropdown = () => {
-  const { dispatch } = useContext(GlobalState);
+  const { state, dispatch } = useContext(GlobalState);
   const id = useContext(QuestionContext);
 
+  const contentForms = state.contentForms;
   const index = contentForms.findIndex((el) => el.id === id);
   const formState = contentForms[index];
 

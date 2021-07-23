@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { contentForms, GlobalState } from "../../config/contextAPI";
+import { GlobalState } from "../../config/contextAPI";
 import plusIcon from "../../../assets/svg/plus.svg";
 import { QuestionContext } from "./Question";
 
@@ -39,6 +39,7 @@ const Radio = () => {
   const id = useContext(QuestionContext);
   const { state, dispatch } = useContext(GlobalState);
 
+  const contentForms = state.contentForms;
   const index = contentForms.findIndex((el) => el.id === id);
   const options = contentForms[index] && contentForms[index].options;
 
@@ -111,6 +112,7 @@ const CheckBox = () => {
   const id = useContext(QuestionContext);
   const { state, dispatch } = useContext(GlobalState);
 
+  const contentForms = state.contentForms;
   const index = contentForms.findIndex((el) => el.id === id);
   const options = contentForms[index] && contentForms[index].options;
 
