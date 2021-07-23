@@ -49,7 +49,7 @@ export const setDataToDatabase = (path, data) =>
       .catch((err) => reject(err))
   );
 
-// get data
+// get
 export const getDataFromDatabase = (path) =>
   new Promise((resolve, reject) =>
     firebase

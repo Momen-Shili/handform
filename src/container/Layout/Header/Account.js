@@ -6,9 +6,9 @@ import { useHistory } from "react-router-dom";
 import { getDataFromDatabase } from "../../config/firebase";
 
 export const Account = ({ setOverHide }) => {
-  const [isDropdown, setDropdown] = useState(false);
-  const [name, setName] = useState("?");
   const { state, dispatch } = useContext(GlobalState);
+  const [isDropdown, setDropdown] = useState(false);
+  const [name, setName] = useState("");
   const { push } = useHistory();
 
   const ref = useRef();
@@ -18,14 +18,11 @@ export const Account = ({ setOverHide }) => {
   });
 
   useEffect(() => {
-    const getUserData = async () => {
-      try {
-        const res = await getDataFromDatabase(`users/${state.uid}`);
-        setName(res.name);
-      } catch (e) {
-        alert(e);
-      }
-    };
+    const getUserData = async () =>
+      await getDataFromDatabase(`users/${state.uid}`)
+        .then((res) => setName(res.name))
+        .catch((e) => console.log(e));
+        
     getUserData();
     return () => setName("");
   }, [state.uid]);

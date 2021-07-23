@@ -20,28 +20,28 @@ export const LoginForm = ({ isSignUp, setSignUp }) => {
     try {
       const res = await signUpToDatabase(input.email, input.password);
       await setDataToDatabase(`users/${res.uid}`, data);
-      dispatch({ type: "CHANGE_ISLOADING", value: false });
       alert("berhasil registrasi");
       setSignUp(false);
     } catch (error) {
       alert("sign up error\n" + error.message + "\ncode : " + error.code);
+    } finally {
       dispatch({ type: "CHANGE_ISLOADING", value: false });
     }
   };
 
   const signIn = async () => {
     dispatch({ type: "CHANGE_ISLOADING", value: true });
-    try {
-      const res = await signInToDatabase(input.email, input.password);
-      input.remember && localStorage.setItem("uid", JSON.stringify(res.uid));
-      dispatch({ type: "CHANGE_ISLOADING", value: false });
-      dispatch({ type: "CHANGE_ISMODAL", value: false });
-      dispatch({ type: "CHANGE_ISLOGIN", value: true });
-      dispatch({ type: "CHANGE_UID", value: res.uid });
-    } catch (error) {
-      alert("login error\n" + error.message + "\ncode : " + error.code);
-      dispatch({ type: "CHANGE_ISLOADING", value: false });
-    }
+    await signInToDatabase(input.email, input.password)
+      .then((res) => {
+        localStorage.setItem("uid", JSON.stringify(res.uid));
+        dispatch({ type: "CHANGE_ISMODAL", value: false });
+        dispatch({ type: "CHANGE_UID", value: res.uid });
+        dispatch({ type: "CHANGE_ISLOGIN", value: true });
+      })
+      .catch((error) =>
+        alert("login error\n" + error.message + "\ncode : " + error.code)
+      )
+      .finally(() => dispatch({ type: "CHANGE_ISLOADING", value: false }));
   };
 
   const handleChange = (e) =>
