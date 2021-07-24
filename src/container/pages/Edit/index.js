@@ -61,7 +61,7 @@ export default function Edit() {
     <section>
       <form
         onSubmit={(e) => handleSubmit(e)}
-        className="w-11/12 lg:w-1/2 py-5 space-y-4 mx-auto"
+        className="lg:w-1/2 py-5 space-y-4 mx-auto"
       >
         <TitleForm />
         <AnimatePresence>

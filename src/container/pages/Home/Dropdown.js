@@ -1,10 +1,12 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 
-export const Dropdown = ({ isDropdown, deleteForm, id }) => {
-  const { push } = useHistory();
-
+export const Dropdown = ({
+  isDropdown,
+  editForm,
+  deleteForm,
+  copyToClipboard,
+}) => {
   const dropdownMenu = [
     {
       text: "Buka",
@@ -12,11 +14,11 @@ export const Dropdown = ({ isDropdown, deleteForm, id }) => {
     },
     {
       text: "Edit",
-      onClick: () => push(`edit/${id}`),
+      onClick: editForm,
     },
     {
       text: "Salin link URL",
-      onClick: () => alert("click"),
+      onClick: copyToClipboard,
     },
     {
       text: "Hapus",
@@ -38,10 +40,7 @@ export const Dropdown = ({ isDropdown, deleteForm, id }) => {
               <li
                 key={index}
                 className="py-2 px-5 hover:bg-gray-100 block"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  el.onClick();
-                }}
+                onClick={() => el.onClick()}
               >
                 {el.text}
               </li>

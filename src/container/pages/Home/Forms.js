@@ -7,9 +7,19 @@ import { stringDate } from "../../Utils/stringDate";
 import { limitString } from "../../Utils/limitString";
 import { GlobalState } from "../../config/contextAPI";
 import { deleteDataDatabase } from "../../config/firebase";
+import { useHistory } from "react-router-dom";
 
 export const Forms = ({ form, fetchUserData }) => {
   const { state } = useContext(GlobalState);
+  const { push } = useHistory();
+
+  const copyToClipboard = () =>
+    navigator.clipboard
+      .writeText(`edit/${form.id}`)
+      .then(() => alert("URL berhasil disalin"))
+      .catch((e) => alert(e));
+
+  const editForm = () => push(`edit/${form.id}`);
 
   const deleteForm = async () =>
     await deleteDataDatabase(`/users/${state.uid}/forms/${form.id}`)
@@ -42,9 +52,11 @@ export const Forms = ({ form, fetchUserData }) => {
       >
         <img src={dotsIcon} alt="dots" className="h-5 w-5" />
         <Dropdown
+          id={form.id}
+          editForm={editForm}
           isDropdown={isDropdown}
           deleteForm={deleteForm}
-          id={form.id}
+          copyToClipboard={copyToClipboard}
         />
       </div>
     </div>
