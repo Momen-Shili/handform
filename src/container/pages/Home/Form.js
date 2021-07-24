@@ -9,8 +9,8 @@ import { GlobalState } from "../../config/contextAPI";
 import { deleteDataDatabase } from "../../config/firebase";
 import { useHistory } from "react-router-dom";
 
-export const Forms = ({ form, fetchUserData }) => {
-  const { state } = useContext(GlobalState);
+export const Form = ({ form, fetchUserData }) => {
+  const { state, dispatch } = useContext(GlobalState);
   const { push } = useHistory();
 
   const copyToClipboard = () =>
@@ -19,10 +19,18 @@ export const Forms = ({ form, fetchUserData }) => {
       .then(() => alert("URL berhasil disalin"))
       .catch((e) => alert(e));
 
-  const editForm = () => push(`edit/${form.id}`);
+  const openForm = () => {
+    push(`/${form.id}`);
+    dispatch({ type: "CHANGE_ISEDIT", value: false });
+  };
+
+  const editForm = () => {
+    push(`/edit/${form.id}`);
+    dispatch({ type: "CHANGE_ISEDIT", value: true });
+  };
 
   const deleteForm = async () =>
-    await deleteDataDatabase(`/users/${state.uid}/forms/${form.id}`)
+    await deleteDataDatabase(`users/${state.uid}/forms/${form.id}/`)
       .then(() => fetchUserData())
       .catch((e) => console.log(e));
 
@@ -53,6 +61,7 @@ export const Forms = ({ form, fetchUserData }) => {
         <img src={dotsIcon} alt="dots" className="h-5 w-5" />
         <Dropdown
           id={form.id}
+          openForm={openForm}
           editForm={editForm}
           isDropdown={isDropdown}
           deleteForm={deleteForm}

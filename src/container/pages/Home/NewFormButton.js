@@ -5,7 +5,7 @@ import plusIcon from "../../../assets/svg/plus.svg";
 import pencilIcon from "../../../assets/svg/pencil.svg";
 import { GlobalState } from "../../config/contextAPI";
 
-export const NewForm = () => {
+export const NewFormButton = () => {
   const { state, dispatch } = useContext(GlobalState);
   const [isHover, setHover] = useState(false);
   const { push } = useHistory();

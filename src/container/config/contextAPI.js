@@ -11,6 +11,7 @@ export const initialState = {
   isModal: false,
   isLogin: false,
   isLoading: false,
+  isEdit: true,
   uid: "",
 };
 
@@ -60,6 +61,11 @@ export const reducer = (state, action) => {
       return {
         ...state,
         uid: action.value,
+      };
+    case "CHANGE_ISEDIT":
+      return {
+        ...state,
+        isEdit: action.value,
       };
     default:
       return state;

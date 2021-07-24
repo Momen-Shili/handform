@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { Redirect, useHistory, useParams } from "react-router-dom";
+import { Redirect, useHistory, useLocation, useParams } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { GlobalState } from "../../config/contextAPI";
 import { getDataFromDatabase, setDataToDatabase } from "../../config/firebase";
@@ -7,14 +7,23 @@ import Question from "./Question";
 import TitleForm from "./TitleForm";
 import { getDate } from "../../Utils/getDate";
 
-export default function Edit() {
-  const { push } = useHistory();
-  const { state, dispatch } = useContext(GlobalState);
+export default function Form() {
   const { id } = useParams();
+  const { push } = useHistory();
+  const { pathname } = useLocation();
+  const { state, dispatch } = useContext(GlobalState);
 
-  const handleSubmit = async (e) => {
+  const indexPathnameStart = pathname.indexOf("uid=") + 4;
+  const indexPathnameEnd = pathname.indexOf("&&id=");
+  const uidURL = pathname.substring(indexPathnameStart, indexPathnameEnd);
+
+  const handleSubmitForm = (e) => {
     e.preventDefault();
-    console.log(state);
+    alert("submit form");
+  };
+
+  const handleEditForm = async (e) => {
+    e.preventDefault();
     if (state.titleForm.title) {
       // title isnt empty
       if (state.contentForms.length !== 0) {
@@ -26,7 +35,7 @@ export default function Edit() {
           color: state.color,
           date: getDate(),
         };
-        await setDataToDatabase(`users/${state.uid}/forms/${id}/`, form)
+        await setDataToDatabase(`/users/${state.uid}/forms/${id}/`, form)
           .then(() => push("/"))
           .catch((e) => alert(e))
           .finally(() => dispatch({ type: "CHANGE_ISLOADING", value: false }));
@@ -40,7 +49,7 @@ export default function Edit() {
 
   useEffect(() => {
     const getData = async () => {
-      const res = await getDataFromDatabase(`users/${state.uid}/forms/${id}/`);
+      const res = await getDataFromDatabase(`users/${uidURL}/forms/${id}/`);
       if (res) {
         dispatch({ type: "CHANGE_TITLEFORM", value: res.title });
         dispatch({ type: "CHANGE_COLOR", value: res.color });
@@ -53,15 +62,33 @@ export default function Edit() {
       dispatch({ type: "CHANGE_COLOR", value: "purple" });
       dispatch({ type: "CHANGE_CONTENTFORM", value: [] });
     };
-  }, [dispatch, id, state.uid]);
+  }, [dispatch, id, uidURL]);
 
-  return state.uid === null ? (
-    <Redirect to="/" />
-  ) : (
+  useEffect(() => {
+    pathname.substring(1, 5) === "edit"
+      ? dispatch({ type: "CHANGE_ISEDIT", value: true })
+      : dispatch({ type: "CHANGE_ISEDIT", value: false });
+
+    return () => dispatch({ type: "CHANGE_ISEDIT", value: true });
+  }, [dispatch, pathname]);
+
+  const auth = () => {
+    if (pathname.substring(1, 5) === "edit") {
+      if (state.uid === uidURL) {
+        return true;
+      }
+      return false;
+    }
+    return true;
+  };
+  
+  return auth() ? (
     <section>
       <form
-        onSubmit={(e) => handleSubmit(e)}
-        className="lg:w-1/2 py-5 space-y-4 mx-auto"
+        onSubmit={(e) =>
+          state.isEdit ? handleEditForm(e) : handleSubmitForm(e)
+        }
+        className="w-11/12 lg:w-1/2 py-5 space-y-4 mx-auto"
       >
         <TitleForm />
         <AnimatePresence>
@@ -81,13 +108,15 @@ export default function Edit() {
                   state.isDark ? "light-shadow bg-gray-100" : "shadow"
                 }`}
               >
-                SIMPAN
+                SUBMIT
               </motion.button>
             )}
           </AnimatePresence>
         </div>
       </form>
     </section>
+  ) : (
+    <Redirect to="/" />
   );
 }
 

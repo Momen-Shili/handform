@@ -34,6 +34,7 @@ export const Input = () => {
         }  border-b focus:border-b-2 focus:border-${
           state.color
         }-700 w-full text-xl py-3`}
+        disabled={!state.isEdit}
       />
       {/* desc  */}
       {formState && formState.isDesc && (
@@ -49,6 +50,7 @@ export const Input = () => {
             state.color
           }-700 w-full text-sm`}
           onChange={(e) => handleChange(e)}
+          disabled={!state.isEdit}
         />
       )}
       {/* input  */}

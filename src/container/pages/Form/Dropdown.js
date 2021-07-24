@@ -73,39 +73,41 @@ export const Dropdown = () => {
   ];
 
   return (
-    <div
-      ref={ref}
-      onClick={() => setDropdown(!isDropdown)}
-      className={`${
-        isDropdown ? "bg-gray-300 z-10" : "hover:bg-gray-100"
-      } absolute right-2 top-2 p-2 rounded-full duration-200 cursor-pointer `}
-    >
-      <img src={dotsIcon} alt="dots" className="h-6 w-6" />
-      <AnimatePresence>
-        {isDropdown && (
-          <motion.div
-            variants={variants}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            className="absolute rounded shadow right-0 top-12 bg-white w-60"
-          >
-            <ul className="text-gray-500 py-1">
-              {dropdownMenu.map((el, index) => (
-                <li
-                  key={index}
-                  className={`flex items-center space-x-3 py-2 px-5 hover:bg-gray-100 `}
-                  onClick={() => el.onClick(el.type)}
-                >
-                  <img src={el.icon} alt="icon" className="h-5 w-5" />
-                  <p>{el.text}</p>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
+    state.isEdit && (
+      <div
+        ref={ref}
+        onClick={() => setDropdown(!isDropdown)}
+        className={`${
+          isDropdown ? "bg-gray-300 z-10" : "hover:bg-gray-100"
+        } absolute right-2 top-2 p-2 rounded-full duration-200 cursor-pointer `}
+      >
+        <img src={dotsIcon} alt="dots" className="h-6 w-6" />
+        <AnimatePresence>
+          {isDropdown && (
+            <motion.div
+              variants={variants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              className="absolute rounded shadow right-0 top-12 bg-white w-60"
+            >
+              <ul className="text-gray-500 py-1">
+                {dropdownMenu.map((el, index) => (
+                  <li
+                    key={index}
+                    className={`flex items-center space-x-3 py-2 px-5 hover:bg-gray-100 `}
+                    onClick={() => el.onClick(el.type)}
+                  >
+                    <img src={el.icon} alt="icon" className="h-5 w-5" />
+                    <p>{el.text}</p>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    )
   );
 };
 

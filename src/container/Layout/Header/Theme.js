@@ -3,15 +3,21 @@ import { AnimatePresence, motion } from "framer-motion";
 import colorPalleteIcon from "../../../assets/svg/colorPallete.svg";
 import { GlobalState } from "../../config/contextAPI";
 import useOutsideClick from "../../Utils/useOutsideClick";
+import { useLocation } from "react-router-dom";
 
 export const Theme = () => {
   const [isTheme, setTheme] = useState(false);
   const { dispatch } = useContext(GlobalState);
+  const { pathname } = useLocation();
 
   const ref = useRef();
   useOutsideClick(ref, () => isTheme && setTheme(false));
   return (
-    <div className="flex items-center space-x-4">
+    <div
+      className={`${
+        pathname === "/" ? "hidden" : "flex"
+      }  items-center space-x-4`}
+    >
       <AnimatePresence>
         {isTheme && (
           <motion.div

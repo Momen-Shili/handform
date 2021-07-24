@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 
 export const Dropdown = ({
   isDropdown,
+  openForm,
   editForm,
   deleteForm,
   copyToClipboard,
@@ -10,7 +11,7 @@ export const Dropdown = ({
   const dropdownMenu = [
     {
       text: "Buka",
-      onClick: () => alert("click"),
+      onClick: openForm,
     },
     {
       text: "Edit",

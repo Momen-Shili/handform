@@ -3,7 +3,7 @@ import { Route, Switch, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { GlobalState, initialState, reducer } from "../config/contextAPI";
 import Header from "../Layout/Header/";
-import Edit from "../pages/Edit/";
+import Form from "../pages/Form/";
 import Home from "../pages/Home/";
 import Modal from "../Layout/Modal";
 import Loading from "../Layout/Loading";
@@ -41,7 +41,8 @@ function App() {
           <AnimatePresence exitBeforeEnter>
             <Switch location={location} key={location.key}>
               <Route exact path="/" component={Home} />
-              <Route path="/edit/:id" component={Edit} />
+              <Route exact path="/:id" component={Form} />
+              <Route path="/edit/:id" component={Form} />
             </Switch>
           </AnimatePresence>
         </main>

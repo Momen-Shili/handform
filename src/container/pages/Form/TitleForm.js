@@ -41,6 +41,7 @@ export default function TitleForm() {
       <div className="pt-4 pb-8 space-y-2">
         <input
           name="title"
+          disabled={!state.isEdit}
           value={state.titleForm.title ? state.titleForm.title : ""}
           placeholder="Judul formulir"
           onChange={(e) => handleChange(e)}
@@ -53,6 +54,7 @@ export default function TitleForm() {
           }-700 w-full text-3xl py-3`}
         />
         <textarea
+          disabled={!state.isEdit}
           name="desc"
           value={state.titleForm.desc ? state.titleForm.desc : ""}
           placeholder="Deskripsi formulir"
@@ -66,14 +68,16 @@ export default function TitleForm() {
           }-700 w-full py-2 h-auto resize-none`}
         ></textarea>
       </div>
-      <div className="border-t py-3 flex justify-end items-center space-x-3">
-        <img
-          src={plusCircleIcon}
-          alt="plus"
-          className="h-6 w-6 cursor-pointer"
-          onClick={() => createForm()}
-        />
-      </div>
+      {state.isEdit && (
+        <div className="border-t py-3 flex justify-end items-center space-x-3">
+          <img
+            src={plusCircleIcon}
+            alt="plus"
+            className="h-6 w-6 cursor-pointer"
+            onClick={() => createForm()}
+          />
+        </div>
+      )}
     </div>
   );
 }

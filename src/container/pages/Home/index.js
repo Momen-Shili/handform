@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState, useCallback } from "react";
 import { GlobalState } from "../../config/contextAPI";
 import { getDataFromDatabase } from "../../config/firebase";
-import { NewForm } from "./NewForm";
-import { Forms } from "./Forms";
+import { NewFormButton } from "./NewFormButton";
+import { Form } from "./Form";
 
 export default function Home() {
   const [userForms, setUserForms] = useState([]);
@@ -47,12 +47,12 @@ export default function Home() {
         ) : (
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
             {userForms.map((form) => (
-              <Forms key={form.id} form={form} fetchUserData={fetchUserData} />
+              <Form key={form.id} form={form} fetchUserData={fetchUserData} />
             ))}
           </div>
         )}
       </div>
-      <NewForm />
+      <NewFormButton />
     </section>
   );
 }

@@ -60,29 +60,31 @@ export const Action = ({ duplicate }) => {
   ];
 
   return (
-    <div className="border-t py-3 flex justify-end items-center space-x-3">
-      {icons.map((el, idx) => (
-        <span key={idx}>
-          <motion.img
-            initial={{
-              rotate: 360,
-              x: el.x,
-              opacity: 0,
-            }}
-            animate={{ rotate: 0, x: 0, opacity: 1 }}
-            transition={{
-              delay: 0.2,
-              type: "spring",
-              duration: 0.5,
-              stiffness: 80,
-            }}
-            src={el.icon}
-            alt={el.alt}
-            className="h-6 w-6 cursor-pointer"
-            onClick={() => el.onClick()}
-          />
-        </span>
-      ))}
-    </div>
+    state.isEdit && (
+      <div className="border-t py-3 flex justify-end items-center space-x-3">
+        {icons.map((el, idx) => (
+          <span key={idx}>
+            <motion.img
+              initial={{
+                rotate: 360,
+                x: el.x,
+                opacity: 0,
+              }}
+              animate={{ rotate: 0, x: 0, opacity: 1 }}
+              transition={{
+                delay: 0.2,
+                type: "spring",
+                duration: 0.5,
+                stiffness: 80,
+              }}
+              src={el.icon}
+              alt={el.alt}
+              className="h-6 w-6 cursor-pointer"
+              onClick={() => el.onClick()}
+            />
+          </span>
+        ))}
+      </div>
+    )
   );
 };

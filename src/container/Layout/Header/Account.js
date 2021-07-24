@@ -2,14 +2,12 @@ import React, { useRef, useContext, useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import useOutsideClick from "../../Utils/useOutsideClick";
 import { GlobalState } from "../../config/contextAPI";
-import { useHistory } from "react-router-dom";
 import { getDataFromDatabase } from "../../config/firebase";
 
 export const Account = ({ setOverHide }) => {
   const { state, dispatch } = useContext(GlobalState);
   const [isDropdown, setDropdown] = useState(false);
   const [name, setName] = useState("");
-  const { push } = useHistory();
 
   const ref = useRef();
   useOutsideClick(ref, () => {
@@ -47,14 +45,9 @@ export const Account = ({ setOverHide }) => {
             initial="initial"
             animate="animate"
             exit="exit"
-            onClick={(e) => {
-              e.stopPropagation();
-              push("/");
-              setName("");
-              setOverHide(true);
-              setDropdown(false);
+            onClick={() => {
+              window.location.reload();
               localStorage.clear();
-              dispatch({ type: "CHANGE_ISLOGIN", value: false });
             }}
             className={`absolute py-2 px-3 -left-5 top-11 border border-gray-300 bg-white rounded shadow-lg hover:bg-indigo-50 outline-none focus:outline-none text-sm`}
           >

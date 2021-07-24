@@ -7,7 +7,7 @@ const Text = () => {
   const { state } = useContext(GlobalState);
   return (
     <input
-      disabled
+      disabled={state.isEdit}
       placeholder="Teks jawaban singkat"
       className={`${
         state.isDark
@@ -22,7 +22,7 @@ const TextArea = () => {
   const { state } = useContext(GlobalState);
   return (
     <textarea
-      disabled
+      disabled={state.isEdit}
       placeholder="Teks jawaban panjang"
       className={`${
         state.isDark
@@ -52,8 +52,15 @@ const Radio = () => {
     <div>
       {options.map((el, idx) => (
         <div key={idx} className="flex items-center space-x-3 relative group">
-          <input value={el} type="radio" disabled className="h-5 w-5" />
           <input
+            name="radio"
+            value={el}
+            type="radio"
+            disabled={state.isEdit}
+            className="h-5 w-5"
+          />
+          <input
+            disabled={!state.isEdit}
             value={el ? el : ""}
             onChange={(e) => {
               options[idx] = e.target.value;
@@ -68,7 +75,7 @@ const Radio = () => {
               state.color
             }-700 w-full py-2`}
           />
-          {options.length > 1 && (
+          {state.isEdit && options.length > 1 && (
             <div
               className="absolute right-0 flex justify-end items-center cursor-pointer opacity-0 group-hover:opacity-100 duration-300"
               onClick={() => {
@@ -85,25 +92,27 @@ const Radio = () => {
           )}
         </div>
       ))}
-      <div className="flex items-center space-x-3">
-        <input type="radio" disabled className="h-5 w-5" />
-        <button
-          type="button"
-          onClick={() => {
-            options.push("");
-            saveData();
-          }}
-          className={`${
-            state.isDark
-              ? "bg-gray-100 hover:border-gray-300 border-gray-100"
-              : "bg-white hover:border-gray-300 border-white"
-          } border-b focus:border-b-2 focus:border-${
-            state.color
-          }-700 py-2 text-gray-400`}
-        >
-          Tambah opsi
-        </button>
-      </div>
+      {state.isEdit && (
+        <div className="flex items-center space-x-3">
+          <input type="radio" disabled className="h-5 w-5" />
+          <button
+            type="button"
+            onClick={() => {
+              options.push("");
+              saveData();
+            }}
+            className={`${
+              state.isDark
+                ? "bg-gray-100 hover:border-gray-300 border-gray-100"
+                : "bg-white hover:border-gray-300 border-white"
+            } border-b focus:border-b-2 focus:border-${
+              state.color
+            }-700 py-2 text-gray-400`}
+          >
+            Tambah opsi
+          </button>
+        </div>
+      )}
     </div>
   );
 };
@@ -125,8 +134,15 @@ const CheckBox = () => {
     <div>
       {options.map((el, idx) => (
         <div key={idx} className="flex items-center space-x-3 relative group">
-          <input value={el} type="checkbox" disabled className="h-5 w-5" />
           <input
+            name="checkbox"
+            value={el}
+            type="checkbox"
+            disabled={state.isEdit}
+            className="h-5 w-5"
+          />
+          <input
+            disabled={!state.isEdit}
             value={el ? el : ""}
             onChange={(e) => {
               options[idx] = e.target.value;
@@ -141,7 +157,7 @@ const CheckBox = () => {
               state.color
             }-700 w-full py-2`}
           />
-          {options.length > 1 && (
+          {state.isEdit && options.length > 1 && (
             <div
               className="absolute right-0 flex justify-end items-center cursor-pointer opacity-0 group-hover:opacity-100 duration-300"
               onClick={() => {
@@ -158,25 +174,27 @@ const CheckBox = () => {
           )}
         </div>
       ))}
-      <div className="flex items-center space-x-3">
-        <input type="checkbox" disabled className="h-5 w-5" />
-        <button
-          type="button"
-          onClick={() => {
-            options.push("");
-            saveData();
-          }}
-          className={`${
-            state.isDark
-              ? "bg-gray-100 hover:border-gray-300 border-gray-100"
-              : "bg-white hover:border-gray-300 border-white"
-          } border-b focus:border-b-2 focus:border-${
-            state.color
-          }-700 py-2 text-gray-400`}
-        >
-          Tambah opsi
-        </button>
-      </div>
+      {state.isEdit && (
+        <div className="flex items-center space-x-3">
+          <input type="checkbox" disabled className="h-5 w-5" />
+          <button
+            type="button"
+            onClick={() => {
+              options.push("");
+              saveData();
+            }}
+            className={`${
+              state.isDark
+                ? "bg-gray-100 hover:border-gray-300 border-gray-100"
+                : "bg-white hover:border-gray-300 border-white"
+            } border-b focus:border-b-2 focus:border-${
+              state.color
+            }-700 py-2 text-gray-400`}
+          >
+            Tambah opsi
+          </button>
+        </div>
+      )}
     </div>
   );
 };
