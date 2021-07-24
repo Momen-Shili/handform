@@ -1,10 +1,21 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
 import documentIcon from "../../../assets/svg/document.svg";
 import dotsIcon from "../../../assets/svg/verticalDots.svg";
 import { Dropdown } from "./Dropdown";
 import useOutsideClick from "../../Utils/useOutsideClick";
+import { stringDate } from "../../Utils/stringDate";
+import { limitString } from "../../Utils/limitString";
+import { GlobalState } from "../../config/contextAPI";
+import { deleteDataDatabase } from "../../config/firebase";
 
-export const Forms = ({ form }) => {
+export const Forms = ({ form, fetchUserData }) => {
+  const { state } = useContext(GlobalState);
+
+  const deleteForm = async () =>
+    await deleteDataDatabase(`/users/${state.uid}/forms/${form.id}`)
+      .then(() => fetchUserData())
+      .catch((e) => console.log(e));
+
   const [isDropdown, setDropdown] = useState(false);
 
   const ref = useRef();
@@ -15,10 +26,14 @@ export const Forms = ({ form }) => {
       key={form.id}
       className="bg-white shadow rounded text-sm py-3 px-5 space-y-2 relative"
     >
-      <p className="text-gray-700 font-semibold text-base">{form.title.title}</p>
+      <p className="text-gray-700 font-semibold text-base">
+        {limitString(form.title.title, 20)}
+      </p>
       <div className="flex items-center space-x-1">
         <img src={documentIcon} alt="form" className="h-5 w-5" />
-        <span className="">Diperbarui 11 juni 1999</span>
+        <span className="text-gray-500">
+          Diperbarui {stringDate(form.date)}
+        </span>
       </div>
       <div
         ref={ref}
@@ -26,7 +41,11 @@ export const Forms = ({ form }) => {
         className="hover:bg-gray-100 absolute right-1 top-1 p-1 rounded-full duration-200 cursor-pointer "
       >
         <img src={dotsIcon} alt="dots" className="h-5 w-5" />
-        <Dropdown isDropdown={isDropdown} id={form.id} />
+        <Dropdown
+          isDropdown={isDropdown}
+          deleteForm={deleteForm}
+          id={form.id}
+        />
       </div>
     </div>
   );

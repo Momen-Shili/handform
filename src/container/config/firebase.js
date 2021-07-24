@@ -72,3 +72,14 @@ export const getDataFromDatabase = (path) =>
           : reject("data not found or database error")
       )
   );
+
+// delete
+export const deleteDataDatabase = (path) =>
+  new Promise((resolve, reject) =>
+    firebase
+      .database()
+      .ref(path)
+      .remove()
+      .then(() => resolve(true))
+      .catch((e) => reject(e))
+  );

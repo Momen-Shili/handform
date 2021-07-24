@@ -5,6 +5,7 @@ import { GlobalState } from "../../config/contextAPI";
 import { getDataFromDatabase, setDataToDatabase } from "../../config/firebase";
 import Question from "./Question";
 import TitleForm from "./TitleForm";
+import { getDate } from "../../Utils/getDate";
 
 export default function Edit() {
   const { push } = useHistory();
@@ -14,28 +15,44 @@ export default function Edit() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(state);
-    dispatch({ type: "CHANGE_ISLOADING", value: true });
-    const form = {
-      title: state.titleForm,
-      contentForms: state.contentForms,
-      color: state.color,
-    };
-    await setDataToDatabase(`users/${state.uid}/forms/${id}/`, form)
-      .then(() => push("/"))
-      .catch((e) => alert(e))
-      .finally(() => dispatch({ type: "CHANGE_ISLOADING", value: false }));
+    if (state.titleForm.title) {
+      // title isnt empty
+      if (state.contentForms.length !== 0) {
+        // form isnt empty
+        dispatch({ type: "CHANGE_ISLOADING", value: true });
+        const form = {
+          title: state.titleForm,
+          contentForms: state.contentForms,
+          color: state.color,
+          date: getDate(),
+        };
+        await setDataToDatabase(`users/${state.uid}/forms/${id}/`, form)
+          .then(() => push("/"))
+          .catch((e) => alert(e))
+          .finally(() => dispatch({ type: "CHANGE_ISLOADING", value: false }));
+      } else {
+        alert("formulir tidak boleh kosong");
+      }
+    } else {
+      alert("judul formulir tidak boleh kosong");
+    }
   };
 
   useEffect(() => {
     const getData = async () => {
       const res = await getDataFromDatabase(`users/${state.uid}/forms/${id}/`);
       if (res) {
-        dispatch({ type: "CHANGE_CONTENTFORM", value: [...res.contentForms] });
-        dispatch({ type: "CHANGE_TITLEFORM", value: { ...res.title } });
-        console.log(res);
+        dispatch({ type: "CHANGE_TITLEFORM", value: res.title });
+        dispatch({ type: "CHANGE_COLOR", value: res.color });
+        dispatch({ type: "CHANGE_CONTENTFORM", value: res.contentForms });
       }
     };
     getData();
+    return () => {
+      dispatch({ type: "CHANGE_TITLEFORM", value: { title: "", desc: "" } });
+      dispatch({ type: "CHANGE_COLOR", value: "purple" });
+      dispatch({ type: "CHANGE_CONTENTFORM", value: [] });
+    };
   }, [dispatch, id, state.uid]);
 
   return state.uid === null ? (

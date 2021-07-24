@@ -1,8 +1,10 @@
-import { AnimatePresence, motion } from "framer-motion";
 import React from "react";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
 
-export const Dropdown = ({ isDropdown, id }) => {
+export const Dropdown = ({ isDropdown, deleteForm, id }) => {
+  const { push } = useHistory();
+
   const dropdownMenu = [
     {
       text: "Buka",
@@ -10,8 +12,7 @@ export const Dropdown = ({ isDropdown, id }) => {
     },
     {
       text: "Edit",
-      onClick: () => alert("click"),
-      path: `edit/${id}`,
+      onClick: () => push(`edit/${id}`),
     },
     {
       text: "Salin link URL",
@@ -19,7 +20,7 @@ export const Dropdown = ({ isDropdown, id }) => {
     },
     {
       text: "Hapus",
-      onClick: () => alert("click"),
+      onClick: deleteForm,
     },
   ];
   return (
@@ -36,14 +37,13 @@ export const Dropdown = ({ isDropdown, id }) => {
             {dropdownMenu.map((el, index) => (
               <li
                 key={index}
-                // onClick={() => el.onClick()}
+                className="py-2 px-5 hover:bg-gray-100 block"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  el.onClick();
+                }}
               >
-                <Link
-                  className="py-2 px-5 hover:bg-gray-100 block"
-                  to={el.path ? el.path : "/"}
-                >
-                  {el.text}
-                </Link>
+                {el.text}
               </li>
             ))}
           </ul>

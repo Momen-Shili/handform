@@ -1,39 +1,41 @@
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useCallback } from "react";
 import { GlobalState } from "../../config/contextAPI";
 import { getDataFromDatabase } from "../../config/firebase";
-import { Button } from "./Button";
+import { NewForm } from "./NewForm";
 import { Forms } from "./Forms";
 
 export default function Home() {
   const [userForms, setUserForms] = useState([]);
-  const { state, dispatch } = useContext(GlobalState);
+  const { state } = useContext(GlobalState);
+
+  const fetchUserData = useCallback(async () => {
+    const { forms } = await getDataFromDatabase(`users/${state.uid}`);
+    if (forms) {
+      const data = [];
+      // MEMBUAT OBJECT MENJADI ARRAY
+      Object.keys(forms).map((key) => {
+        const form = { ...forms[key], id: key };
+        return data.push(form);
+      });
+      setUserForms(data);
+    } else {
+      setUserForms([]);
+    }
+  }, [state.uid]);
 
   useEffect(() => {
-    const getUserData = async () => {
-      const { forms } = await getDataFromDatabase(`users/${state.uid}`);
-      if (forms) {
-        const data = [];
-        // MEMBUAT OBJECT MENJADI ARRAY
-        Object.keys(forms).map((key) => {
-          const form = { ...forms[key], id: key };
-          return data.push(form);
-        });
-        setUserForms(data);
-      }
-    };
-    state.uid && getUserData();
-    return () => {
-      setUserForms([]);
-      dispatch({ type: "CHANGE_TITLEFORM", value: { title: "", desc: "" } });
-      dispatch({ type: "CHANGE_CONTENTFORM", value: [] });
-      dispatch({ type: "CHANGE_COLOR", value: "purple" });
-    };
-  }, [state.uid, setUserForms, dispatch]);
+    state.uid && fetchUserData();
+    return () => setUserForms([]);
+  }, [state.uid, fetchUserData]);
 
   return (
     <section style={{ minHeight: "90vh" }} className="relative overflow-hidden">
       <div className="w-2/3 py-3 space-y-6 mx-auto">
-        <h6 className="font-semibold text-lg text-gray-700">
+        <h6
+          className={`${
+            !state.isDark ? "text-gray-700" : "text-gray-100"
+          } font-semibold text-lg `}
+        >
           Formulir Terbaru
         </h6>
         {!userForms.length ? (
@@ -46,12 +48,12 @@ export default function Home() {
         ) : (
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
             {userForms.map((form) => (
-              <Forms key={form.id} form={form} />
+              <Forms key={form.id} form={form} fetchUserData={fetchUserData} />
             ))}
           </div>
         )}
       </div>
-      <Button />
+      <NewForm />
     </section>
   );
 }
