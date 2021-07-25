@@ -29,8 +29,8 @@ export default function Home() {
   }, [state.uid, fetchUserData]);
 
   return (
-    <section style={{ minHeight: "90vh" }} className="relative overflow-hidden">
-      <div className="w-11/12 lg:w-2/3 py-3 space-y-6 mx-auto overflow-hidden">
+    <section style={{ minHeight: "90vh" }} className="relative ">
+      <div className="w-11/12 lg:w-2/3 py-3 space-y-6 mx-auto">
         <h6
           className={`${
             !state.isDark ? "text-gray-700" : "text-gray-100"
@@ -52,7 +52,9 @@ export default function Home() {
             ))}
           </div>
         )}
-        <Response />
+        <div className="overflow-x-auto">
+          <Response />
+        </div>
       </div>
       <NewFormButton />
     </section>

@@ -39,7 +39,7 @@ export const Response = () => {
 
   return (
     state.idForm && (
-      <table className="w-890 lg:w-full bg-white rounded-md shadow-md">
+      <table className="bg-white rounded-md shadow-md">
         <thead>
           <tr className="border-b-2 border-gray-300 text-gray-400 text-left">
             {state.contentForms.map((el, index) => (
@@ -56,11 +56,15 @@ export const Response = () => {
         <tbody>
           {response.map((el, index) => (
             <tr key={index} className="border-b text-left">
-              {el.map((input, idx) => (
-                <td key={idx} className="px-6" style={{ height: "40px" }}>
-                  {input.inputs}
-                </td>
-              ))}
+              {el
+                .sort(function (a, b) {
+                  return a.id - b.id;
+                })
+                .map((input, idx) => (
+                  <td key={idx} className="px-6" style={{ height: "40px" }}>
+                    {input.inputs}
+                  </td>
+                ))}
             </tr>
           ))}
         </tbody>

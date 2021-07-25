@@ -59,7 +59,7 @@ export const Form = ({ form, fetchUserData }) => {
       <div
         ref={ref}
         onClick={() => setDropdown(!isDropdown)}
-        className="hover:bg-gray-100 absolute right-1 top-1 p-1 rounded-full duration-200 cursor-pointer "
+        className="hover:bg-gray-100 absolute right-1 top-1 p-1 rounded-full duration-200 cursor-pointer z-10"
       >
         <img src={dotsIcon} alt="dots" className="h-5 w-5" />
         <Dropdown
