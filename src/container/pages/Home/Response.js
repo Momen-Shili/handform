@@ -39,15 +39,17 @@ export const Response = () => {
 
   return (
     state.idForm && (
-      <table className="bg-white rounded-md shadow-md">
+      <table
+        className={`${state.isDark ? "text-gray-700" : "text-gray-500"} bg-white rounded-md shadow-md`}
+      >
         <thead>
-          <tr className="border-b-2 border-gray-300 text-gray-400 text-left">
+          <tr className="border-b-2 border-gray-300 text-left">
             {state.contentForms
               .sort((a, b) => a.id - b.id)
               .map((el, index) => (
                 <th
                   key={index}
-                  className="px-6 font-thin"
+                  className="px-6 font-semibold"
                   style={{ height: "40px" }}
                 >
                   {el.title}

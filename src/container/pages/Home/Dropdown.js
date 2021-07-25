@@ -39,7 +39,7 @@ export const Dropdown = ({
           initial="initial"
           animate="animate"
           exit="exit"
-          className="absolute rounded shadow right-0 top-10 bg-white w-40 z-10"
+          className="absolute rounded shadow right-0 lg:-right-20 lg:top-10 bg-white w-40 z-10"
         >
           <ul className="text-gray-500 py-1">
             {dropdownMenu.map((el, index) => (
