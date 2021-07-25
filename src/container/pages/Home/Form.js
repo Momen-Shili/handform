@@ -15,7 +15,7 @@ export const Form = ({ form, fetchUserData }) => {
 
   const copyToClipboard = () =>
     navigator.clipboard
-      .writeText(`edit/${form.id}`)
+      .writeText(window.location.href + form.id)
       .then(() => alert("URL berhasil disalin"))
       .catch((e) => alert(e));
 

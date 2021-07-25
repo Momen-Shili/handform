@@ -12,10 +12,11 @@ export const Theme = () => {
 
   const ref = useRef();
   useOutsideClick(ref, () => isTheme && setTheme(false));
+
   return (
     <div
       className={`${
-        pathname === "/" ? "hidden" : "flex"
+        pathname.substring(1, 5) !== "edit" ? "hidden" : "flex"
       }  items-center space-x-4`}
     >
       <AnimatePresence>

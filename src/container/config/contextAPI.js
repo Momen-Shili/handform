@@ -13,7 +13,7 @@ export const initialState = {
   isLoading: false,
   isEdit: true,
   uid: "",
-  response: [],
+  inputs: [],
 };
 
 export const reducer = (state, action) => {
@@ -68,10 +68,10 @@ export const reducer = (state, action) => {
         ...state,
         isEdit: action.value,
       };
-    case "CHANGE_RESPONSE":
+    case "CHANGE_INPUTS":
       return {
         ...state,
-        response: action.value,
+        inputs: action.value,
       };
     default:
       return state;

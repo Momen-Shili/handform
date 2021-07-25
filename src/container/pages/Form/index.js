@@ -2,7 +2,11 @@ import React, { useContext, useEffect } from "react";
 import { Redirect, useHistory, useLocation, useParams } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { GlobalState } from "../../config/contextAPI";
-import { getDataFromDatabase, setDataToDatabase } from "../../config/firebase";
+import {
+  getDataFromDatabase,
+  postDataToDatabase,
+  setDataToDatabase,
+} from "../../config/firebase";
 import Question from "./Question";
 import TitleForm from "./TitleForm";
 import { getDate } from "../../Utils/getDate";
@@ -19,13 +23,12 @@ export default function Form() {
 
   const handleSubmitForm = async (e) => {
     e.preventDefault();
-    if (state.contentForms.length === state.response.length) {
-      const resId = Date.now();
+    if (state.contentForms.length === state.inputs.length) {
       dispatch({ type: "CHANGE_ISLOADING", value: false });
       try {
-        await setDataToDatabase(
-          `/users/${uidURL}/forms/${id}/response/${resId}`,
-          state.response
+        await postDataToDatabase(
+          `/users/${uidURL}/forms/${id}/response/`,
+          state.inputs
         );
         alert("Data yang anda masukkan berhasil direkam");
         push("/");
@@ -83,7 +86,7 @@ export default function Form() {
       dispatch({ type: "CHANGE_TITLEFORM", value: { title: "", desc: "" } });
       dispatch({ type: "CHANGE_COLOR", value: "purple" });
       dispatch({ type: "CHANGE_CONTENTFORM", value: [] });
-      dispatch({ type: "CHANGE_RESPONSE", value: [] });
+      dispatch({ type: "CHANGE_INPUTS", value: [] });
     };
   }, [dispatch, id, uidURL]);
 

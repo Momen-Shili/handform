@@ -1,6 +1,6 @@
 import React, { useContext, createContext } from "react";
 import { motion } from "framer-motion";
-import { Response } from "./Response";
+import { Inputs } from "./Inputs";
 import { Action } from "./Action";
 import { Dropdown } from "./Dropdown";
 import { GlobalState } from "../../config/contextAPI";
@@ -24,7 +24,7 @@ export default function Question({ id }) {
            px-8 border-t rounded-lg relative 
         `}
       >
-        <Response />
+        <Inputs />
         <Action />
         <Dropdown />
       </motion.div>

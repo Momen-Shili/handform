@@ -6,32 +6,32 @@ export const Text = () => {
   const { state, dispatch } = useContext(GlobalState);
   const [text, setText] = useState("");
   const id = useContext(QuestionContext);
-  const response = state.response;
-  const index = response.findIndex((el) => el.id === id);
+  const inputs = state.inputs;
+  const index = inputs.findIndex((el) => el.id === id);
 
   const handleChange = (e) => {
     setText(e.target.value);
     if (index === -1) {
       // id not found
-      if (response.length === 0) {
+      if (inputs.length === 0) {
         // because of array is empty
         dispatch({
-          type: "CHANGE_RESPONSE",
-          value: [{ id, type: "text", response: e.target.value }],
+          type: "CHANGE_INPUTS",
+          value: [{ id, type: "text", inputs: e.target.value }],
         });
       } else {
         // array isnt empty but id doesnt exist
         dispatch({
-          type: "CHANGE_RESPONSE",
-          value: [...response, { id, type: "text", response: e.target.value }],
+          type: "CHANGE_INPUTS",
+          value: [...inputs, { id, type: "text", inputs: e.target.value }],
         });
       }
     } else {
       // id found
-      response[index] = { ...response[index], response: e.target.value };
+      inputs[index] = { ...inputs[index], inputs: e.target.value };
       dispatch({
-        type: "CHANGE_RESPONSE",
-        value: [...response],
+        type: "CHANGE_INPUTS",
+        value: [...inputs],
       });
     }
   };

@@ -16,31 +16,31 @@ export const Radio = () => {
     dispatch({ type: "CHANGE_CONTENTFORM", value: [...contentForms] });
   };
 
-  const response = state.response;
-  const resIndex = response.findIndex((el) => el.id === id);
+  const inputs = state.inputs;
+  const resIndex = inputs.findIndex((el) => el.id === id);
 
   const handleChange = (e) => {
     if (resIndex === -1) {
       // id not found
-      if (response.length === 0) {
+      if (inputs.length === 0) {
         // because of array is empty
         dispatch({
-          type: "CHANGE_RESPONSE",
-          value: [{ id, type: "radio", response: e.target.value }],
+          type: "CHANGE_INPUTS",
+          value: [{ id, type: "radio", inputs: e.target.value }],
         });
       } else {
         // array isnt empty but id doesnt exist
         dispatch({
-          type: "CHANGE_RESPONSE",
-          value: [...response, { id, type: "radio", response: e.target.value }],
+          type: "CHANGE_INPUTS",
+          value: [...inputs, { id, type: "radio", inputs: e.target.value }],
         });
       }
     } else {
       // id found
-      response[resIndex] = { ...response[resIndex], response: e.target.value };
+      inputs[resIndex] = { ...inputs[resIndex], inputs: e.target.value };
       dispatch({
-        type: "CHANGE_RESPONSE",
-        value: [...response],
+        type: "CHANGE_INPUTS",
+        value: [...inputs],
       });
     }
   };

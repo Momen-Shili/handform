@@ -18,8 +18,8 @@ export const Checkbox = () => {
 
   const [checks, setChecks] = useState([]);
 
-  const response = state.response;
-  const resIndex = response.findIndex((el) => el.id === id);
+  const inputs = state.inputs;
+  const resIndex = inputs.findIndex((el) => el.id === id);
 
   const handleChange = (e, idx) => {
     const arr = checks;
@@ -28,25 +28,25 @@ export const Checkbox = () => {
 
     if (resIndex === -1) {
       // id not found
-      if (response.length === 0) {
+      if (inputs.length === 0) {
         // because of array is empty
         dispatch({
-          type: "CHANGE_RESPONSE",
-          value: [{ id, type: "checkbox", response: arr }],
+          type: "CHANGE_INPUTS",
+          value: [{ id, type: "checkbox", inputs: arr }],
         });
       } else {
         // array isnt empty but id doesnt exist
         dispatch({
-          type: "CHANGE_RESPONSE",
-          value: [...response, { id, type: "checkbox", response: arr }],
+          type: "CHANGE_INPUTS",
+          value: [...inputs, { id, type: "checkbox", inputs: arr }],
         });
       }
     } else {
       // id found
-      response[resIndex] = { ...response[resIndex], response: arr };
+      inputs[resIndex] = { ...inputs[resIndex], inputs: arr };
       dispatch({
-        type: "CHANGE_RESPONSE",
-        value: [...response],
+        type: "CHANGE_INPUTS",
+        value: [...inputs],
       });
     }
   };

@@ -6,7 +6,7 @@ import { Textarea } from "./Textarea";
 import { Radio } from "./Radio";
 import { Checkbox } from "./Checkbox";
 
-export const Response = () => {
+export const Inputs = () => {
   const { state, dispatch } = useContext(GlobalState);
   const id = useContext(QuestionContext);
 
