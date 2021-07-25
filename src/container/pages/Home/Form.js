@@ -11,13 +11,8 @@ import { useHistory } from "react-router-dom";
 
 export const Form = ({ form, fetchUserData }) => {
   const { state, dispatch } = useContext(GlobalState);
+  const [isDropdown, setDropdown] = useState(false);
   const { push } = useHistory();
-
-  const copyToClipboard = () =>
-    navigator.clipboard
-      .writeText(window.location.href + form.id)
-      .then(() => alert("URL berhasil disalin"))
-      .catch((e) => alert(e));
 
   const openForm = () => {
     push(`/${form.id}`);
@@ -29,12 +24,20 @@ export const Form = ({ form, fetchUserData }) => {
     dispatch({ type: "CHANGE_ISEDIT", value: true });
   };
 
+  const copyToClipboard = () =>
+    navigator.clipboard
+      .writeText(window.location.href + form.id)
+      .then(() => alert("URL berhasil disalin"))
+      .catch((e) => alert(e));
+
+  const showData = () => {
+    dispatch({ type: "CHANGE_IDFORM", value: form.id });
+  };
+
   const deleteForm = async () =>
     await deleteDataDatabase(`users/${state.uid}/forms/${form.id}/`)
       .then(() => fetchUserData())
       .catch((e) => console.log(e));
-
-  const [isDropdown, setDropdown] = useState(false);
 
   const ref = useRef();
   useOutsideClick(ref, () => isDropdown && setDropdown(false));
@@ -61,11 +64,12 @@ export const Form = ({ form, fetchUserData }) => {
         <img src={dotsIcon} alt="dots" className="h-5 w-5" />
         <Dropdown
           id={form.id}
+          isDropdown={isDropdown}
           openForm={openForm}
           editForm={editForm}
-          isDropdown={isDropdown}
-          deleteForm={deleteForm}
           copyToClipboard={copyToClipboard}
+          showData={showData}
+          deleteForm={deleteForm}
         />
       </div>
     </div>

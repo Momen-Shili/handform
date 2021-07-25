@@ -14,6 +14,7 @@ export const initialState = {
   isEdit: true,
   uid: "",
   inputs: [],
+  idForm: "",
 };
 
 export const reducer = (state, action) => {
@@ -72,6 +73,11 @@ export const reducer = (state, action) => {
       return {
         ...state,
         inputs: action.value,
+      };
+    case "CHANGE_IDFORM":
+      return {
+        ...state,
+        idForm: action.value,
       };
     default:
       return state;

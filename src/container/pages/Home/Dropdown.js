@@ -7,6 +7,7 @@ export const Dropdown = ({
   editForm,
   deleteForm,
   copyToClipboard,
+  showData,
 }) => {
   const dropdownMenu = [
     {
@@ -20,6 +21,10 @@ export const Dropdown = ({
     {
       text: "Salin link URL",
       onClick: copyToClipboard,
+    },
+    {
+      text: "Tampilkan data",
+      onClick: showData,
     },
     {
       text: "Hapus",
