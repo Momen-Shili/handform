@@ -20,11 +20,11 @@ export default function TitleForm() {
   };
 
   const handleChange = (e) => {
-    contentForms.titleForm = {
-      ...contentForms.titleForm,
+    state.titleForm = {
+      ...state.titleForm,
       [e.target.name]: e.target.value,
     };
-    dispatch({ type: "CHANGE_TITLEFORM", value: contentForms.titleForm });
+    dispatch({ type: "CHANGE_TITLEFORM", value: state.titleForm });
   };
 
   return (
