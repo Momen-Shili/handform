@@ -14,42 +14,40 @@ export const Theme = () => {
   useOutsideClick(ref, () => isTheme && setTheme(false));
 
   return (
-    <div
-      className={`${
-        pathname.substring(1, 5) !== "edit" ? "hidden" : "flex"
-      }  items-center space-x-4`}
-    >
-      <AnimatePresence>
-        {isTheme && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="flex space-x-3"
-          >
-            {colors.map((el, idx) => (
-              <motion.span
-                key={idx}
-                initial={{ x: el.x, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ delay: el.delay }}
-                className={`h-5 w-5 rounded-full bg-${el.color}-700 border-2 border-gray-200 cursor-pointer`}
-                onMouseEnter={() =>
-                  dispatch({ type: "CHANGE_COLOR", value: el.color })
-                }
-              ></motion.span>
-            ))}
-          </motion.div>
-        )}
-      </AnimatePresence>
-      <img
-        ref={ref}
-        onClick={() => setTheme(!isTheme)}
-        src={colorPalleteIcon}
-        alt="theme"
-        className="h-6 w-6 cursor-pointer"
-      />
-    </div>
+    pathname.substring(1, 5) === "edit" && (
+      <div className="flex  items-center space-x-4">
+        <AnimatePresence>
+          {isTheme && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="flex space-x-3"
+            >
+              {colors.map((el, idx) => (
+                <motion.span
+                  key={idx}
+                  initial={{ x: el.x, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: el.delay }}
+                  className={`h-5 w-5 rounded-full bg-${el.color}-700 border-2 border-gray-200 cursor-pointer`}
+                  onMouseEnter={() =>
+                    dispatch({ type: "CHANGE_COLOR", value: el.color })
+                  }
+                ></motion.span>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
+        <img
+          ref={ref}
+          onClick={() => setTheme(!isTheme)}
+          src={colorPalleteIcon}
+          alt="theme"
+          className="h-6 w-6 cursor-pointer"
+        />
+      </div>
+    )
   );
 };
 
