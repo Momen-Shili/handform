@@ -40,7 +40,9 @@ export const Response = () => {
   return (
     state.idForm && (
       <table
-        className={`${state.isDark ? "text-gray-700" : "text-gray-500"} bg-white rounded-md shadow-md`}
+        className={`${
+          state.isDark ? "text-gray-700" : "text-gray-500"
+        } bg-white rounded-md shadow-md`}
       >
         <thead>
           <tr className="border-b-2 border-gray-300 text-left">
@@ -64,7 +66,9 @@ export const Response = () => {
                 .sort((a, b) => a.id - b.id)
                 .map((input, idx) => (
                   <td key={idx} className="px-6" style={{ height: "40px" }}>
-                    {input.inputs}
+                    {input.type !== "checkbox"
+                      ? input.inputs
+                      : input.inputs.join(",")}
                   </td>
                 ))}
             </tr>
