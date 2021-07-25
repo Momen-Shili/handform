@@ -29,9 +29,9 @@ export const Account = () => {
           ? setDropdown(!isDropdown)
           : dispatch({ type: "CHANGE_ISMODAL", value: true })
       }
-      className={`bg-${
-        name ? "green" : "indigo"
-      }-600 h-10 w-10 relative rounded-full border-2 border-gray-200 flex justify-center items-center cursor-pointer`}
+      className={`${
+        name ? "bg-green-600" : "bg-indigo-600"
+      } h-10 w-10 relative rounded-full border-2 border-gray-200 flex justify-center items-center cursor-pointer`}
     >
       <span className="text-white text-lg">{name ? name.charAt(0) : "?"}</span>
       <AnimatePresence>

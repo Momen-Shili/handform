@@ -36,7 +36,7 @@ export default function TitleForm() {
           ? "light-shadow bg-gray-100 text-gray-700"
           : "shadow bg-white"
       }
-      bg-white px-8 border-t  rounded-lg border-${state.color}-700`}
+      bg-white px-8 border-t  rounded-lg border-purple-600`}
     >
       <div className="pt-4 pb-8 space-y-2">
         <input
@@ -49,9 +49,7 @@ export default function TitleForm() {
             state.isDark
               ? "bg-gray-100 hover:border-gray-300 border-gray-100"
               : "bg-white hover:border-gray-300 border-white"
-          } focus:border-b-2 focus:border-${
-            state.color
-          }-700 w-full text-3xl py-3`}
+          } focus:border-b-2 focus:border-purple-700 w-full text-3xl py-3`}
         />
         <textarea
           disabled={!state.isEdit}
@@ -63,9 +61,7 @@ export default function TitleForm() {
             state.isDark
               ? "bg-gray-100 hover:border-gray-300 border-gray-100"
               : "bg-white hover:border-gray-300 border-white"
-          } border-b focus:border-b-2 focus:border-${
-            state.color
-          }-700 w-full py-2 h-auto resize-none`}
+          } border-b focus:border-b-2 focus:border-purple-700 w-full py-2 h-auto resize-none`}
         ></textarea>
       </div>
       {state.isEdit && (

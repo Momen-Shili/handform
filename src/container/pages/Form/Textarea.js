@@ -49,9 +49,7 @@ export const Textarea = () => {
         state.isDark
           ? "bg-gray-100 hover:border-gray-300 border-gray-100"
           : "bg-white hover:border-gray-300 border-white"
-      } border-b focus:border-b-2 focus:border-${
-        state.color
-      }-700 w-full py-2 h-auto resize-none`}
+      } border-b focus:border-b-2 focus:border-purple-700 w-full py-2 h-auto resize-none`}
     ></textarea>
   );
 };

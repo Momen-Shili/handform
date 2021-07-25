@@ -5,7 +5,6 @@ export const GlobalState = createContext();
 export const initialState = {
   titleForm: { title: "", desc: "" },
   contentForms: [],
-  color: "purple",
   isAnimateSubmitButton: false,
   isDark: false,
   isModal: false,
@@ -53,11 +52,6 @@ export const reducer = (state, action) => {
       return {
         ...state,
         isLoading: action.value,
-      };
-    case "CHANGE_COLOR":
-      return {
-        ...state,
-        color: action.value,
       };
     case "CHANGE_UID":
       return {

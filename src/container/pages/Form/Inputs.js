@@ -34,9 +34,7 @@ export const Inputs = () => {
           state.isDark
             ? "bg-gray-100 hover:border-gray-300 border-gray-100"
             : "bg-white hover:border-gray-300 border-white"
-        }  border-b focus:border-b-2 focus:border-${
-          state.color
-        }-700 w-full text-xl py-3`}
+        }  border-b focus:border-b-2 focus:border-purple-700 w-full text-xl py-3`}
         disabled={!state.isEdit}
       />
       {/* desc  */}
@@ -49,9 +47,7 @@ export const Inputs = () => {
             state.isDark
               ? "bg-gray-100 hover:border-gray-300 border-gray-100"
               : "bg-white hover:border-gray-300 border-white"
-          } border-b focus:border-b-2 focus:border-${
-            state.color
-          }-700 w-full text-sm`}
+          } border-b focus:border-b-2 focus:border-purple-700 w-full text-sm`}
           onChange={(e) => handleChange(e)}
           disabled={!state.isEdit}
         />

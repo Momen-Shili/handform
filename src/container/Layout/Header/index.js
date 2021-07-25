@@ -1,6 +1,5 @@
 import { useState } from "react";
 import documentIcon from "../../../assets/svg/document.svg";
-import { Theme } from "./Theme";
 import { Mode } from "./Mode";
 import { Account } from "./Account";
 import { Link } from "react-router-dom";
@@ -20,7 +19,6 @@ export default function Header() {
       </Link>
       {/* right  */}
       <div className="space-x-6 flex items-center">
-        <Theme />
         <Mode setOverHide={setOverHide}/>
         <Account />
       </div>
