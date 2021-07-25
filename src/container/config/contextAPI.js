@@ -13,6 +13,7 @@ export const initialState = {
   isLoading: false,
   isEdit: true,
   uid: "",
+  response: [],
 };
 
 export const reducer = (state, action) => {
@@ -66,6 +67,11 @@ export const reducer = (state, action) => {
       return {
         ...state,
         isEdit: action.value,
+      };
+    case "CHANGE_RESPONSE":
+      return {
+        ...state,
+        response: action.value,
       };
     default:
       return state;

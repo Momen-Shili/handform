@@ -1,9 +1,12 @@
 import React, { useContext } from "react";
 import { GlobalState } from "../../config/contextAPI";
 import { QuestionContext } from "./Question";
-import * as InputType from "./InputType";
+import { Text } from "./Text";
+import { Textarea } from "./Textarea";
+import { Radio } from "./Radio";
+import { Checkbox } from "./Checkbox";
 
-export const Input = () => {
+export const Response = () => {
   const { state, dispatch } = useContext(GlobalState);
   const id = useContext(QuestionContext);
 
@@ -54,10 +57,10 @@ export const Input = () => {
         />
       )}
       {/* input  */}
-      {inputType === "text" && <InputType.Text />}
-      {inputType === "textarea" && <InputType.TextArea />}
-      {inputType === "radio" && <InputType.Radio />}
-      {inputType === "checkbox" && <InputType.CheckBox />}
+      {inputType === "text" && <Text />}
+      {inputType === "textarea" && <Textarea />}
+      {inputType === "radio" && <Radio />}
+      {inputType === "checkbox" && <Checkbox />}
     </div>
   );
 };

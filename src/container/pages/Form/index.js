@@ -49,12 +49,12 @@ export default function Form() {
 
   useEffect(() => {
     const getData = async () => {
-      const res = await getDataFromDatabase(`users/${uidURL}/forms/${id}/`);
-      if (res) {
+      try {
+        const res = await getDataFromDatabase(`users/${uidURL}/forms/${id}/`);
         dispatch({ type: "CHANGE_TITLEFORM", value: res.title });
         dispatch({ type: "CHANGE_COLOR", value: res.color });
         dispatch({ type: "CHANGE_CONTENTFORM", value: res.contentForms });
-      }
+      } catch (e) {console.error("data tidak ada")}
     };
     getData();
     return () => {
@@ -81,8 +81,10 @@ export default function Form() {
     }
     return true;
   };
-  
-  return auth() ? (
+
+  return !auth() ? (
+    <Redirect to="/" />
+  ) : (
     <section>
       <form
         onSubmit={(e) =>
@@ -115,8 +117,6 @@ export default function Form() {
         </div>
       </form>
     </section>
-  ) : (
-    <Redirect to="/" />
   );
 }
 
