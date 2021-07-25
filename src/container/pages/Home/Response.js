@@ -42,24 +42,24 @@ export const Response = () => {
       <table className="bg-white rounded-md shadow-md">
         <thead>
           <tr className="border-b-2 border-gray-300 text-gray-400 text-left">
-            {state.contentForms.map((el, index) => (
-              <th
-                key={index}
-                className="px-6 font-thin"
-                style={{ height: "40px" }}
-              >
-                {el.title}
-              </th>
-            ))}
+            {state.contentForms
+              .sort((a, b) => a.id - b.id)
+              .map((el, index) => (
+                <th
+                  key={index}
+                  className="px-6 font-thin"
+                  style={{ height: "40px" }}
+                >
+                  {el.title}
+                </th>
+              ))}
           </tr>
         </thead>
         <tbody>
           {response.map((el, index) => (
             <tr key={index} className="border-b text-left">
               {el
-                .sort(function (a, b) {
-                  return a.id - b.id;
-                })
+                .sort((a, b) => a.id - b.id)
                 .map((input, idx) => (
                   <td key={idx} className="px-6" style={{ height: "40px" }}>
                     {input.inputs}

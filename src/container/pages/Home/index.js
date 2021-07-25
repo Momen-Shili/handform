@@ -46,13 +46,13 @@ export default function Home() {
             <p className="text-gray-400">Klik + untuk membuat formulir baru</p>
           </div>
         ) : (
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {userForms.map((form) => (
               <Form key={form.id} form={form} fetchUserData={fetchUserData} />
             ))}
           </div>
         )}
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto py-3">
           <Response />
         </div>
       </div>

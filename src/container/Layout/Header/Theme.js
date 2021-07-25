@@ -11,18 +11,18 @@ export const Theme = () => {
   const { pathname } = useLocation();
 
   const ref = useRef();
-  useOutsideClick(ref, () => isTheme && setTheme(false));
+  useOutsideClick(ref, () => setTheme(false));
 
   return (
     pathname.substring(1, 5) === "edit" && (
-      <div className="flex  items-center space-x-4">
+      <div className="flex  items-center lg:space-x-4 relative">
         <AnimatePresence>
           {isTheme && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="flex space-x-3"
+              className="lg:flex space-y-3 lg:space-y-0 lg:space-x-3 absolute lg:static top-10"
             >
               {colors.map((el, idx) => (
                 <motion.span
@@ -30,7 +30,7 @@ export const Theme = () => {
                   initial={{ x: el.x, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: el.delay }}
-                  className={`h-5 w-5 rounded-full bg-${el.color}-700 border-2 border-gray-200 cursor-pointer`}
+                  className={`h-5 w-5 rounded-full bg-${el.color}-700 border-2 border-gray-200 cursor-pointer block lg:inline`}
                   onMouseEnter={() =>
                     dispatch({ type: "CHANGE_COLOR", value: el.color })
                   }

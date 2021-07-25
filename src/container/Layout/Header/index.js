@@ -6,7 +6,7 @@ import { Account } from "./Account";
 import { Link } from "react-router-dom";
 
 export default function Header() {
-  const [isOverHide, setOverHide] = useState(true);
+  const [isOverHide, setOverHide] = useState(false);
   return (
     <header
       className={`${
@@ -21,8 +21,8 @@ export default function Header() {
       {/* right  */}
       <div className="space-x-6 flex items-center">
         <Theme />
-        <Mode />
-        <Account setOverHide={setOverHide} />
+        <Mode setOverHide={setOverHide}/>
+        <Account />
       </div>
     </header>
   );

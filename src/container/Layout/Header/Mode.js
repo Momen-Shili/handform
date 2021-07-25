@@ -1,15 +1,23 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import { GlobalState } from "../../config/contextAPI";
 import moonIcon from "../../../assets/svg/moon.svg";
 import sunIcon from "../../../assets/svg/sun.svg";
 import { AnimatePresence, motion } from "framer-motion";
+import useOutsideClick from "../../Utils/useOutsideClick";
 
-export const Mode = () => {
+export const Mode = ({ setOverHide }) => {
   const { state, dispatch } = useContext(GlobalState);
+  const ref = useRef();
+  useOutsideClick(ref, () => setOverHide(false));
+  
   return (
     <div
+      ref={ref}
       className="cursor-pointer relative h-full"
-      onClick={() => dispatch({ type: "CHANGE_ISDARK", value: !state.isDark })}
+      onClick={() => {
+        setOverHide(true);
+        dispatch({ type: "CHANGE_ISDARK", value: !state.isDark });
+      }}
     >
       <img src={moonIcon} alt="light-mode" className="h-6 w-6 invisible" />
       <AnimatePresence>

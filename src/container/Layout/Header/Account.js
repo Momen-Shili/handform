@@ -4,16 +4,13 @@ import useOutsideClick from "../../Utils/useOutsideClick";
 import { GlobalState } from "../../config/contextAPI";
 import { getDataFromDatabase } from "../../config/firebase";
 
-export const Account = ({ setOverHide }) => {
+export const Account = () => {
   const { state, dispatch } = useContext(GlobalState);
   const [isDropdown, setDropdown] = useState(false);
   const [name, setName] = useState("");
 
   const ref = useRef();
-  useOutsideClick(ref, () => {
-    setDropdown(false);
-    setOverHide(true);
-  });
+  useOutsideClick(ref, () => setDropdown(false));
 
   useEffect(() => {
     const getUserData = async () =>
@@ -27,12 +24,11 @@ export const Account = ({ setOverHide }) => {
   return (
     <div
       ref={ref}
-      onClick={() => {
-        setOverHide(false);
+      onClick={() =>
         state.isLogin
           ? setDropdown(!isDropdown)
-          : dispatch({ type: "CHANGE_ISMODAL", value: true });
-      }}
+          : dispatch({ type: "CHANGE_ISMODAL", value: true })
+      }
       className={`bg-${
         name ? "green" : "indigo"
       }-600 h-10 w-10 relative rounded-full border-2 border-gray-200 flex justify-center items-center cursor-pointer`}
