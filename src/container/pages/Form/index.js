@@ -19,7 +19,7 @@ export default function Form() {
 
   const handleSubmitForm = (e) => {
     e.preventDefault();
-    alert("submit form");
+    console.log('response',state.response);
   };
 
   const handleEditForm = async (e) => {

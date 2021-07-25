@@ -38,7 +38,7 @@ export const Textarea = () => {
       });
     }
   };
-  
+
   return (
     <textarea
       onChange={(e) => handleChange(e)}
