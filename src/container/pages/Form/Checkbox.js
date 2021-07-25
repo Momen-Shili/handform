@@ -32,13 +32,13 @@ export const Checkbox = () => {
         // because of array is empty
         dispatch({
           type: "CHANGE_RESPONSE",
-          value: [{ id, type: "radio", response: arr }],
+          value: [{ id, type: "checkbox", response: arr }],
         });
       } else {
         // array isnt empty but id doesnt exist
         dispatch({
           type: "CHANGE_RESPONSE",
-          value: [...response, { id, type: "radio", response: arr }],
+          value: [...response, { id, type: "checkbox", response: arr }],
         });
       }
     } else {

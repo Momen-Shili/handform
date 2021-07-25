@@ -17,9 +17,26 @@ export default function Form() {
   const indexPathnameEnd = pathname.indexOf("&&id=");
   const uidURL = pathname.substring(indexPathnameStart, indexPathnameEnd);
 
-  const handleSubmitForm = (e) => {
+  const handleSubmitForm = async (e) => {
     e.preventDefault();
-    console.log('response',state.response);
+    if (state.contentForms.length === state.response.length) {
+      const resId = Date.now();
+      dispatch({ type: "CHANGE_ISLOADING", value: false });
+      try {
+        await setDataToDatabase(
+          `/users/${uidURL}/forms/${id}/response/${resId}`,
+          state.response
+        );
+        alert("Data yang anda masukkan berhasil direkam");
+        push("/");
+      } catch (e) {
+        alert(e);
+      } finally {
+        dispatch({ type: "CHANGE_ISLOADING", value: false });
+      }
+    } else {
+      alert("tidak boleh ada yang kosong");
+    }
   };
 
   const handleEditForm = async (e) => {
@@ -49,18 +66,24 @@ export default function Form() {
 
   useEffect(() => {
     const getData = async () => {
+      dispatch({ type: "CHANGE_ISLOADING", value: true });
       try {
         const res = await getDataFromDatabase(`users/${uidURL}/forms/${id}/`);
         dispatch({ type: "CHANGE_TITLEFORM", value: res.title });
         dispatch({ type: "CHANGE_COLOR", value: res.color });
         dispatch({ type: "CHANGE_CONTENTFORM", value: res.contentForms });
-      } catch (e) {console.error("data tidak ada")}
+      } catch (e) {
+        console.error("data tidak ada");
+      } finally {
+        dispatch({ type: "CHANGE_ISLOADING", value: false });
+      }
     };
     getData();
     return () => {
       dispatch({ type: "CHANGE_TITLEFORM", value: { title: "", desc: "" } });
       dispatch({ type: "CHANGE_COLOR", value: "purple" });
       dispatch({ type: "CHANGE_CONTENTFORM", value: [] });
+      dispatch({ type: "CHANGE_RESPONSE", value: [] });
     };
   }, [dispatch, id, uidURL]);
 
@@ -72,7 +95,7 @@ export default function Form() {
     return () => dispatch({ type: "CHANGE_ISEDIT", value: true });
   }, [dispatch, pathname]);
 
-  const auth = () => {
+  const isAdmin = () => {
     if (pathname.substring(1, 5) === "edit") {
       if (state.uid === uidURL) {
         return true;
@@ -82,7 +105,7 @@ export default function Form() {
     return true;
   };
 
-  return !auth() ? (
+  return !isAdmin() ? (
     <Redirect to="/" />
   ) : (
     <section>

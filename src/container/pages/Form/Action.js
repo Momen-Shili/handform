@@ -7,8 +7,8 @@ import { GlobalState } from "../../config/contextAPI";
 import { QuestionContext } from "./Question";
 
 export const Action = ({ duplicate }) => {
-  const id = useContext(QuestionContext);
   const { state, dispatch } = useContext(GlobalState);
+  const id = useContext(QuestionContext);
   const contentForms = state.contentForms;
   const index = state.contentForms.findIndex((el) => el.id === id);
 
