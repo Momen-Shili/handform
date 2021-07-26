@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import plusCircleIcon from "../../../assets/svg/plusCircle.svg";
-import { GlobalState } from "../../config/contextAPI";
+import { GlobalState } from "../../../config/contextAPI";
 
 export default function TitleForm() {
   const { state, dispatch } = useContext(GlobalState);

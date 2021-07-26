@@ -1,10 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
-import { GlobalState } from "../../config/contextAPI";
+import { GlobalState } from "../../../config/contextAPI";
 import {
   setDataToDatabase,
   signInToDatabase,
   signUpToDatabase,
-} from "../../config/firebase";
+} from "../../../config/firebase";
 
 export const LoginForm = ({ isSignUp, setSignUp }) => {
   const { dispatch } = useContext(GlobalState);

@@ -1,7 +1,7 @@
 import React, { useContext, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { GlobalState } from "../../config/contextAPI";
-import useOutsideClick from "../../Utils/useOutsideClick";
+import { GlobalState } from "../../../config/contextAPI";
+import useOutsideClick from "../../../utils/useOutsideClick";
 import { Header } from "./Header";
 import { LoginForm } from "./LoginForm";
 
@@ -29,7 +29,7 @@ export default function Modal() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
             ref={ref}
-            className="w-3/4 lg:w-1/3 bg-white rounded shadow-lg z-50 overflow-y-auto"
+            className="w-11/12 sm:w-3/4 lg:w-1/3 bg-white rounded shadow-lg z-50 overflow-y-auto"
           >
             <div className="modal-content text-left">
               <Header

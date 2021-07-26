@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { GlobalState } from "../../config/contextAPI";
+import { GlobalState } from "../../../config/contextAPI";
 import { QuestionContext } from "./Question";
 import { Text } from "./Text";
 import { Textarea } from "./Textarea";

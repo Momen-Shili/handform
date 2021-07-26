@@ -10,7 +10,7 @@ export default function Header() {
     <header
       className={`${
         isOverHide && "overflow-hidden"
-      } bg-white text-gray-600 w-full flex left-0 top-0 fixed items-center justify-between py-3 px-8 z-50`}
+      } bg-white text-gray-600 w-full flex left-0 top-0 fixed items-center justify-between py-3 px-2 sm:px-8 z-50`}
     >
       {/* left  */}
       <Link to="/" className="flex items-center space-x-2">

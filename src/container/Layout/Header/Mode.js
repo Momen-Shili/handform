@@ -1,9 +1,9 @@
 import React, { useContext, useRef } from "react";
-import { GlobalState } from "../../config/contextAPI";
+import { GlobalState } from "../../../config/contextAPI";
 import moonIcon from "../../../assets/svg/moon.svg";
 import sunIcon from "../../../assets/svg/sun.svg";
 import { AnimatePresence, motion } from "framer-motion";
-import useOutsideClick from "../../Utils/useOutsideClick";
+import useOutsideClick from "../../../utils/useOutsideClick";
 
 export const Mode = ({ setOverHide }) => {
   const { state, dispatch } = useContext(GlobalState);

@@ -2,11 +2,11 @@ import { useState, useRef, useContext } from "react";
 import documentIcon from "../../../assets/svg/document.svg";
 import dotsIcon from "../../../assets/svg/verticalDots.svg";
 import { Dropdown } from "./Dropdown";
-import useOutsideClick from "../../Utils/useOutsideClick";
-import { stringDate } from "../../Utils/stringDate";
-import { limitString } from "../../Utils/limitString";
-import { GlobalState } from "../../config/contextAPI";
-import { deleteDataDatabase } from "../../config/firebase";
+import useOutsideClick from "../../../utils/useOutsideClick";
+import { stringDate } from "../../../utils/stringDate";
+import { limitString } from "../../../utils/limitString";
+import { GlobalState } from "../../../config/contextAPI";
+import { deleteDataDatabase } from "../../../config/firebase";
 import { useHistory } from "react-router-dom";
 
 export const Form = ({ form, fetchUserData }) => {

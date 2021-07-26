@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useState } from "react";
-import { GlobalState } from "../../config/contextAPI";
-import { getDataFromDatabase } from "../../config/firebase";
+import { GlobalState } from "../../../config/contextAPI";
+import { getDataFromDatabase } from "../../../config/firebase";
 
 export const Response = () => {
   const { state, dispatch } = useContext(GlobalState);

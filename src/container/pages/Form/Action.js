@@ -3,7 +3,7 @@ import duplicateIcon from "../../../assets/svg/duplicate.svg";
 import trashIcon from "../../../assets/svg/trash.svg";
 import plusCircleIcon from "../../../assets/svg/plusCircle.svg";
 import { motion } from "framer-motion";
-import { GlobalState } from "../../config/contextAPI";
+import { GlobalState } from "../../../config/contextAPI";
 import { QuestionContext } from "./Question";
 
 export const Action = ({ duplicate }) => {

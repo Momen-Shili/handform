@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { GlobalState } from "../../config/contextAPI";
+import { GlobalState } from "../../../config/contextAPI";
 import { QuestionContext } from "./Question";
 import plusIcon from "../../../assets/svg/plus.svg";
 

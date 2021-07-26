@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { GlobalState } from "../../config/contextAPI";
+import { GlobalState } from "../../../config/contextAPI";
 import { QuestionContext } from "./Question";
 
 export const Textarea = () => {

@@ -1,15 +1,15 @@
 import React, { useContext, useEffect } from "react";
 import { Redirect, useHistory, useLocation, useParams } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { GlobalState } from "../../config/contextAPI";
+import { GlobalState } from "../../../config/contextAPI";
 import {
   getDataFromDatabase,
   postDataToDatabase,
   setDataToDatabase,
-} from "../../config/firebase";
+} from "../../../config/firebase";
 import Question from "./Question";
 import TitleForm from "./TitleForm";
-import { getDate } from "../../Utils/getDate";
+import { getDate } from "../../../utils/getDate";
 
 export default function Form() {
   const { id } = useParams();
@@ -52,7 +52,6 @@ export default function Form() {
         const form = {
           title: state.titleForm,
           contentForms: state.contentForms,
-          color: state.color,
           date: getDate(),
         };
         await setDataToDatabase(`/users/${state.uid}/forms/${id}/`, form)

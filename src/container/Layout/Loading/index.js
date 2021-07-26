@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { GlobalState } from "../../config/contextAPI";
+import { GlobalState } from "../../../config/contextAPI";
 
 export default function Loading() {
   const { state } = useContext(GlobalState);

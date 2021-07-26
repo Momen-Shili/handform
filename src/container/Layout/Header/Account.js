@@ -1,8 +1,8 @@
 import React, { useRef, useContext, useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import useOutsideClick from "../../Utils/useOutsideClick";
-import { GlobalState } from "../../config/contextAPI";
-import { getDataFromDatabase } from "../../config/firebase";
+import useOutsideClick from "../../../utils/useOutsideClick";
+import { GlobalState } from "../../../config/contextAPI";
+import { getDataFromDatabase } from "../../../config/firebase";
 
 export const Account = () => {
   const { state, dispatch } = useContext(GlobalState);

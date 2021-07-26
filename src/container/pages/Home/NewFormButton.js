@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useHistory } from "react-router-dom";
 import plusIcon from "../../../assets/svg/plus.svg";
 import pencilIcon from "../../../assets/svg/pencil.svg";
-import { GlobalState } from "../../config/contextAPI";
+import { GlobalState } from "../../../config/contextAPI";
 
 export const NewFormButton = () => {
   const { state, dispatch } = useContext(GlobalState);

@@ -1,7 +1,7 @@
 import { useReducer, useEffect } from "react";
 import { Route, Switch, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import { GlobalState, initialState, reducer } from "../config/contextAPI";
+import { GlobalState, initialState, reducer } from "../../config/contextAPI";
 import Header from "../Layout/Header/";
 import Form from "../pages/Form/";
 import Home from "../pages/Home/";
@@ -15,7 +15,7 @@ function App() {
 
   const mode = {
     color: state.isDark ? "#eee" : "#999",
-    backgroundColor: state.isDark ? "#374151" : "#F3F4F6",
+    backgroundColor: state.isDark ? "#1F2937" : "#F3F4F6",
     transition: "all .5s ease",
     WebkitTransition: "all .5s ease",
     MozTransition: "all .5s ease",

@@ -7,8 +7,8 @@ import gridIcon from "../../../assets/svg/grid.svg";
 import checkIcon from "../../../assets/svg/check.svg";
 import documentAddIcon from "../../../assets/svg/documentAdd.svg";
 import documentRemoveIcon from "../../../assets/svg/documentRemove.svg";
-import useOutsideClick from "../../Utils/useOutsideClick";
-import { GlobalState } from "../../config/contextAPI";
+import useOutsideClick from "../../../utils/useOutsideClick";
+import { GlobalState } from "../../../config/contextAPI";
 import { QuestionContext } from "./Question";
 
 export const Dropdown = () => {

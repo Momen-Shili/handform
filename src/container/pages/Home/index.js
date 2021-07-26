@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState, useCallback } from "react";
-import { GlobalState } from "../../config/contextAPI";
-import { getDataFromDatabase } from "../../config/firebase";
+import { GlobalState } from "../../../config/contextAPI";
+import { getDataFromDatabase } from "../../../config/firebase";
 import { NewFormButton } from "./NewFormButton";
 import { Form } from "./Form";
 import { Response } from "./Response";

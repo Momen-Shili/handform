@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Inputs } from "./Inputs";
 import { Action } from "./Action";
 import { Dropdown } from "./Dropdown";
-import { GlobalState } from "../../config/contextAPI";
+import { GlobalState } from "../../../config/contextAPI";
 
 export const QuestionContext = createContext();
 
