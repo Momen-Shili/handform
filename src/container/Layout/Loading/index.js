@@ -17,7 +17,7 @@ export default function Loading() {
             <div className="absolute top-0 mt-1 w-3 h-3 rounded-full bg-green-500" />
           </div>
           <div className="text-gray-500 text-xs font-light mt-2 text-center">
-            Tunggu sebentar
+            Attendez un moment
           </div>
         </div>
       </div>
