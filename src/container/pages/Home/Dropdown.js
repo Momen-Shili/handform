@@ -11,7 +11,7 @@ export const Dropdown = ({
 }) => {
   const dropdownMenu = [
     {
-      text: "Buka",
+      text: "ouvert",
       onClick: openForm,
     },
     {
@@ -19,15 +19,15 @@ export const Dropdown = ({
       onClick: editForm,
     },
     {
-      text: "Salin link URL",
+      text: "Copier le lien URL",
       onClick: copyToClipboard,
     },
     {
-      text: "Tampilkan data",
+      text: "Afficher les données",
       onClick: showData,
     },
     {
-      text: "Hapus",
+      text: "effacer",
       onClick: deleteForm,
     },
   ];
