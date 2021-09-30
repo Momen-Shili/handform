@@ -33,25 +33,25 @@ export const Dropdown = () => {
   const dropdownMenu = [
     {
       icon: menuAltIcon,
-      text: "Jawaban singkat",
+      text: "Réponse courte",
       type: "text",
       onClick: changeInputType,
     },
     {
       icon: menuIcon,
-      text: "Paragraf",
+      text: "Paragraphe",
       type: "textarea",
       onClick: changeInputType,
     },
     {
       icon: gridIcon,
-      text: "Pilihan ganda",
+      text: "Double choix",
       type: "radio",
       onClick: changeInputType,
     },
     {
       icon: checkIcon,
-      text: "Kotak centang",
+      text: "Case à cocher",
       type: "checkbox",
       onClick: changeInputType,
     },
@@ -60,8 +60,8 @@ export const Dropdown = () => {
         formState && formState.isDesc ? documentRemoveIcon : documentAddIcon,
       text:
         formState && formState.isDesc
-          ? "Hapus deskripsi"
-          : "Tambahkan deskripsi",
+          ? "Supprimer la description"
+          : "Ajouter une description",
 
       onClick: () => {
         contentForms[index].isDesc
