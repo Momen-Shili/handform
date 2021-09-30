@@ -36,7 +36,7 @@ export default function Home() {
             !state.isDark ? "text-gray-700" : "text-gray-100"
           } font-semibold text-lg `}
         >
-          Formulir Terbaru
+          Dernier formulaire
         </h6>
         {!userForms.length ? (
           <div className="text-center bg-white shadow-md py-8 rounded-md space-y-2">
