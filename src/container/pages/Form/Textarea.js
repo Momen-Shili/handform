@@ -44,7 +44,7 @@ export const Textarea = () => {
       onChange={(e) => handleChange(e)}
       value={textarea}
       disabled={state.isEdit}
-      placeholder="Teks jawaban panjang"
+      placeholder="Texte de réponse longue"
       className={`${
         state.isDark
           ? "bg-gray-100 hover:border-gray-300 border-gray-100"
