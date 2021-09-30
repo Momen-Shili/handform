@@ -20,7 +20,7 @@ export const LoginForm = ({ isSignUp, setSignUp }) => {
     try {
       const res = await signUpToDatabase(input.email, input.password);
       await setDataToDatabase(`users/${res.uid}`, data);
-      alert("berhasil registrasi");
+      alert("inscription réussie");
       setSignUp(false);
     } catch (error) {
       alert("sign up error\n" + error.message + "\ncode : " + error.code);
@@ -51,18 +51,18 @@ export const LoginForm = ({ isSignUp, setSignUp }) => {
     e.preventDefault();
     if (isSignUp) {
       // sign up
-      if (input.name && input.email && input.password && input["re-password"]) {
+      if (input.name && input.email && input.password && input["Répéter le mot de passe"]) {
         // field isn't empty
-        if (input.password === input["re-password"]) {
+        if (input.password === input["Répéter le mot de passe"]) {
           // password match
           signUp();
         } else {
           // password isnt match
-          alert("password tidak cocok");
+          alert("le mot de passe ne correspond pas");
         }
       } else {
         // some field is empty
-        alert("tidak boleh kosong");
+        alert("ne peux pas être vide");
       }
     } else {
       // sign in
@@ -71,7 +71,7 @@ export const LoginForm = ({ isSignUp, setSignUp }) => {
         signIn();
       } else {
         // some field is empty
-        alert("tidak boleh kosong");
+        alert("ne peux pas être vide");
       }
     }
   };
@@ -111,10 +111,10 @@ export const LoginForm = ({ isSignUp, setSignUp }) => {
                   type="checkbox"
                   className="border-gray-300 border"
                 />
-                <label htmlFor="modal-remember">Ingat saya</label>
+                <label htmlFor="modal-remember">Souviens de moi</label>
               </div>
               <button type="button" className="text-red-400 hover:text-red-500">
-                Lupa password?
+                Mot de passe oublié ?
               </button>
             </div>
           )}
@@ -134,34 +134,34 @@ export const LoginForm = ({ isSignUp, setSignUp }) => {
 
 const login = [
   {
-    label: "Alamat email",
+    label: "Adresse e-mail",
     id: "email",
     type: "text",
   },
   {
-    label: "Password",
+    label: "Mot de passe",
     id: "password",
     type: "password",
   },
 ];
 const register = [
   {
-    label: "Nama lengkap",
+    label: "Nom et prénom",
     id: "name",
     type: "text",
   },
   {
-    label: "Alamat email",
+    label: "Adresse e-mail",
     id: "email",
     type: "text",
   },
   {
-    label: "Password",
+    label: "Mot de passe",
     id: "password",
     type: "password",
   },
   {
-    label: "Ulangi password",
+    label: "Répéter le mot de passe",
     id: "re-password",
     type: "password",
   },
