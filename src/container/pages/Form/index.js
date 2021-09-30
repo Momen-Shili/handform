@@ -30,7 +30,7 @@ export default function Form() {
           `/users/${uidURL}/forms/${id}/response/`,
           state.inputs
         );
-        alert("Data yang anda masukkan berhasil direkam");
+        alert("Les données que vous avez saisies ont été enregistrées avec succès");
         push("/");
       } catch (e) {
         alert(e);
@@ -38,7 +38,7 @@ export default function Form() {
         dispatch({ type: "CHANGE_ISLOADING", value: false });
       }
     } else {
-      alert("tidak boleh ada yang kosong");
+      alert("il ne peut rien y avoir de vide");
     }
   };
 
@@ -59,10 +59,10 @@ export default function Form() {
           .catch((e) => alert(e))
           .finally(() => dispatch({ type: "CHANGE_ISLOADING", value: false }));
       } else {
-        alert("formulir tidak boleh kosong");
+        alert("le formulaire ne peut pas être vide");
       }
     } else {
-      alert("judul formulir tidak boleh kosong");
+      alert("le titre du formulaire ne peut pas être vide");
     }
   };
 
@@ -75,7 +75,7 @@ export default function Form() {
         dispatch({ type: "CHANGE_COLOR", value: res.color });
         dispatch({ type: "CHANGE_CONTENTFORM", value: res.contentForms });
       } catch (e) {
-        console.error("data tidak ada");
+        console.error("pas de données");
       } finally {
         dispatch({ type: "CHANGE_ISLOADING", value: false });
       }
