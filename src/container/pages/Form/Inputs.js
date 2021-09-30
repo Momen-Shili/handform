@@ -28,7 +28,7 @@ export const Inputs = () => {
       <input
         name="title"
         value={formState ? formState.title : ""}
-        placeholder="Judul pertanyaan"
+        placeholder="Titre de question"
         onChange={(e) => handleChange(e)}
         className={`${
           state.isDark
@@ -42,7 +42,7 @@ export const Inputs = () => {
         <input
           name="desc"
           value={formState ? formState.desc : ""}
-          placeholder="Deskripsi pertanyaan"
+          placeholder="Description des questions"
           className={`${
             state.isDark
               ? "bg-gray-100 hover:border-gray-300 border-gray-100"
