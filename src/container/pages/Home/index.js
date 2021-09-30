@@ -41,9 +41,9 @@ export default function Home() {
         {!userForms.length ? (
           <div className="text-center bg-white shadow-md py-8 rounded-md space-y-2">
             <h6 className="text-gray-500 font-semibold text-lg">
-              Belum ada formulir
+              Pas encore de formulaire
             </h6>
-            <p className="text-gray-400">Klik + untuk membuat formulir baru</p>
+            <p className="text-gray-400">Cliquez sur + pour créer un nouveau formulaire</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
