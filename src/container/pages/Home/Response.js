@@ -24,7 +24,7 @@ export const Response = () => {
         });
         setResponse(datas);
       } catch (e) {
-        console.error("data tidak ada");
+        console.error("pas de données");
       } finally {
         dispatch({ type: "CHANGE_ISLOADING", value: false });
       }
