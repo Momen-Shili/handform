@@ -41,7 +41,7 @@ export const Text = () => {
       onChange={(e) => handleChange(e)}
       value={text}
       disabled={state.isEdit}
-      placeholder="Teks jawaban singkat"
+      placeholder="Texte de réponse court"
       className={`${
         state.isDark
           ? "bg-gray-100 hover:border-gray-300 border-gray-100"
