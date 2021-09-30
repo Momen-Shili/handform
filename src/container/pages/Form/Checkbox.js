@@ -109,7 +109,7 @@ export const Checkbox = () => {
                 : "bg-white hover:border-gray-300 border-white"
             } border-b focus:border-b-2 focus:border-purple-700 py-2 text-gray-400`}
           >
-            Tambah opsi
+            Ajouter une option
           </button>
         </div>
       )}
